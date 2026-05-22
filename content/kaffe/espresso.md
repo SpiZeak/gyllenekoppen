@@ -67,9 +67,9 @@ En välgjord espresso har en komplex smakprofil:
 | Lungo      | Längre extraktion (50&ndash;60&thinsp;ml), mildare           |
 | Doppio     | Dubbel shot, 50&ndash;70&thinsp;ml                           |
 | Americano  | Espresso spädd med hett vatten                               |
-| Cappuccino | Espresso + ångad mjolk + mjukt mjolkskum                     |
-| Latte      | Espresso + mer ångad mjolk, lite skum                        |
-| Flat White | Espresso + mikroskirat mjolkskum, australisk klassiker       |
+| Cappuccino | Espresso + ångad mjölk + mjukt mjölkskum                     |
+| Latte      | Espresso + mer ångad mjölk, lite skum                        |
+| Flat White | Espresso + mikroskirat mjölkskum, australisk klassiker       |
 
 ## Vanliga misstag
 
