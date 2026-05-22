@@ -8,7 +8,7 @@ weight = 3
 ikon = "☕"
 image = "photo-1509042239860-f550ce710b93"
 svarighet = "Nybörjarvänlig"
-brygtid = "6–10 minuter"
+bryggtid = "6–10 minuter"
 ursprung = "USA / Globalt"
 temperatur = "90–96°C"
 malningsgrad = "Mediumgrovt"
@@ -75,7 +75,7 @@ Små justeringar ger stora resultat:
 
 1. **Malningsgrad** &ndash; grovt ger svagare, mildare kaffe; fint ger starkare och potentiellt besk smak
 2. **Vattentemperatur** &ndash; de flesta maskiner värmer till 85&ndash;90&deg;C; bra maskiner når 92&ndash;96&deg;C
-3. **Brygtid** &ndash; 6&ndash;8 minuter är optimalt för en kanna
+3. **Bryggtid** &ndash; 6&ndash;8 minuter är optimalt för en kanna
 4. **Filtertyp** &ndash; rengjör maskinen regelmässigt så inte gamla kaffeolja förstör smaken
 
 ## Vanliga misstag

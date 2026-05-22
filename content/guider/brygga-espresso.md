@@ -83,11 +83,11 @@ Följt av målen:
 
 Smaka på esprusson och evaluera:
 
-| Smäk       | Orsak           | Åtgärd                                |
-| ---------- | --------------- | ------------------------------------- |
-| Sur/skarp  | Underextraherat | Finare malning eller längre brygtid   |
-| Besk/torr  | Överextraherat  | Grovare malning eller kortare brygtid |
-| Balanserad | Korrekt         | Spara inställningarna!                |
+| Smäk       | Orsak           | Åtgärd                                 |
+| ---------- | --------------- | -------------------------------------- |
+| Sur/skarp  | Underextraherat | Finare malning eller längre bryggtid   |
+| Besk/torr  | Överextraherat  | Grovare malning eller kortare bryggtid |
+| Balanserad | Korrekt         | Spara inställningarna!                 |
 
 ---
 

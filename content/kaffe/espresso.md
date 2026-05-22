@@ -1,6 +1,6 @@
 +++
 title = "Espresso"
-description = "Den intensiva grundpelaren i kaffevärlden – en liten, kraftfull kopp med djup smak och krämmig crema."
+description = "Den intensiva grundpelaren i kaffevärlden – en liten, kraftfull kopp med djup smak och krämig crema."
 template = "coffee_page.html"
 weight = 1
 
@@ -8,7 +8,7 @@ weight = 1
 ikon = "☕"
 image = "photo-1510591509098-f4fdc6d0ff04"
 svarighet = "Mellannivå"
-brygtid = "25–30 sekunder"
+bryggtid = "25–30 sekunder"
 ursprung = "Italien, 1900-talet"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
@@ -54,7 +54,7 @@ För att brygga riktig espresso behöver du:
 
 En välgjord espresso har en komplex smakprofil:
 
-- **Crema** &ndash; len, krämmig och persikofärgad; ett tecken på fräscha bönor och korrekt extraktion
+- **Crema** &ndash; len, krämig och persikofärgad; ett tecken på fräscha bönor och korrekt extraktion
 - **Kropp** &ndash; tjock och sirapsaktig
 - **Smak** &ndash; balans mellan sötma, syra och bitterhet; toner av mörk choklad, karamell och frukt
 - **Aftertaste** &ndash; lång och behållig

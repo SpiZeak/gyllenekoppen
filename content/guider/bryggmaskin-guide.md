@@ -73,7 +73,7 @@ De flesta hemmabrygger värmer vatten till 85&ndash;90&deg;C, men **idealet är 
 
 Om din maskin är gammal eller billig värmer den antagligen för låg temperatur, vilket ger underextraherat, surt kaffe. En investering i en bättre maskin kan göra stor skillnad.
 
-**Total brygtid:** 6&ndash;8 minuter för en kanna är optimalt.
+**Total bryggtid:** 6&ndash;8 minuter för en kanna är optimalt.
 
 ---
 

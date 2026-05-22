@@ -8,7 +8,7 @@ weight = 2
 ikon = "🫖"
 image = "photo-1495474472287-4d71bcdd2085"
 svarighet = "Nybörjarbra"
-brygtid = "3–4 minuter"
+bryggtid = "3–4 minuter"
 ursprung = "Japan / Globalt"
 temperatur = "92–96°C"
 malningsgrad = "Mediumfint"
@@ -60,7 +60,7 @@ Pour-over-bryggning består av tre faser:
 
 1. **Bloom (preskvättning)** &ndash; Häll dubbla vattenmängden mot kaffemängden (t.ex. 60&thinsp;g vatten för 30&thinsp;g kaffe) och vänta 30&ndash;45 sekunder. CO&sup2; från fräscha bönor släpps ut och skapar ett "blås-upp" &ndash; ett gott tecken.
 2. **Kontinuerlig hällning** &ndash; Häll vattnet i jämna, cirkulera rörelser utåt och inåt. Håll vattennivån stabil.
-3. **Slutfäsning** &ndash; Avsluta hällningen när du nått rätt totalvikt. Total brygtid bör vara 3&ndash;4 minuter.
+3. **Slutfäsning** &ndash; Avsluta hällningen när du nått rätt totalvikt. Total bryggtid bör vara 3&ndash;4 minuter.
 
 ## Smakprofil
 
