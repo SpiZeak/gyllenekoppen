@@ -1,11 +1,11 @@
 # The URL the site will be built for
-base_url = "https://zola.trewhitt.se"
+base_url = "https://gyllenekoppen.se"
 
 # Site title — available in templates as {{ config.title }}
-title = "My Zola Site"
+title = "Gyllene Koppen"
 
 # Site description — available in templates as {{ config.description }}
-description = "A fast static site built with Zola and Tailwind CSS."
+description = "Din guide till kaffevärlden – från espresso till pour-over. Lär dig om bönor, bryggmetoder och konsten att brygga den perfekta koppen."
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
@@ -15,7 +15,7 @@ build_search_index = false
 
 [[taxonomies]]
 name = "tags"
-url = "tags"
+url = "taggar"
 feed = true
 
 [markdown]

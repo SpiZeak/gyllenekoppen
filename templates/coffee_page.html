@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+
+{% block description %}
+{%- if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif -%}
+{% endblock description %}
+
+{% block content %}
+
+<article>
+	<!-- Breadcrumb -->
+	<nav class="mb-8 text-seasalt-400 dark:text-seasalt-500 text-sm animate-fade-in">
+		<a href="/" class="hover:text-pumpkin transition-colors">Hem</a>
+		<span class="mx-2">/</span>
+		<a href="/kaffe" class="hover:text-pumpkin transition-colors">Kaffe</a>
+		<span class="mx-2">/</span>
+		<span class="text-seasalt-600 dark:text-seasalt-300">{{ page.title }}</span>
+	</nav>
+
+	<!-- Hero -->
+	<header class="relative mb-12 rounded-2xl overflow-hidden animate-slide-up">
+		{% if page.extra.image %}
+		<img src="https://images.unsplash.com/{{ page.extra.image }}?w=1400&h=560&fit=crop&q=80&auto=format"
+			alt="{{ page.title }}" class="w-full h-64 sm:h-80 object-cover" />
+		{% else %}
+		<div class="bg-gradient-to-br from-warm-charcoal-600 to-warm-charcoal-800 w-full h-64 sm:h-80"></div>
+		{% endif %}
+		<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+		<div class="absolute inset-0 flex flex-col justify-end p-6 sm:p-10">
+			<h1 class="font-serif font-bold text-white text-4xl sm:text-5xl tracking-tight animate-slide-up delay-100">
+				{{
+				page.title }}</h1>
+			{% if page.description %}
+			<p class="mt-3 max-w-2xl text-white/80 text-base sm:text-lg leading-relaxed animate-slide-up delay-200">{{
+				page.description }}</p>
+			{% endif %}
+		</div>
+	</header>
+
+	<!-- Stats grid -->
+	<div class="gap-3 grid grid-cols-2 sm:grid-cols-3 mb-12 animate-slide-up delay-300">
+		{% if page.extra.svarighet %}
+		<div
+			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
+			<div class="mb-1 text-2xl">&#9889;</div>
+			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
+				Sv&#229;righetsgrad</div>
+			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ page.extra.svarighet }}</div>
+		</div>
+		{% endif %}
+		{% if page.extra.brygtid %}
+		<div
+			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
+			<div class="mb-1 text-2xl">&#8987;</div>
+			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
+				Brygtid</div>
+			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ page.extra.brygtid }}</div>
+		</div>
+		{% endif %}
+		{% if page.extra.ursprung %}
+		<div
+			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
+			<div class="mb-1 text-2xl">&#127757;</div>
+			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
+				Ursprung</div>
+			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ page.extra.ursprung }}</div>
+		</div>
+		{% endif %}
+		{% if page.extra.temperatur %}
+		<div
+			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
+			<div class="mb-1 text-2xl">&#127777;&#65039;</div>
+			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
+				Temperatur</div>
+			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ page.extra.temperatur }}</div>
+		</div>
+		{% endif %}
+		{% if page.extra.malningsgrad %}
+		<div
+			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
+			<div class="mb-1 text-2xl">&#9881;&#65039;</div>
+			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
+				Malningsgrad</div>
+			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ page.extra.malningsgrad }}
+			</div>
+		</div>
+		{% endif %}
+		{% if page.extra.vattenkvot %}
+		<div
+			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
+			<div class="mb-1 text-2xl">&#128167;</div>
+			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
+				Vattenkvot</div>
+			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ page.extra.vattenkvot }}</div>
+		</div>
+		{% endif %}
+	</div>
+
+	<!-- Content -->
+	<div class="animate-fade-in delay-400 prose">
+		{{ page.content | safe }}
+	</div>
+
+	<!-- Related guides -->
+	{% set guider = get_section(path="guider/_index.md") %}
+	{% if guider.pages %}
+	{% set related = [] %}
+	{% for guide in guider.pages %}
+	{% if guide.extra.dryck and guide.extra.dryck == page.title %}
+	{% set_global related = related | concat(with=guide) %}
+	{% endif %}
+	{% endfor %}
+	{% if related %}
+	<div class="mt-12 pt-8 border-seasalt-200 dark:border-warm-charcoal-600 border-t animate-fade-in delay-500">
+		<h2 class="mb-4 font-bold text-xl">Relaterade guider</h2>
+		<div class="space-y-3">
+			{% for guide in related %}
+			<a href="{{ guide.permalink }}"
+				class="group flex items-center gap-4 bg-white dark:bg-warm-charcoal-600 p-4 border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-xl transition-all">
+				{% if guide.extra.image %}
+				<div class="rounded-lg w-12 h-12 overflow-hidden shrink-0">
+					<img src="https://images.unsplash.com/{{ guide.extra.image }}?w=100&h=100&fit=crop&q=80&auto=format"
+						alt="{{ guide.title }}" class="w-full h-full object-cover" loading="lazy" />
+				</div>
+				{% endif %}
+				<div class="flex-1">
+					<div class="font-semibold group-hover:text-pumpkin transition-colors">{{ guide.title }}</div>
+					{% if guide.description %}
+					<div class="mt-0.5 text-seasalt-500 dark:text-seasalt-400 text-sm">{{ guide.description }}</div>
+					{% endif %}
+				</div>
+				<svg xmlns="http://www.w3.org/2000/svg"
+					class="size-5 text-seasalt-300 dark:text-seasalt-600 group-hover:text-pumpkin transition-colors shrink-0"
+					fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+				</svg>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+	{% endif %}
+
+	<!-- Back link -->
+	<div class="mt-12 pt-8 border-seasalt-200 dark:border-warm-charcoal-600 border-t animate-fade-in delay-500">
+		<a href="/kaffe" class="font-medium text-pumpkin hover:underline">
+			&larr; Tillbaka till alla kaffevarianter
+		</a>
+	</div>
+</article>
+
+{% endblock content %}

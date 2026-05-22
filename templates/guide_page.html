@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+
+{% block description %}
+{%- if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif -%}
+{% endblock description %}
+
+{% block content %}
+
+<article>
+	<!-- Breadcrumb -->
+	<nav class="mb-8 text-seasalt-400 dark:text-seasalt-500 text-sm animate-fade-in">
+		<a href="/" class="hover:text-pumpkin transition-colors">Hem</a>
+		<span class="mx-2">/</span>
+		<a href="/guider" class="hover:text-pumpkin transition-colors">Guider</a>
+		<span class="mx-2">/</span>
+		<span class="text-seasalt-600 dark:text-seasalt-300">{{ page.title }}</span>
+	</nav>
+
+	{% if page.extra.image %}
+	<div class="relative mb-10 rounded-2xl h-56 sm:h-72 overflow-hidden animate-slide-up">
+		<img src="https://images.unsplash.com/{{ page.extra.image }}?w=1400&h=560&fit=crop&q=80&auto=format"
+			alt="{{ page.title }}" class="w-full h-full object-cover" />
+		<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+	</div>
+	{% endif %}
+
+	<!-- Hero -->
+	<header class="mb-12">
+		<div class="flex flex-wrap items-center gap-3 mb-4 animate-fade-in">
+			{% if page.extra.svarighet %}
+			<span
+				class="bg-pumpkin-50 dark:bg-warm-charcoal-600 px-3 py-1 border border-pumpkin-200 dark:border-pumpkin-800 rounded-full font-semibold text-pumpkin-700 dark:text-pumpkin-300 text-xs uppercase tracking-wide">
+				&#9889; {{ page.extra.svarighet }}
+			</span>
+			{% endif %}
+			{% if page.extra.tidsatgang %}
+			<span
+				class="bg-seasalt-100 dark:bg-warm-charcoal-600 px-3 py-1 border border-seasalt-200 dark:border-warm-charcoal-500 rounded-full font-semibold text-seasalt-600 dark:text-seasalt-300 text-xs uppercase tracking-wide">
+				&#8987; {{ page.extra.tidsatgang }}
+			</span>
+			{% endif %}
+			{% if page.extra.dryck %}
+			<span
+				class="bg-seasalt-100 dark:bg-warm-charcoal-600 px-3 py-1 border border-seasalt-200 dark:border-warm-charcoal-500 rounded-full font-semibold text-seasalt-600 dark:text-seasalt-300 text-xs uppercase tracking-wide">
+				&#9749; {{ page.extra.dryck }}
+			</span>
+			{% endif %}
+		</div>
+		<h1 class="font-serif font-bold text-4xl sm:text-5xl tracking-tight animate-slide-up delay-50">{{ page.title }}
+		</h1>
+		{% if page.description %}
+		<p
+			class="mt-4 max-w-2xl text-seasalt-500 dark:text-seasalt-400 text-lg leading-relaxed animate-slide-up delay-150">
+			{{ page.description }}
+		</p>
+		{% endif %}
+	</header>
+
+	<!-- Content -->
+	<div class="animate-fade-in delay-250 prose">
+		{{ page.content | safe }}
+	</div>
+
+	<!-- Back link -->
+	<div
+		class="flex flex-wrap justify-between items-center gap-4 mt-12 pt-8 border-seasalt-200 dark:border-warm-charcoal-600 border-t animate-fade-in delay-500">
+		<a href="/guider" class="font-medium text-pumpkin hover:underline">
+			&larr; Tillbaka till alla guider
+		</a>
+		{% if page.extra.dryck %}
+		<a href="/kaffe/{{ page.extra.dryck | lower | replace(from=' ', to='-') }}"
+			class="font-medium text-pumpkin hover:underline">
+			L&#228;s om {{ page.extra.dryck }} &rarr;
+		</a>
+		{% endif %}
+	</div>
+</article>
+
+{% endblock content %}

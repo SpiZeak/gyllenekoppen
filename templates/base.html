@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="sv" class="">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>{% block title %}{{ config.title }}{% endblock title %}</title>
 	<meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}" />
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2615;</text></svg>" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" />
-	<link rel="preload" href="{{ get_url(path='tailwind.css', cachebust=true) }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-	<noscript><link rel="stylesheet" href="{{ get_url(path='tailwind.css', cachebust=true) }}" /></noscript>
-	<style>body{background-color:#f9fafb}html.dark body{background-color:#1a1a1a}</style>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" />
+	<link rel="stylesheet" href="/tailwind.css" />
+	<style>
+		body {
+			background-color: #fdfbf6
+		}
+
+		html.dark body {
+			background-color: #1c150c
+		}
+	</style>
 	<script>
 		const saved = localStorage.getItem('theme');
 		if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -18,18 +29,33 @@
 		}
 	</script>
 </head>
-<body class="flex flex-col bg-seasalt dark:bg-warm-charcoal min-h-screen text-seasalt-900 dark:text-seasalt transition-colors">
-	<header class="border-seasalt-200 dark:border-warm-charcoal-600 border-b animate-slide-down">
-		<nav class="flex justify-between items-center mx-auto px-4 py-4 max-w-4xl">
-			<a href="/" class="font-bold hover:text-pumpkin text-xl tracking-tight transition-colors animate-fade-in delay-100">
+
+<body
+	class="flex flex-col bg-seasalt dark:bg-warm-charcoal min-h-screen text-seasalt-900 dark:text-seasalt transition-colors">
+	<header
+		class="top-0 z-50 sticky bg-seasalt-50/95 dark:bg-warm-charcoal-800/95 backdrop-blur-sm border-seasalt-200 dark:border-warm-charcoal-600 border-b animate-slide-down">
+		<nav class="flex justify-between items-center mx-auto px-4 py-4 max-w-5xl">
+			<a href="/"
+				class="font-serif font-bold hover:text-pumpkin text-2xl tracking-tight transition-colors animate-fade-in delay-100">
 				{{ config.title }}
 			</a>
 
 			<!-- Desktop nav -->
 			<ul class="hidden sm:flex items-center gap-6 font-medium text-sm">
-				<li class="animate-fade-in delay-150"><a href="/" class="hover:text-pumpkin transition-colors">Home</a></li>
-				<li class="animate-fade-in delay-200"><a href="/blog" class="hover:text-pumpkin transition-colors">Blog</a></li>
-				<li class="animate-fade-in delay-250"><a href="/about" class="hover:text-pumpkin transition-colors">About</a></li>
+				<li class="animate-fade-in delay-150"><a href="/" class="hover:text-pumpkin transition-colors">Hem</a>
+				</li>
+				<li class="animate-fade-in delay-200"><a href="/kaffe"
+						class="hover:text-pumpkin transition-colors">Kaffe</a></li>
+				<li class="animate-fade-in delay-250"><a href="/guider"
+						class="hover:text-pumpkin transition-colors">Guider</a></li>
+				<li class="animate-fade-in delay-300"><a href="/om-oss" class="hover:text-pumpkin transition-colors">Om
+						oss</a></li>
+				<li class="animate-fade-in delay-350">
+					<a href="/kaffe"
+						class="bg-pumpkin hover:bg-pumpkin-600 px-5 py-2 rounded-full font-semibold text-white text-sm transition-colors">
+						Utforska kaffe
+					</a>
+				</li>
 				<li class="animate-fade-in delay-300">
 					<button id="theme-toggle" aria-label="Toggle dark mode"
 						class="hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 p-2 rounded-lg text-seasalt-600 hover:text-pumpkin dark:hover:text-pumpkin-300 dark:text-seasalt-300 transition-colors cursor-pointer">
@@ -53,23 +79,25 @@
 			<div class="sm:hidden flex items-center gap-2 animate-fade-in delay-150">
 				<button id="theme-toggle-mobile" aria-label="Toggle dark mode"
 					class="hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 p-2 rounded-lg text-seasalt-600 hover:text-pumpkin dark:hover:text-pumpkin-300 dark:text-seasalt-300 transition-colors cursor-pointer">
-					<svg xmlns="http://www.w3.org/2000/svg" class="hidden dark:block size-5"
-						fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<svg xmlns="http://www.w3.org/2000/svg" class="hidden dark:block size-5" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<path stroke-linecap="round" stroke-linejoin="round"
 							d="M12 3v1m0 16v1m8.66-9H21M3 12H2m15.07-6.07-.71.71M7.64 16.36l-.71.71M18.36 16.36l-.71-.71M6.34 7.64l-.71-.71M17 12a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
 					</svg>
-					<svg xmlns="http://www.w3.org/2000/svg" class="dark:hidden block size-5"
-						fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<svg xmlns="http://www.w3.org/2000/svg" class="dark:hidden block size-5" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<path stroke-linecap="round" stroke-linejoin="round"
 							d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
 					</svg>
 				</button>
 				<button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
 					class="hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 p-2 rounded-lg text-seasalt-600 hover:text-pumpkin dark:hover:text-pumpkin-300 dark:text-seasalt-300 transition-colors cursor-pointer">
-					<svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
 					</svg>
-					<svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="hidden size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="hidden size-5" fill="none"
+						viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 					</svg>
 				</button>
@@ -79,25 +107,39 @@
 		<!-- Mobile menu -->
 		<div id="mobile-menu" class="sm:hidden border-seasalt-200 dark:border-warm-charcoal-600 border-t mobile-menu">
 			<ul class="flex flex-col items-end gap-1 px-4 py-3 font-medium text-md">
-				<li><a href="/" class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">Home</a></li>
-				<li><a href="/blog" class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">Blog</a></li>
-				<li><a href="/about" class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">About</a></li>
+				<li><a href="/"
+						class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">Hem</a>
+				</li>
+				<li><a href="/kaffe"
+						class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">Kaffe</a>
+				</li>
+				<li><a href="/guider"
+						class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">Guider</a>
+				</li>
+				<li><a href="/om-oss"
+						class="block hover:bg-seasalt-100 dark:hover:bg-warm-charcoal-600 px-3 py-2 rounded-lg hover:text-pumpkin transition-colors">Om
+						oss</a></li>
 			</ul>
 		</div>
 	</header>
-	<main class="flex-1 mx-auto px-4 py-12 w-full max-w-4xl">
-		{% block content %}{% endblock content %}
+	<main class="flex-1">
+		{% block full_content %}
+		<div class="mx-auto px-4 py-12 w-full max-w-5xl">
+			{% block content %}{% endblock content %}
+		</div>
+		{% endblock full_content %}
 	</main>
 	<footer class="mt-auto border-seasalt-200 dark:border-warm-charcoal-600 border-t">
-		<div class="mx-auto px-4 py-6 max-w-4xl text-seasalt-500 dark:text-seasalt-400 text-sm text-center">
-			Built with
+		<div class="mx-auto px-4 py-6 max-w-5xl text-seasalt-500 dark:text-seasalt-400 text-sm text-center">
+			<span class="font-serif font-semibold text-seasalt-700 dark:text-seasalt-300">Gyllene Koppen</span> &mdash;
+			din guide till
+			kaffevärlden.
+			Byggd med
 			<a href="https://www.getzola.org"
 				class="hover:text-pumpkin dark:hover:text-pumpkin-300 underline transition-colors">Zola</a>
-			and
+			och
 			<a href="https://tailwindcss.com"
 				class="hover:text-pumpkin dark:hover:text-pumpkin-300 underline transition-colors">Tailwind CSS</a>.
-			<a href="https://github.com/SpiZeak/zola-tailwind"
-				class="hover:text-pumpkin dark:hover:text-pumpkin-300 underline transition-colors">Source on GitHub</a>.
 		</div>
 	</footer>
 	<script>
@@ -116,8 +158,8 @@
 		// Mobile menu
 		const menuToggle = document.getElementById('menu-toggle');
 		const mobileMenu = document.getElementById('mobile-menu');
-		const iconMenu   = document.getElementById('icon-menu');
-		const iconClose  = document.getElementById('icon-close');
+		const iconMenu = document.getElementById('icon-menu');
+		const iconClose = document.getElementById('icon-close');
 
 		menuToggle.addEventListener('click', () => {
 			const isOpen = mobileMenu.classList.contains('is-open');
@@ -128,4 +170,5 @@
 		});
 	</script>
 </body>
+
 </html>

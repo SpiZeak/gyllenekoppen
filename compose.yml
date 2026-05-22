@@ -2,7 +2,6 @@ services:
   zola:
     user: "1000:1000"
     image: ghcr.io/getzola/zola:v0.22.1
-    container_name: zola
     ports:
       - "5000:5000"
     volumes:
@@ -13,7 +12,6 @@ services:
   tailwind:
     user: "1000:1000"
     build: ./docker/tailwind
-    container_name: tailwind
     volumes:
       - .:/project
     working_dir: /project

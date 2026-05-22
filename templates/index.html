@@ -1,49 +1,187 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block title %}{{ config.title }} – Din guide till kaffevärlden{% endblock title %}
 
-<section class="py-16 text-center">
-	<h1 class="mb-4 font-extrabold text-5xl tracking-tight animate-slide-up delay-50">{{ config.title }}</h1>
-	<p class="mx-auto max-w-xl text-seasalt-500 dark:text-seasalt-400 text-lg animate-slide-up delay-150">{{ config.description }}</p>
-	<div class="flex flex-wrap justify-center gap-4 mt-8 animate-slide-up delay-250">
-		<a href="/blog"
-			class="bg-pumpkin hover:bg-pumpkin-600 px-6 py-3 rounded-lg font-semibold text-white transition-colors">
-			Read the Blog
-		</a>
-		<a href="/about"
-			class="hover:bg-seasalt-50 dark:hover:bg-warm-charcoal-600 px-6 py-3 border border-seasalt-300 dark:border-warm-charcoal-600 rounded-lg font-semibold transition-colors">
-			About
-		</a>
+{% block full_content %}
+
+<!-- Hero -->
+<section
+	class="relative bg-gradient-to-br from-pumpkin-50 dark:from-warm-charcoal-800 via-seasalt-50 dark:via-warm-charcoal-700 to-pumpkin-50 dark:to-warm-charcoal-800 mb-16 px-6 sm:px-14 py-24 md:py-36 w-full overflow-hidden">
+	<!-- Coffee ring stain decorations -->
+	<div class="absolute inset-0 overflow-hidden pointer-events-none">
+		<!-- Top-right cluster: overlapping cup rings -->
+		<div
+			class="-top-28 -right-28 absolute opacity-50 border-[30px] border-pumpkin-200 dark:border-warm-charcoal-500 rounded-full w-[26rem] h-[26rem]">
+		</div>
+		<div
+			class="-top-10 -right-10 absolute opacity-40 border-[16px] border-pumpkin-100 dark:border-warm-charcoal-600 rounded-full w-64 h-64">
+		</div>
+		<div
+			class="top-24 right-8 absolute opacity-25 border-[10px] border-pumpkin-200 dark:border-warm-charcoal-500 rounded-full w-32 h-32">
+		</div>
+		<!-- Bottom-left cluster: offset rings -->
+		<div
+			class="-bottom-24 -left-24 absolute opacity-45 border-[24px] border-pumpkin-100 dark:border-warm-charcoal-500 rounded-full w-80 h-80">
+		</div>
+		<div
+			class="-bottom-6 left-10 absolute opacity-30 border-[14px] border-pumpkin-200 dark:border-warm-charcoal-600 rounded-full w-48 h-48">
+		</div>
+	</div>
+
+	<div class="relative text-center">
+		<p
+			class="mb-4 font-semibold text-pumpkin dark:text-pumpkin-300 text-sm uppercase tracking-[0.2em] animate-slide-up delay-50">
+			VÄLKOMMEN
+			TILL</p>
+		<h1 class="font-serif font-bold text-seasalt-900 dark:text-seasalt-50 leading-none animate-slide-up delay-100"
+			style="font-size: clamp(3rem, 8vw, 6rem)">
+			Gyllene Koppen
+		</h1>
+		<p
+			class="mx-auto mt-6 max-w-2xl text-seasalt-500 dark:text-seasalt-400 text-lg leading-relaxed animate-slide-up delay-200">
+			Utforska kaffets värld &ndash; från den intensiva esprusson till den eleganta pour-overn.
+			Lär dig om bönor, rostning, malning och konsten att brygga den perfekta koppen.
+		</p>
+		<div class="flex flex-wrap justify-center gap-4 mt-10 animate-slide-up delay-300">
+			<a href="/kaffe"
+				class="bg-pumpkin hover:bg-pumpkin-600 shadow-sm px-8 py-4 rounded-full font-semibold text-white transition-colors">
+				Utforska kaffevarianter
+			</a>
+			<a href="/guider"
+				class="hover:bg-seasalt-900 dark:hover:bg-seasalt-100 px-8 py-4 border-2 border-seasalt-900 dark:border-seasalt-200 rounded-full font-semibold text-seasalt-900 hover:text-white dark:hover:text-seasalt-900 dark:text-seasalt-200 transition-colors">
+				Läs guider
+			</a>
+		</div>
 	</div>
 </section>
 
-{% set blog = get_section(path="blog/_index.md") %}
-{% if blog.pages %}
-<section>
-	<h2 class="mb-6 font-bold text-2xl animate-slide-up delay-350">Latest Posts</h2>
-	<ul class="space-y-6">
-		{% for page in blog.pages | slice(end=5) %}
-		<li class="pb-6 border-seasalt-200 dark:border-warm-charcoal-600 last:border-0 border-b animate-slide-up" style="animation-delay: {{ loop.index * 75 + 375 }}ms">
-			<a href="{{ page.permalink }}" class="group block">
-				<h3 class="font-semibold group-hover:text-pumpkin text-xl transition-colors">
-					{{ page.title }}
-				</h3>
-				{% if page.date %}
-				<time class="block mt-1 text-seasalt-400 dark:text-seasalt-500 text-sm">
-					{{ page.date | date(format="%B %e, %Y") }}
-				</time>
+<div class="mx-auto px-4 pb-12 w-full max-w-5xl">
+	<!-- Coffee types -->
+	{% set kaffe = get_section(path="kaffe/_index.md") %}
+	{% if kaffe.pages %}
+	<section class="mt-4">
+		<div class="flex justify-between items-start mb-8">
+			<div>
+				<p
+					class="mb-1 font-semibold text-pumpkin dark:text-pumpkin-300 text-xs uppercase tracking-[0.2em] animate-fade-in delay-350">
+					KAFFEVARIANTER</p>
+				<h2 class="font-serif font-bold text-3xl animate-slide-up delay-350">Kaffevarianter</h2>
+				<p class="mt-2 text-seasalt-500 dark:text-seasalt-400 animate-slide-up delay-400">
+					Tre klassiker &ndash; tre helt olika upplevelser.
+				</p>
+			</div>
+			<a href="/kaffe"
+				class="mt-1 font-medium text-pumpkin dark:text-pumpkin-300 text-sm hover:underline animate-fade-in delay-400 shrink-0">Se
+				alla
+				&rarr;</a>
+		</div>
+		<div class="gap-6 grid sm:grid-cols-3">
+			{% for page in kaffe.pages %}
+			<a href="{{ page.permalink }}"
+				class="group flex flex-col bg-white dark:bg-warm-charcoal-600 hover:shadow-lg border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-2xl overflow-hidden transition-all animate-slide-up"
+				style="animation-delay: {{ loop.index * 100 + 450 }}ms">
+				{% if page.extra.image %}
+				<div class="h-44 overflow-hidden shrink-0">
+					<img src="https://images.unsplash.com/{{ page.extra.image }}?w=600&h=300&fit=crop&q=80&auto=format"
+						alt="{{ page.title }}"
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+						loading="lazy" />
+				</div>
 				{% endif %}
-				{% if page.description %}
-				<p class="mt-2 text-seasalt-500 dark:text-seasalt-400">{{ page.description }}</p>
-				{% endif %}
+				<div class="flex flex-col flex-1 p-5">
+					<h3 class="mb-2 font-bold group-hover:text-pumpkin text-xl transition-colors">{{ page.title }}</h3>
+					{% if page.description %}
+					<p class="flex-1 text-seasalt-500 dark:text-seasalt-400 text-sm leading-relaxed">{{ page.description
+						}}
+					</p>
+					{% endif %}
+					<div class="flex flex-wrap gap-2 mt-4">
+						{% if page.extra.svarighet %}
+						<span
+							class="bg-pumpkin-50 dark:bg-warm-charcoal-700 px-2 py-1 rounded-full font-medium text-pumpkin-700 dark:text-pumpkin-300 text-xs">
+							{{ page.extra.svarighet }}
+						</span>
+						{% endif %}
+						{% if page.extra.brygtid %}
+						<span
+							class="bg-seasalt-100 dark:bg-warm-charcoal-700 px-2 py-1 rounded-full font-medium text-seasalt-600 dark:text-seasalt-400 text-xs">
+							{{ page.extra.brygtid }}
+						</span>
+						{% endif %}
+					</div>
+				</div>
 			</a>
-		</li>
-		{% endfor %}
-	</ul>
-	<a href="/blog" class="inline-block mt-8 font-medium text-pumpkin hover:underline animate-slide-up delay-700">
-		View all posts →
-	</a>
-</section>
-{% endif %}
+			{% endfor %}
+		</div>
+	</section>
+	{% endif %}
 
-{% endblock content %}
+	<!-- Guides -->
+	{% set guider = get_section(path="guider/_index.md") %}
+	{% if guider.pages %}
+	<section class="mt-16">
+		<div class="flex justify-between items-start mb-8">
+			<div>
+				<p
+					class="mb-1 font-semibold text-pumpkin dark:text-pumpkin-300 text-xs uppercase tracking-[0.2em] animate-fade-in delay-700">
+					GUIDER</p>
+				<h2 class="font-serif font-bold text-3xl animate-slide-up delay-700">Guider</h2>
+				<p class="mt-2 text-seasalt-500 dark:text-seasalt-400 animate-slide-up delay-750">
+					Steg-för-steg-instruktioner för att brygga kaffe hemma.
+				</p>
+			</div>
+			<a href="/guider"
+				class="mt-1 font-medium text-pumpkin dark:text-pumpkin-300 text-sm hover:underline animate-fade-in delay-750 shrink-0">Se
+				alla
+				&rarr;</a>
+		</div>
+		<div class="space-y-4">
+			{% for page in guider.pages | slice(end=3) %}
+			<a href="{{ page.permalink }}"
+				class="group flex items-center gap-4 bg-white dark:bg-warm-charcoal-600 p-5 border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-xl overflow-hidden transition-all animate-slide-up"
+				style="animation-delay: {{ loop.index * 75 + 800 }}ms">
+				{% if page.extra.image %}
+				<div class="rounded-lg w-16 h-16 overflow-hidden shrink-0">
+					<img src="https://images.unsplash.com/{{ page.extra.image }}?w=120&h=120&fit=crop&q=80&auto=format"
+						alt="{{ page.title }}"
+						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+						loading="lazy" />
+				</div>
+				{% endif %}
+				<div class="flex-1 min-w-0">
+					<h3 class="font-semibold group-hover:text-pumpkin text-lg transition-colors">{{ page.title }}</h3>
+					{% if page.description %}
+					<p class="mt-1 text-seasalt-500 dark:text-seasalt-400 text-sm line-clamp-1">{{ page.description }}
+					</p>
+					{% endif %}
+				</div>
+				{% if page.extra.tidsatgang %}
+				<span class="text-seasalt-400 dark:text-seasalt-500 text-sm shrink-0">&#8987; {{ page.extra.tidsatgang
+					}}</span>
+				{% endif %}
+				<svg xmlns="http://www.w3.org/2000/svg"
+					class="size-5 text-seasalt-300 dark:text-seasalt-600 group-hover:text-pumpkin transition-colors shrink-0"
+					fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+				</svg>
+			</a>
+			{% endfor %}
+		</div>
+	</section>
+	{% endif %}
+
+	<!-- About coffee blurb -->
+	<section
+		class="bg-pumpkin-50 dark:bg-warm-charcoal-600 mt-16 mb-4 p-8 md:p-12 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-2xl animate-fade-in delay-1000">
+		<p class="mb-2 font-semibold text-pumpkin dark:text-pumpkin-300 text-xs uppercase tracking-[0.2em]">OM KAFFE</p>
+		<h2 class="mb-3 font-serif font-bold text-2xl">Kaffe &ndash; mer än bara en dryck</h2>
+		<p class="text-seasalt-600 dark:text-seasalt-300 leading-relaxed">
+			Kaffe är en av världens mest komplexa drycker med över 800 aromföreningar.
+			Från kaffeodlingar i Etiopien, Colombia och Brasilien till din kopp &ndash;
+			varje steg i kedjan påverkar smaken. Böntyp, rostning, malning och bryggning
+			spelar alla en avgörande roll. Den här guiden hjälper dig förstå och uppskatta
+			hela processen, oavsett om du är nybörjare eller kaffenasare.
+		</p>
+	</section>
+
+</div>{% endblock full_content %}

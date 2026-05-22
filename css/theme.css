@@ -2,6 +2,7 @@
 
 @theme {
 	--font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+	--font-serif: 'Playfair Display', Georgia, serif;
 
 	/* Reset all colors to their initial values for the current theme */
 	--color-*: initial;
@@ -13,25 +14,25 @@
 	--color-warm-charcoal-300: #b3b3b3;
 	--color-warm-charcoal-400: #808080;
 	--color-warm-charcoal-500: #4d4d4d;
-	--color-warm-charcoal-600: #333333;
-	--color-warm-charcoal-700: #1a1a1a; /* Original */
+	--color-warm-charcoal-600: #2e2018;
+	--color-warm-charcoal-700: #1c150c; /* Espresso dark */
 	--color-warm-charcoal-800: #141414;
 	--color-warm-charcoal-900: #0d0d0d;
 	--color-warm-charcoal-950: #050505;
 	--color-warm-charcoal: var(--color-warm-charcoal-700);
 
-	/* --- Pumpkin (Accent) --- */
-	--color-pumpkin-50:  #fff7ed;
-	--color-pumpkin-100: #ffedd5;
-	--color-pumpkin-200: #fed7aa;
-	--color-pumpkin-300: #fdba74;
-	--color-pumpkin-400: #fb923c;
-	--color-pumpkin-500: #ff6b00; /* Original */
-	--color-pumpkin-600: #ea580c;
-	--color-pumpkin-700: #c2410c;
-	--color-pumpkin-800: #9a3412;
-	--color-pumpkin-900: #7c2d12;
-	--color-pumpkin-950: #431407;
+	/* --- Coffee Amber (Accent) --- */
+	--color-pumpkin-50:  #fdf5e8;
+	--color-pumpkin-100: #faead0;
+	--color-pumpkin-200: #f4d3a0;
+	--color-pumpkin-300: #e8b568;
+	--color-pumpkin-400: #d4923a;
+	--color-pumpkin-500: #b87028; /* Coffee amber */
+	--color-pumpkin-600: #9a5c1e;
+	--color-pumpkin-700: #7a4817;
+	--color-pumpkin-800: #5a3510;
+	--color-pumpkin-900: #3b230a;
+	--color-pumpkin-950: #1e1205;
 	--color-pumpkin: var(--color-pumpkin-500);
 
 	/* --- Emerald (Success) --- */
@@ -62,10 +63,10 @@
 	--color-crimson-950: #450a0a;
 	--color-crimson: var(--color-crimson-500);
 
-	/* --- Seasalt (Neutrals/Backgrounds) --- */
-	--color-seasalt-50:  #f9fafb; /* Original Base */
-	--color-seasalt-100: #f3f4f6;
-	--color-seasalt-200: #e5e7eb;
+	/* --- Seasalt (Warm Cream Backgrounds) --- */
+	--color-seasalt-50:  #fdfbf6; /* Warm cream */
+	--color-seasalt-100: #f5f0e8;
+	--color-seasalt-200: #e8e0d0;
 	--color-seasalt-300: #d1d5db;
 	--color-seasalt-400: #9ca3af;
 	--color-seasalt-500: #6b7280;

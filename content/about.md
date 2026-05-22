@@ -1,25 +1,27 @@
 +++
-title = "About"
+title = "Om oss"
+path = "om-oss"
 +++
 
-## About This Site
+## Vår passion för kaffe
 
-This is a static site built with [Zola](https://www.getzola.org/) and styled with [Tailwind CSS v4](https://tailwindcss.com/).
+Kaffekultur grundades av en grupp kaffeentusiaster som tröttnade på att dricka medelmåttigt kaffe. Vi tror att gott kaffe är tillgängligt för alla – oavsett om du är nybörjare eller har en fullt utrustad hemmabrygg.
 
-## About the Boilerplate
+## Vad vi gör
 
-This boilerplate gives you a fast starting point for building Zola-powered sites with Tailwind CSS. The entire development environment runs in Docker — no local installs are required beyond Docker itself.
+Vi sammanställer kunskap om:
 
-### What's Included
+- **Kaffevarianter** – espresso, pour-over, bryggkaffe och mer
+- **Bönor och ursprung** – vad skillnaden är och vad som passar vad
+- **Bryggmetoder** – steg-för-steg-guider för hemmabrygget
+- **Utrustning** – vad du faktiskt behöver och vad som är nice-to-have
 
-- A two-service Docker Compose setup (Zola + Tailwind CSS watcher)
-- A minimal base layout with navigation and footer
-- A blog section with tag support and pagination
-- Syntax highlighting powered by Zola's built-in highlighter (catppuccin-mocha theme)
-- Prose styles for rendered Markdown content
+## Vår filosofi
 
-### Get Started
+Bra kaffe behöver inte vara komplicerat. Det viktigaste är fräscha bönor, rent vatten och lite nånslags översyn över processen. Allt annat är finlir.
 
-Clone the repository, run `docker compose up`, and open [http://localhost](http://localhost) in your browser. Start editing the files in `content/` and `templates/` — changes are reflected live.
+Vi tror på att lära sig sakta, prova sig fram och njuta av resan – inte bara målet.
 
-See the [README](https://github.com/SpiZeak/zola-tailwind#readme) for full documentation, or browse the full source on [GitHub](https://github.com/SpiZeak/zola-tailwind).
+## Kom igång
+
+Bläddra bland våra [kaffevarianter](/kaffe) eller hoppa direkt till våra [guider](/guider) för praktiska tips.
