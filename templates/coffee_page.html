@@ -14,6 +14,10 @@
 		<a href="/" class="hover:text-pumpkin transition-colors">Hem</a>
 		<span class="mx-2">/</span>
 		<a href="/kaffe" class="hover:text-pumpkin transition-colors">Kaffe</a>
+		{% if page.parent %}
+		<span class="mx-2">/</span>
+		<a href="{{ page.parent.permalink }}" class="hover:text-pumpkin transition-colors">{{ page.parent.title }}</a>
+		{% endif %}
 		<span class="mx-2">/</span>
 		<span class="text-seasalt-600 dark:text-seasalt-300">{{ page.title }}</span>
 	</nav>
@@ -24,9 +28,9 @@
 		<img src="https://images.unsplash.com/{{ page.extra.image }}?w=1400&h=560&fit=crop&q=80&auto=format"
 			alt="{{ page.title }}" class="w-full h-64 sm:h-80 object-cover" />
 		{% else %}
-		<div class="bg-gradient-to-br from-warm-charcoal-600 to-warm-charcoal-800 w-full h-64 sm:h-80"></div>
+		<div class="bg-linear-to-br from-warm-charcoal-600 to-warm-charcoal-800 w-full h-64 sm:h-80"></div>
 		{% endif %}
-		<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+		<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
 		<div class="absolute inset-0 flex flex-col justify-end p-6 sm:p-10">
 			<h1 class="font-serif font-bold text-white text-4xl sm:text-5xl tracking-tight animate-slide-up delay-100">
 				{{
@@ -144,9 +148,15 @@
 
 	<!-- Back link -->
 	<div class="mt-12 pt-8 border-seasalt-200 dark:border-warm-charcoal-600 border-t animate-fade-in delay-500">
+		{% if page.parent %}
+		<a href="{{ page.parent.permalink }}" class="font-medium text-pumpkin hover:underline">
+			&larr; Tillbaka till {{ page.parent.title }}
+		</a>
+		{% else %}
 		<a href="/kaffe" class="font-medium text-pumpkin hover:underline">
 			&larr; Tillbaka till alla kaffevarianter
 		</a>
+		{% endif %}
 	</div>
 </article>
 

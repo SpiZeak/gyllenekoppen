@@ -1,6 +1,6 @@
 +++
 title = "Hur man brygger espresso hemma"
-description = "En komplett guide för nybörjare och entusiaster – från att välja rätt bönor till att åstadskomma perfekt crema."
+description = "En komplett guide för nybörjare och entusiaster – från att välja rätt bönor till att åstadkomma perfekt crema."
 template = "guide_page.html"
 weight = 1
 
@@ -14,12 +14,12 @@ dryck = "Espresso"
 
 ## Vad du behöver
 
-Före du börjar, se till att du har:
+Innan du börjar, se till att du har:
 
 - Espressomaskin med minst 9 bars pumptryck
-- Burr-kvarn (invända skivor eller kugghjul)
+- Burr-kvarn (invändiga skivor eller kugghjul)
 - Tamper
-- Våg med timerfunction
+- Våg med timerfunktion
 - Fräscha kaffebönor (rostade inom 2–4 veckor)
 - Rent, filtrerat vatten
 
@@ -27,7 +27,7 @@ Före du börjar, se till att du har:
 
 ## Steg 1 &ndash; Välj och väg dina bönor
 
-Välj en espressoros med medel–mörk rostning. En bra startpunkt är en Brasiliansk–Colombiansk blend som ger sötma och god kropp.
+Välj en espressoblend med medel–mörk rostning. En bra startpunkt är en brasiliansk–colombiansk blend som ger sötma och god kropp.
 
 **Startdos:** 18&thinsp;g kaffe för en dubbel shot (doppio). Väg upp kaffet på vågen.
 
@@ -37,7 +37,7 @@ Välj en espressoros med medel–mörk rostning. En bra startpunkt är en Brasil
 
 Mala kaffet fint &ndash; ungefär som fint strösocker, lite grovare än florsocker.
 
-**Test:** Om esprusson rinner igenom på under 20 sekunder är malningen för grov. Över 35 sekunder är den för fin. Målet är 25&ndash;30 sekunder.
+**Test:** Om espresson rinner igenom på under 20 sekunder är malningen för grov. Över 35 sekunder är den för fin. Målet är 25&ndash;30 sekunder.
 
 ---
 
@@ -53,7 +53,7 @@ Målet är en **jämn, plan yta** utan klumpar.
 
 Ställ portafiltret på ett plant underlag. Placera tampern rätt och tryck ned med ca 15&ndash;20 kg jämnt tryck rakt ned. Vrid tampern lätt för att glätta ytan.
 
-**Viktigt:** Tamp jämnt &ndash; en sned tamp ger s.k. "channeling" där vatten söker sig igenom svårare motstånd och ger ojämn extraktion.
+**Viktigt:** Tamp jämnt &ndash; en sned tamp ger s.k. "channeling" där vattnet söker sig igenom vägen av minst motstånd och ger ojämn extraktion.
 
 ---
 
@@ -71,19 +71,19 @@ Placera en vägd kopp under portafiltret. Starta timern och bryggningen.
 
 **Mål:** 36&thinsp;g espresso (dubbelt mot dosen) på 25&ndash;30 sekunder.
 
-Följt av målen:
+Följ målen:
 
-- Esprusson ska börja rinna ut efter ca 5&ndash;8 sekunder som en mörk, tjock stråle
-- Stelen liknar "myrtransporter" och blir gradvis ljusare
+- Espresson ska börja rinna ut efter ca 5&ndash;8 sekunder som en mörk, tjock stråle
+- Strålen liknar "myrtransporter" och blir gradvis ljusare
 - Stoppa när vågen visar &asymp;36&thinsp;g
 
 ---
 
-## Steg 7 &ndash; Smäktest och justering
+## Steg 7 &ndash; Smaktest och justering
 
-Smaka på esprusson och evaluera:
+Smaka på espresson och evaluera:
 
-| Smäk       | Orsak           | Åtgärd                                 |
+| Smak       | Orsak           | Åtgärd                                 |
 | ---------- | --------------- | -------------------------------------- |
 | Sur/skarp  | Underextraherat | Finare malning eller längre bryggtid   |
 | Besk/torr  | Överextraherat  | Grovare malning eller kortare bryggtid |
@@ -94,5 +94,5 @@ Smaka på esprusson och evaluera:
 ## Bra att veta
 
 - **Nyrostade bönor** ger bättre crema men behöver vanligtvis 4&ndash;10 dagars "rest" efter rostningsdatumet för optimalt resultat.
-- **Rent vatten** är avgörande &ndash; kalkhaltigt vatten slöar bort maskinens är och påverkar smaken.
-- **Rengör maskinen** regelbundet &ndash; rengjör portafiltret dagligen och backspolningsrengjör maskinen varje vecka.
+- **Rent vatten** är avgörande &ndash; kalkhaltigt vatten slöar bort maskinens livslängd och påverkar smaken.
+- **Rengör maskinen** regelbundet &ndash; rengör portafiltret dagligen och backflusha maskinen varje vecka.

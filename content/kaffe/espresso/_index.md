@@ -1,7 +1,7 @@
 +++
 title = "Espresso"
 description = "Den intensiva grundpelaren i kaffevärlden – en liten, kraftfull kopp med djup smak och krämig crema."
-template = "coffee_page.html"
+template = "coffee_section.html"
 weight = 1
 
 [extra]
@@ -12,12 +12,12 @@ bryggtid = "25–30 sekunder"
 ursprung = "Italien, 1900-talet"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
-vattenkvot = "1:2 (1&thinsp;g kaffe → 2&thinsp;g espresso)"
+vattenkvot = "1:2 (1 g kaffe → 2 g espresso)"
 +++
 
 ## Vad är espresso?
 
-Espresso är en koncentrerad kaffeform som bryggs genom att hett vatten pressas genom finmalt kaffe under högt tryck &ndash; vanligtvis 9 bar. Resultatet är en liten, kraftfull kopp på 25&ndash;35&thinsp;ml med en karakteristisk guldbrun **crema** på ytan.
+Espresso är en koncentrerad kaffeform som bryggs genom att hett vatten pressas genom finmalt kaffe under högt tryck &ndash; vanligtvis 9 bar. Resultatet är en liten, kraftfull kopp på 25&ndash;35 ml med en karakteristisk guldbrun **crema** på ytan.
 
 Espresso är inte bara en dryck i sig &ndash; det är grunden för de flesta kaffedrinkar vi känner idag: cappuccino, latte, americano och flat white bygger alla på en eller flera shots espresso.
 
@@ -46,9 +46,9 @@ För espresso föredras vanligtvis **medium–mörk rostning**. En för ljus ros
 För att brygga riktig espresso behöver du:
 
 - **Espressomaskin** &ndash; med tillräckligt pumptryck (9 bar). En enkel halvautomatisk maskin räcker gärna för hemmabruk.
-- **Kvarn** &ndash; en bra kvarn är viktigare än maskinen. Malningen måste vara jämn och fin &ndash; invända grindar ger bättre resultat än propellerkvarnar.
+- **Kvarn** &ndash; en bra kvarn är viktigare än maskinen. Malningen måste vara jämn och fin &ndash; kvarnar med invändiga skivor ger bättre resultat än propellerkvarnar.
 - **Tamper** &ndash; för att pressa kaffet jämnt i portafiltret med ca 15&ndash;20 kg tryck.
-- **Våg** &ndash; väg både inkafé och utespresso för att träffa rätt kvot.
+- **Våg** &ndash; väg både inkaffe och utkaffe för att träffa rätt kvot.
 
 ## Smakprofil
 
@@ -61,15 +61,15 @@ En välgjord espresso har en komplex smakprofil:
 
 ## Variationer på espresso
 
-| Dryck      | Beskrivning                                                  |
-| ---------- | ------------------------------------------------------------ |
-| Ristretto  | Kortare extraktion (15&ndash;20&thinsp;ml), mer koncentrerad |
-| Lungo      | Längre extraktion (50&ndash;60&thinsp;ml), mildare           |
-| Doppio     | Dubbel shot, 50&ndash;70&thinsp;ml                           |
-| Americano  | Espresso spädd med hett vatten                               |
-| Cappuccino | Espresso + ångad mjölk + mjukt mjölkskum                     |
-| Latte      | Espresso + mer ångad mjölk, lite skum                        |
-| Flat White | Espresso + mikroskirat mjölkskum, australisk klassiker       |
+Espresso är grunden för många populära kaffedrycker. Utforska våra sidor för varje variation:
+
+- **[Ristretto](ristretto/)** – Kortare extraktion, mer koncentrerad
+- **[Lungo](lungo/)** – Längre extraktion, mildare
+- **[Doppio](doppio/)** – Dubbel shot, mer volym
+- **[Americano](americano/)** – Espresso spädd med hett vatten
+- **[Cappuccino](cappuccino/)** – Espresso + ångad mjölk + mjölkskum
+- **[Latte](latte/)** – Espresso med rikligt med ångad mjölk
+- **[Flat White](flat-white/)** – Espresso + mikroskumat mjölk, australisk klassiker
 
 ## Vanliga misstag
 

@@ -53,7 +53,7 @@ För bryggmaskin gäller **mediumgrov malning** &ndash; ungefär som grovkornigt
 - **För fint** &rarr; bitter och överextraherat
 - **För grovt** &rarr; svagt och surt
 
-Om du köper förmalet kaffe, välj ett paket labelled "bryggkaffe" eller "filterkaffe".
+Om du köper förmalet kaffe, välj ett paket märkt "bryggkaffe" eller "filterkaffe".
 
 ---
 
@@ -61,9 +61,9 @@ Om du köper förmalet kaffe, välj ett paket labelled "bryggkaffe" eller "filte
 
 Vatten består av 98&thinsp;% av din kopp &ndash; det spelar roll.
 
-- **Klorerat vatten** &ndash; använd ett britta-filter eller låt vattnet stå öppet en stund
+- **Klorerat vatten** &ndash; använd ett Brita-filter eller låt vattnet stå öppet en stund
 - **Kalkrikt vatten** &ndash; sänker maskinens effektivitet och påverkar smaken; använd filtrerat
-- **Destillerat vatten** &ndash; ska undvikas; saknar mineraler som bidrar till smärk
+- **Destillerat vatten** &ndash; ska undvikas; saknar mineraler som bidrar till smaken
 
 ---
 

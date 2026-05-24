@@ -1,7 +1,15 @@
 +++
-title = "Home"
+title = "Gyllene Koppen"
 +++
 
-A minimal, production-ready boilerplate for building static sites with [Zola](https://www.getzola.org/) and [Tailwind CSS v4](https://tailwindcss.com/). The entire development environment runs inside Docker — no local Rust or Node.js required.
+## Välkommen till Gyllene Koppen
 
-Browse the source and get started on [GitHub](https://github.com/SpiZeak/zola-tailwind).
+Din guide till bättre kaffe hemma – oavsett om du är nybörjare eller erfaren bryggare.
+
+Vi sammanställer kunskap om kaffevarianter, bryggmetoder och utrustning så att du kan brygga den perfekta koppen varje dag.
+
+## Utforska
+
+- **[Kaffevarianter](/kaffe)** – Espresso, pour-over, bryggkaffe och mer
+- **[Guider](/guider)** – Steg-för-steg-instruktioner för hemmabrygget
+- **[Om oss](/om-oss)** – Vår passion för kaffe

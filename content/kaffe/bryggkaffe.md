@@ -18,7 +18,7 @@ dryck = "Bryggkaffe"
 
 ## Vad är bryggkaffe?
 
-Bryggkaffe &ndash; också kallat filterkaffe eller dränkt kaffe &ndash; är den vanligaste kaffeformen i Sverige. En bryggmaskin värmer vatten och låter det drypa över kaffemjol i ett filter, varpå det fardrika kaffet samlas i en kanna.
+Bryggkaffe &ndash; också kallat filterkaffe eller dränkt kaffe &ndash; är den vanligaste kaffeformen i Sverige. En bryggmaskin värmer vatten och låter det drypa över kaffemjöl i ett filter, varpå det färdiga kaffet samlas i en kanna.
 
 Det är enkelt, pålitligt och ett utmärkt sätt att brygga kaffe för flera personer samtidigt. Med rätt bönor och korrekt dosering kan bryggkaffet bli en riktig njutning.
 
@@ -41,13 +41,13 @@ Bryggkaffe är förlåtande när det gäller bönor, men kvaliteten påverkar sl
 
 ### Rostning
 
-För bryggkaffe passar **mediumrostning** utmärkt. Det bevarar sötma och komplexitet utan att bli för syra eller för beskt. En mörkrostad blend ger en klassisk, kraftig bryggkaffesmäk som många sänder sig med.
+För bryggkaffe passar **mediumrostning** utmärkt. Det bevarar sötma och komplexitet utan att bli för syra eller för beskt. En mörkrostad blend ger en klassisk, kraftig bryggkaffesmak som många känner igen.
 
 ## Utrustning
 
 - **Bryggmaskin** &ndash; välj en maskin med värmehållning eller termo-kanna för att kaffet inte ska bli överhätt
 - **Pappersfilter eller metalfilter** &ndash; papper ger renare kopp; metalfilter släpper igenom mer oljor och ger fylligare smak
-- **Kvarn** &ndash; en burr-kvarn med mediumgrov inställning låter hela kaffestoftet sättas korrekt
+- **Kvarn** &ndash; en burr-kvarn med mediumgrov inställning säkerställer att kaffet malts korrekt
 - **Kaffemått eller våg** &ndash; för konsekvent dosering
 
 ## Dosering
@@ -76,12 +76,12 @@ Små justeringar ger stora resultat:
 1. **Malningsgrad** &ndash; grovt ger svagare, mildare kaffe; fint ger starkare och potentiellt besk smak
 2. **Vattentemperatur** &ndash; de flesta maskiner värmer till 85&ndash;90&deg;C; bra maskiner når 92&ndash;96&deg;C
 3. **Bryggtid** &ndash; 6&ndash;8 minuter är optimalt för en kanna
-4. **Filtertyp** &ndash; rengjör maskinen regelmässigt så inte gamla kaffeolja förstör smaken
+4. **Filtertyp** &ndash; rengjör maskinen regelbundet så inte gamla kaffeolja förstör smaken
 
 ## Vanliga misstag
 
 - **Kaffet står kvar på värmeplattan** &rarr; blir överhätt och bitter efter 20&ndash;30 minuter; använd termoskanna
 - **Gamla bönor** &rarr; det vanligaste felet; köp fräscha bönor från ett lokalt kafferosteri
 - **För lite kaffe** &rarr; många använder för lite; testa att öka doseringen
-- **Skitig maskin** &rarr; gamla kaffeolja harsknar och förstör smaken; diskmaskinsrengöring regelmässigt
+- **Skitig maskin** &rarr; gamla kaffeolja harsknar och förstör smaken; diskmaskinsrengöring regelbundet
 - **Dåligt vatten** &rarr; klorat eller kalkrikt vatten påverkar negativt; använd filtrerat
