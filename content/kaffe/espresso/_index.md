@@ -45,7 +45,7 @@ För espresso föredras vanligtvis **medium–mörk rostning**. En för ljus ros
 
 För att brygga riktig espresso behöver du:
 
-- **Espressomaskin** &ndash; med tillräckligt pumptryck (9 bar). En enkel halvautomatisk maskin räcker gärna för hemmabruk.
+- **Espressomaskin** &ndash; med tillräckligt pumptryck (9 bar). En enkel halvautomatisk maskin räcker gott för hemmabruk.
 - **Kvarn** &ndash; en bra kvarn är viktigare än maskinen. Malningen måste vara jämn och fin &ndash; kvarnar med invändiga skivor ger bättre resultat än propellerkvarnar.
 - **Tamper** &ndash; för att pressa kaffet jämnt i portafiltret med ca 15&ndash;20 kg tryck.
 - **Våg** &ndash; väg både inkaffe och utkaffe för att träffa rätt kvot.
@@ -54,10 +54,10 @@ För att brygga riktig espresso behöver du:
 
 En välgjord espresso har en komplex smakprofil:
 
-- **Crema** &ndash; len, krämig och persikofärgad; ett tecken på fräscha bönor och korrekt extraktion
+- **Crema** &ndash; len, krämig och persikofärgad; ett tecken på färska bönor och korrekt extraktion
 - **Kropp** &ndash; tjock och sirapsaktig
 - **Smak** &ndash; balans mellan sötma, syra och bitterhet; toner av mörk choklad, karamell och frukt
-- **Aftertaste** &ndash; lång och behållig
+- **Aftertaste** &ndash; lång och behaglig
 
 ## Variationer på espresso
 

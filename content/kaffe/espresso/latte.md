@@ -33,7 +33,7 @@ En traditionell latte byggs i två delar:
 - **Mild** – mjölken dominerar, espressons smak är subtil
 - **Krämig** – mycket ångad mjölk ger en len textur
 - **Söt** – laktos-sötman framhävs av den stora mjölkvolymen
-- **Arom** – vanilj, karamell och mjuka kaffetonter
+- **Arom** – vanilj, karamell och mjuka kaffetoner
 
 ## Tips
 

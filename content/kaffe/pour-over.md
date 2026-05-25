@@ -20,7 +20,7 @@ dryck = "Pour-Over"
 
 Pour-over, eller hällkaffe, är en enkel men nyansrik bryggmetod där hett vatten hälls kontrollerat över kaffet i en filterhållare. Det filter som används &ndash; vanligtvis ett pappersfilter &ndash; fångar upp kaffets oljor och grus, vilket ger en **ren, klar och aromatisk kopp**.
 
-Metoden populariserades på 1900-talets början med Melitta Benz uppfinning av pappersfiltret. I dag finns många varianter: Hario V60, Chemex, Kalita Wave och Origami är bland de mest kända.
+Metoden populariserades på 1900-talets början med Melitta Bentz uppfinning av pappersfiltret. I dag finns många varianter: Hario V60, Chemex, Kalita Wave och Origami är bland de mest kända.
 
 ## Bönorna
 
@@ -58,7 +58,7 @@ Malningsgraden påverkar extraktion och smak:
 
 Pour-over-bryggning består av tre faser:
 
-1. **Bloom (preskvättning)** &ndash; Häll dubbla vattenmängden mot kaffemängden (t.ex. 60&thinsp;g vatten för 30&thinsp;g kaffe) och vänta 30&ndash;45 sekunder. CO&sup2; från fräscha bönor släpps ut och skapar ett "blås-upp" &ndash; ett gott tecken.
+1. **Bloom (preskvättning)** &ndash; Häll dubbla vattenmängden mot kaffemängden (t.ex. 60&thinsp;g vatten för 30&thinsp;g kaffe) och vänta 30&ndash;45 sekunder. CO&sup2; från färska bönor släpps ut och skapar ett "blås-upp" &ndash; ett gott tecken.
 2. **Kontinuerlig hällning** &ndash; Häll vattnet i jämna, cirkulära rörelser utåt och inåt. Håll vattennivån stabil.
 3. **Slutfasning** &ndash; Avsluta hällningen när du nått rätt totalvikt. Total bryggtid bör vara 3&ndash;4 minuter.
 

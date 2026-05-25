@@ -17,7 +17,7 @@ vattenkvot = "1:1 (1 g kaffe → 1 g ristretto)"
 
 ## Vad är ristretto?
 
-Ristretto är en kortare extraktion av espresso. Genom att använda samma mängd kaffe men hälva vattenmängden får man en mer koncentrerad och intensiv dryck på 15–20 ml.
+Ristretto är en kortare extraktion av espresso. Genom att använda samma mängd kaffe men halva vattenmängden får man en mer koncentrerad och intensiv dryck på 15–20 ml.
 
 Ordet "ristretto" betyder "begränsad" på italienska – och det är precis vad det är: en begränsad extraktion som fokuserar på kaffets sötaste, mest koncentrerade delar.
 

@@ -44,7 +44,7 @@ text = "Undvik att hälla för snabbt – långsam, kontrollerad hällning ger j
 
 [[extra.tips]]
 titel = "Bloom-effekten avslöjar färskheten"
-text = "En kraftig bloom betyder fräscha bönor. Liten eller ingen bloom = gamla bönor."
+text = "En kraftig bloom betyder färska bönor. Liten eller ingen bloom = gamla bönor."
 
 [[extra.tips]]
 titel = "Experimentera med förhållanden"
@@ -63,11 +63,11 @@ text = "Prova 1:14 för en kraftigare kopp eller 1:16 för en mildare. Justera e
 
 ---
 
-## Steg 1 &ndash; Värm upp och spöla filtret
+## Steg 1 &ndash; Värm upp och spola filtret
 
-Kok vatten och låt det svalna till ca 93&ndash;95&deg;C. Placera filtret i drippern och spöla det med hett vatten &ndash; detta tar bort papperssmaken och värmer upp utrustningen.
+Kok vatten och låt det svalna till ca 93&ndash;95&deg;C. Placera filtret i drippern och spola det med hett vatten &ndash; detta tar bort papperssmaken och värmer upp utrustningen.
 
-Häll bort spölvattnet från muggen.
+Häll bort spolvattnet från muggen.
 
 ---
 
@@ -88,7 +88,7 @@ Placera drippern på vågen och ställ om den till noll. Starta timern.
 
 Häll 40&thinsp;g vatten (dubbelt mot kaffemängden) jämnt över kaffet. Se till att allt kaffe blöts.
 
-Vänta **30&ndash;45 sekunder**. Du ser kaffet "bloomma" &ndash; det bubblar och sväller upp. Det är CO&sup2; som släpps ut från fräscha bönor.
+Vänta **30&ndash;45 sekunder**. Du ser kaffet "bloomma" &ndash; det bubblar och sväller upp. Det är CO&sup2; som släpps ut från färska bönor.
 
 ---
 
@@ -131,6 +131,6 @@ När dräneringen är klar, ta bort drippern och njut.
 ## Tips för bättre pour-over
 
 - **Håll hällningen konsekvent** &ndash; undvik att hälla för snabbt; långsam, kontrollerad hällning ger jämn extraktion.
-- **Använd fräscha bönor** &ndash; bloom-effekten påvisar fräschheten. Liten bloom = gamla bönor.
+- **Använd färska bönor** &ndash; bloom-effekten påvisar färskheten. Liten bloom = gamla bönor.
 - **Experimentera med förhållanden** &ndash; prova 1:14 för kraftigare, 1:16 för mildare kopp.
-- **Kallt brygg** &rarr; använd isvatten för cold brew istället.
+- **Kallbrygg** &rarr; använd isvatten för cold brew istället.

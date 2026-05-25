@@ -19,7 +19,7 @@ vattenkvot = "1:2 (espresso) + mjölk"
 
 Cappuccino är en ikonisk italiensk kaffedryck som består av tre lika delar: en shot espresso, ångad mjölk och ett tjockt lager mjölkskum. Resultatet är en balanserad dryck på 150–180 ml med en krämig textur och rik smak.
 
-Namnet kommer från likheten med huven (cappa) hos kapuciner munkar – den bruna färgen från espresso blandat med vit mjölk påminner om deras kläder.
+Namnet kommer från likheten med huven (cappa) hos kapucinermunkar – den bruna färgen från espresso blandat med vit mjölk påminner om deras kläder.
 
 ## Klassisk uppdelning
 

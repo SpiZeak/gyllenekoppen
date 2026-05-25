@@ -78,7 +78,7 @@
 	--color-sage-950: #0a180f;
 	--color-sage: var(--color-sage-500);
 
-	/* ── Backwards-compatible aliases ── */
+	/* ── Backward-compatible aliases ── */
 	--color-seasalt-50:  var(--color-parchment-50);
 	--color-seasalt-100: var(--color-parchment-100);
 	--color-seasalt-200: var(--color-parchment-200);
@@ -90,7 +90,6 @@
 	--color-seasalt-800: var(--color-parchment-800);
 	--color-seasalt-900: var(--color-parchment-900);
 	--color-seasalt-950: var(--color-parchment-950);
-	--color-seasalt: var(--color-parchment-50);
 	--color-seasalt: var(--color-parchment-50);
 
 	--color-pumpkin-50:  var(--color-gold-50);

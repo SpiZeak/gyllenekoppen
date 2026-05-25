@@ -35,7 +35,7 @@ namn = "Termokanna (rekommenderas)"
 ikon = "🫖"
 
 [[extra.utrustning]]
-namn = "Fräscha bönor"
+namn = "Färska bönor"
 ikon = "🫘"
 
 [[extra.tips]]
@@ -58,7 +58,7 @@ text = "Efter 15–20 minuter på värmeplattan börjar kaffet försämras. Anv�
 - Kvarn eller färdigmalt bryggkaffe
 - Våg för korrekt dosering
 - Termokanna (rekommenderas framför värmeplatta)
-- Fräscha, nyrostade bönor
+- Färska, nyrostade bönor
 
 ---
 
@@ -68,7 +68,7 @@ Bryggkaffe verkar enkelt &ndash; men det finns många variabler som påverkar sl
 
 ---
 
-## Steg 1 &ndash; Börja med fräscha bönor
+## Steg 1 &ndash; Börja med färska bönor
 
 Det vanligaste misstaget är att använda gamla bönor. Kaffebönor håller på sin toppkvalitet **2&ndash;4 veckor efter rostning**.
 
@@ -129,9 +129,9 @@ Om din maskin är gammal eller billig värmer den antagligen för låg temperatu
 
 ## Steg 6 &ndash; Drick kaffet snabbt
 
-Bryggkaffe är bäst fräskt. På värmeplattan börjar kaffet försämras efter **15&ndash;20 minuter**.
+Bryggkaffe är bäst färskt. På värmeplattan börjar kaffet försämras efter **15&ndash;20 minuter**.
 
-**Lösning:** Använd en termo-kanna som håller temperaturen utan värme. Om du måste låta det stå, sätt värmeplattan på lågaste inställning.
+**Lösning:** Använd en termokanna som håller temperaturen utan värme. Om du måste låta det stå, sätt värmeplattan på lägsta inställning.
 
 ---
 
@@ -141,7 +141,7 @@ En smutsig maskin ger beskt kaffe. Gamla kaffeolja harsknar och läcker in i din
 
 **Veckounderhåll:**
 
-1. Rengjör kannan och filterhållaren med diskmedel
+1. Rengör kannan och filterhållaren med diskmedel
 2. Kör en cykel med bara vatten
 
 **Månadsunderhåll:**
@@ -158,5 +158,5 @@ En smutsig maskin ger beskt kaffe. Gamla kaffeolja harsknar och läcker in i din
 | Beskt kaffe | Överextraherat / för fint malt | Grovare malning                    |
 | Surt kaffe  | Underextraherat / för låg temp | Finare malning eller bättre maskin |
 | Svagt kaffe | För lite kaffe                 | Öka dosen med 10&thinsp;g          |
-| Dålig arom  | Gamla bönor                    | Köp fräscha bönor                  |
+| Dålig arom  | Gamla bönor                    | Köp färska bönor                  |
 | Bismaker    | Smutsig maskin                 | Rengör och avkalka                 |

@@ -5,7 +5,7 @@ path = "om-oss"
 
 ## Vår passion för kaffe
 
-Kaffekultur grundades av en grupp kaffeentusiaster som tröttnade på att dricka medelmåttigt kaffe. Vi tror att gott kaffe är tillgängligt för alla – oavsett om du är nybörjare eller har en fullt utrustad hemmabrygg.
+Gyllene Koppen grundades av en grupp kaffeentusiaster som tröttnade på att dricka medelmåttigt kaffe. Vi tror att gott kaffe är tillgängligt för alla – oavsett om du är nybörjare eller har en fullt utrustad hemmabrygg.
 
 ## Vad vi gör
 
@@ -18,7 +18,7 @@ Vi sammanställer kunskap om:
 
 ## Vår filosofi
 
-Bra kaffe behöver inte vara komplicerat. Det viktigaste är fräscha bönor, rent vatten och lite nånslags översyn över processen. Allt annat är finlir.
+Bra kaffe behöver inte vara komplicerat. Det viktigaste är färska bönor, rent vatten och lite nånslags översyn över processen. Allt annat är finlir.
 
 Vi tror på att lära sig sakta, prova sig fram och njuta av resan – inte bara målet.
 

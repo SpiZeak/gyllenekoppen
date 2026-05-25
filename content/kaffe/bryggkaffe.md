@@ -45,7 +45,7 @@ För bryggkaffe passar **mediumrostning** utmärkt. Det bevarar sötma och kompl
 
 ## Utrustning
 
-- **Bryggmaskin** &ndash; välj en maskin med värmehållning eller termo-kanna för att kaffet inte ska bli överhätt
+- **Bryggmaskin** &ndash; välj en maskin med värmehållning eller termokanna för att kaffet inte ska bli överhettat
 - **Pappersfilter eller metalfilter** &ndash; papper ger renare kopp; metalfilter släpper igenom mer oljor och ger fylligare smak
 - **Kvarn** &ndash; en burr-kvarn med mediumgrov inställning säkerställer att kaffet malts korrekt
 - **Kaffemått eller våg** &ndash; för konsekvent dosering
@@ -76,12 +76,12 @@ Små justeringar ger stora resultat:
 1. **Malningsgrad** &ndash; grovt ger svagare, mildare kaffe; fint ger starkare och potentiellt besk smak
 2. **Vattentemperatur** &ndash; de flesta maskiner värmer till 85&ndash;90&deg;C; bra maskiner når 92&ndash;96&deg;C
 3. **Bryggtid** &ndash; 6&ndash;8 minuter är optimalt för en kanna
-4. **Filtertyp** &ndash; rengjör maskinen regelbundet så inte gamla kaffeolja förstör smaken
+4. **Filtertyp** &ndash; rengör maskinen regelbundet så inte gamla kaffeolja förstör smaken
 
 ## Vanliga misstag
 
-- **Kaffet står kvar på värmeplattan** &rarr; blir överhätt och bitter efter 20&ndash;30 minuter; använd termoskanna
-- **Gamla bönor** &rarr; det vanligaste felet; köp fräscha bönor från ett lokalt kafferosteri
+- **Kaffet står kvar på värmeplattan** &rarr; blir överhettat och bitter efter 20&ndash;30 minuter; använd termokanna
+- **Gamla bönor** &rarr; det vanligaste felet; köp färska bönor från ett lokalt kafferosteri
 - **För lite kaffe** &rarr; många använder för lite; testa att öka doseringen
-- **Skitig maskin** &rarr; gamla kaffeolja harsknar och förstör smaken; diskmaskinsrengöring regelbundet
+- **Smutsig maskin** &rarr; gamla kaffeolja harsknar och förstör smaken; rengör maskinen regelbundet
 - **Dåligt vatten** &rarr; klorat eller kalkrikt vatten påverkar negativt; använd filtrerat

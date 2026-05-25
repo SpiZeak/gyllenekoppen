@@ -19,7 +19,7 @@ vattenkvot = "1:4–1:6 (1 g kaffe → 4–6 g vatten)"
 
 Americano är en enkel men populär dryck som består av en eller två shots espresso spädda med hett vatten. Resultatet är en större kopp på 120–180 ml med en mildare smak än ren espresso.
 
-Legendan säger att amerikanska soldater under andra världskriget spädde sin italienska espresso med vatten för att få det att likna det svagare kaffet de var vana vid hemma.
+Legenden säger att amerikanska soldater under andra världskriget spädde sin italienska espresso med vatten för att få det att likna det svagare kaffet de var vana vid hemma.
 
 ## Smakprofil
 

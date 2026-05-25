@@ -25,7 +25,7 @@ Ordet "lungo" betyder "lång" på italienska – en lång extraktion som drar ut
 
 - **Större volym** – 50–60 ml jämfört med 25–35 ml för espresso
 - **Mildare** – mer vatten späder ut koncentrationen
-- **Bitterare** – längre extraktion drar ut mer av de bittera ämnena
+- **Bitterare** – längre extraktion drar ut mer av de bittra ämnena
 - **Komplex** – fler smaker kommer fram, både goda och utmanande
 
 ## Skillnad mot espresso

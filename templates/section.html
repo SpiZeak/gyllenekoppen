@@ -55,13 +55,13 @@
 {% if paginator %}
 <nav class="flex justify-between items-center mt-14 font-medium text-sm animate-slide-up delay-150" aria-label="Pagination">
 	{% if paginator.previous %}
-	<a href="{{ paginator.previous }}" class="text-gold-600 dark:text-gold-400 hover:underline">&larr; Newer posts</a>
+	<a href="{{ paginator.previous }}" class="text-gold-600 dark:text-gold-400 hover:underline">&larr; Nyare inlägg</a>
 	{% else %}
 	<span></span>
 	{% endif %}
-	<span class="text-parchment-500 dark:text-parchment-400">Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
+	<span class="text-parchment-500 dark:text-parchment-400">Sida {{ paginator.current_index }} av {{ paginator.number_pagers }}</span>
 	{% if paginator.next %}
-	<a href="{{ paginator.next }}" class="text-gold-600 dark:text-gold-400 hover:underline">Older posts &rarr;</a>
+	<a href="{{ paginator.next }}" class="text-gold-600 dark:text-gold-400 hover:underline">Äldre inlägg &rarr;</a>
 	{% else %}
 	<span></span>
 	{% endif %}

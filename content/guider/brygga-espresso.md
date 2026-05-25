@@ -31,7 +31,7 @@ namn = "Våg med timer"
 ikon = "⚖️"
 
 [[extra.utrustning]]
-namn = "Fräscha kaffebönor"
+namn = "Färska kaffebönor"
 ikon = "🫘"
 
 [[extra.utrustning]]
@@ -59,7 +59,7 @@ Innan du börjar, se till att du har:
 - Burr-kvarn (invändiga skivor eller kugghjul)
 - Tamper
 - Våg med timerfunktion
-- Fräscha kaffebönor (rostade inom 2–4 veckor)
+- Färska kaffebönor (rostade inom 2–4 veckor)
 - Rent, filtrerat vatten
 
 ---
@@ -96,9 +96,9 @@ Ställ portafiltret på ett plant underlag. Placera tampern rätt och tryck ned 
 
 ---
 
-## Steg 5 &ndash; Spöla och sätt i portafiltret
+## Steg 5 &ndash; Spola och sätt i portafiltret
 
-Kör en kort spölningscykel (flush) på maskinen i 2&ndash;3 sekunder innan du sätter i portafiltret. Detta stabiliserar maskinens temperatur.
+Kör en kort spolningscykel (flush) på maskinen i 2&ndash;3 sekunder innan du sätter i portafiltret. Detta stabiliserar maskinens temperatur.
 
 Sätt i portafiltret och starta bryggningen **omedelbart** &ndash; fördröjning torkar ut kaffeytans översta lager.
 
@@ -133,5 +133,5 @@ Smaka på espresson och evaluera:
 ## Bra att veta
 
 - **Nyrostade bönor** ger bättre crema men behöver vanligtvis 4&ndash;10 dagars "rest" efter rostningsdatumet för optimalt resultat.
-- **Rent vatten** är avgörande &ndash; kalkhaltigt vatten slöar bort maskinens livslängd och påverkar smaken.
+- **Rent vatten** är avgörande &ndash; kalkhaltigt vatten förkortar maskinens livslängd och påverkar smaken.
 - **Rengör maskinen** regelbundet &ndash; rengör portafiltret dagligen och backflusha maskinen varje vecka.
