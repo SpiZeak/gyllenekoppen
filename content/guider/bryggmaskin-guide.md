@@ -10,7 +10,57 @@ image = "photo-1497636577773-f1231844b336"
 svarighet = "Nybörjarvänlig"
 tidsatgang = "ca 15 min"
 dryck = "Bryggkaffe"
+malningsgrad = "Mediumgrov (som grovkornigt salt)"
+temperatur = "92–96°C"
+vattenkvot = "1:15 (60g → 1L)"
+
+[[extra.utrustning]]
+namn = "Bryggmaskin"
+ikon = "⚙️"
+
+[[extra.utrustning]]
+namn = "Pappersfilter (rätt storlek)"
+ikon = "📄"
+
+[[extra.utrustning]]
+namn = "Kvarn (eller färdigmalt bryggkaffe)"
+ikon = "🔧"
+
+[[extra.utrustning]]
+namn = "Våg"
+ikon = "⚖️"
+
+[[extra.utrustning]]
+namn = "Termokanna (rekommenderas)"
+ikon = "🫖"
+
+[[extra.utrustning]]
+namn = "Fräscha bönor"
+ikon = "🫘"
+
+[[extra.tips]]
+titel = "Köp från lokalt rosteri"
+text = "Bönor med tydligt rostningsdatum ger alltid bättre resultat än anonyma stormarknadsmärken."
+
+[[extra.tips]]
+titel = "Mala precis före bryggning"
+text = "Förmalet kaffe tappar aromer inom minuter. Investera i en kvarn för bästa resultat."
+
+[[extra.tips]]
+titel = "Drick kaffet färskt"
+text = "Efter 15–20 minuter på värmeplattan börjar kaffet försämras. Använd termokanna istället."
 +++
+
+## Vad du behöver
+
+- Bryggmaskin med filterhållare
+- Pappersfilter i rätt storlek
+- Kvarn eller färdigmalt bryggkaffe
+- Våg för korrekt dosering
+- Termokanna (rekommenderas framför värmeplatta)
+- Fräscha, nyrostade bönor
+
+---
 
 ## Varför smakar bryggkaffe olika?
 

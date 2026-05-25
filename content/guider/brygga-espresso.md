@@ -10,6 +10,45 @@ image = "photo-1510591509098-f4fdc6d0ff04"
 svarighet = "Mellannivå"
 tidsatgang = "ca 10 min"
 dryck = "Espresso"
+malningsgrad = "Fin (som strösocker)"
+temperatur = "92–96°C"
+vattenkvot = "1:2 (18g in → 36g ut)"
+
+[[extra.utrustning]]
+namn = "Espressomaskin (minst 9 bar)"
+ikon = "⚙️"
+
+[[extra.utrustning]]
+namn = "Burr-kvarn"
+ikon = "🔧"
+
+[[extra.utrustning]]
+namn = "Tamper"
+ikon = "👆"
+
+[[extra.utrustning]]
+namn = "Våg med timer"
+ikon = "⚖️"
+
+[[extra.utrustning]]
+namn = "Fräscha kaffebönor"
+ikon = "🫘"
+
+[[extra.utrustning]]
+namn = "Filtrerat vatten"
+ikon = "💧"
+
+[[extra.tips]]
+titel = "Nyrostade bönor"
+text = "Låt bönorna vila 4–10 dagar efter rostning för optimalt resultat. För färska bönor ger överdriven crema."
+
+[[extra.tips]]
+titel = "Rent vatten är avgörande"
+text = "Kalkhaltigt vatten förkortar maskinens livslängd och påverkar smaken negativt. Använd alltid filtrerat vatten."
+
+[[extra.tips]]
+titel = "Regelbunden rengöring"
+text = "Rengör portafiltret dagligen och backflusha maskinen varje vecka för bästa resultat och lång livslängd."
 +++
 
 ## Vad du behöver

@@ -10,6 +10,45 @@ image = "photo-1461023058943-07fcbe16d735"
 svarighet = "Nybörjarvänlig"
 tidsatgang = "ca 10 min"
 dryck = "Pour-Over"
+malningsgrad = "Mediumfin (som bordssalt)"
+temperatur = "93–95°C"
+vattenkvot = "1:15 (20g → 300g)"
+
+[[extra.utrustning]]
+namn = "Pour-over dripper (t.ex. Hario V60)"
+ikon = "🫖"
+
+[[extra.utrustning]]
+namn = "Pappersfilter"
+ikon = "📄"
+
+[[extra.utrustning]]
+namn = "Gooseneck-kanna"
+ikon = "🫗"
+
+[[extra.utrustning]]
+namn = "Burr-kvarn"
+ikon = "🔧"
+
+[[extra.utrustning]]
+namn = "Våg med timer"
+ikon = "⚖️"
+
+[[extra.utrustning]]
+namn = "Termometer"
+ikon = "🌡️"
+
+[[extra.tips]]
+titel = "Håll hällningen konsekvent"
+text = "Undvik att hälla för snabbt – långsam, kontrollerad hällning ger jämn extraktion och bättre smak."
+
+[[extra.tips]]
+titel = "Bloom-effekten avslöjar färskheten"
+text = "En kraftig bloom betyder fräscha bönor. Liten eller ingen bloom = gamla bönor."
+
+[[extra.tips]]
+titel = "Experimentera med förhållanden"
+text = "Prova 1:14 för en kraftigare kopp eller 1:16 för en mildare. Justera efter din smak."
 +++
 
 ## Vad du behöver
