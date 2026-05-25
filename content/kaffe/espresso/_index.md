@@ -67,6 +67,7 @@ Espresso är grunden för många populära kaffedrycker. Utforska våra sidor f�
 - **[Lungo](lungo/)** – Längre extraktion, mildare
 - **[Doppio](doppio/)** – Dubbel shot, mer volym
 - **[Americano](americano/)** – Espresso spädd med hett vatten
+- **[Long Black](long-black/)** – Espresso hälld över hett vatten, bevarad crema
 - **[Cappuccino](cappuccino/)** – Espresso + ångad mjölk + mjölkskum
 - **[Latte](latte/)** – Espresso med rikligt med ångad mjölk
 - **[Flat White](flat-white/)** – Espresso + mikroskumat mjölk, australisk klassiker

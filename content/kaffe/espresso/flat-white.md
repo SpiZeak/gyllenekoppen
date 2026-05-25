@@ -2,7 +2,7 @@
 title = "Flat White"
 description = "Espresso med mikroskumat mjölk – en silkeslen australisk klassiker med stark kaffekärna."
 template = "coffee_page.html"
-weight = 8
+weight = 9
 
 [extra]
 ikon = "🤍"

@@ -2,7 +2,7 @@
 title = "Cappuccino"
 description = "Espresso krönt med ångad mjölk och ett tjockt lager mjölkskum – den italienska klassikern."
 template = "coffee_page.html"
-weight = 6
+weight = 7
 
 [extra]
 ikon = "☁️"

@@ -149,7 +149,7 @@
 						<!-- Cup body -->
 						<div class="relative w-[72px] sm:w-[84px] cup-body overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-500"
 							style="
-								{% if page.extra.ikon == '🔴' %}height:68px;{% elif page.extra.ikon == '🔵' %}height:88px;{% elif page.extra.ikon == '☕☕' %}height:84px;{% elif page.extra.ikon == '💧' %}height:104px;{% elif page.extra.ikon == '☁️' %}height:100px;{% elif page.extra.ikon == '🥛' %}height:120px;{% elif page.extra.ikon == '🤍' %}height:94px;{% else %}height:94px;{% endif %}
+								{% if page.extra.ikon == '🔴' %}height:68px;{% elif page.extra.ikon == '🔵' %}height:88px;{% elif page.extra.ikon == '☕☕' %}height:84px;{% elif page.extra.ikon == '💧' %}height:104px;{% elif page.extra.ikon == '🌊' %}height:104px;{% elif page.extra.ikon == '☁️' %}height:100px;{% elif page.extra.ikon == '🥛' %}height:120px;{% elif page.extra.ikon == '🤍' %}height:94px;{% else %}height:94px;{% endif %}
 							">
 
 							<!-- Gloss -->
@@ -161,14 +161,14 @@
 							<!-- Espresso layer -->
 							<div class="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-espresso-800 to-espresso-600 dark:from-espresso-600 dark:to-espresso-400"
 								style="
-									{% if page.extra.ikon == '🔴' %}height:100%;{% elif page.extra.ikon == '🔵' %}height:100%;{% elif page.extra.ikon == '☕☕' %}height:100%;{% elif page.extra.ikon == '💧' %}height:28%;{% elif page.extra.ikon == '☁️' %}height:33%;{% elif page.extra.ikon == '🥛' %}height:22%;{% elif page.extra.ikon == '🤍' %}height:38%;{% else %}height:50%;{% endif %}
+									{% if page.extra.ikon == '🔴' %}height:100%;{% elif page.extra.ikon == '🔵' %}height:100%;{% elif page.extra.ikon == '☕☕' %}height:100%;{% elif page.extra.ikon == '💧' %}height:28%;{% elif page.extra.ikon == '🌊' %}height:28%;{% elif page.extra.ikon == '☁️' %}height:33%;{% elif page.extra.ikon == '🥛' %}height:22%;{% elif page.extra.ikon == '🤍' %}height:38%;{% else %}height:50%;{% endif %}
 								">
 								<!-- Crema -->
 								<div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-b from-gold-400/80 to-espresso-600/50 dark:from-gold-400/60 dark:to-espresso-500/40"></div>
 							</div>
 
 							<!-- Water (Americano) -->
-							{% if page.extra.ikon == '💧' %}
+							{% if page.extra.ikon == '💧' or page.extra.ikon == '🌊' %}
 							<div class="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-blue-100/70 via-blue-100/40 to-blue-50/10 dark:from-blue-300/30 dark:via-blue-300/15 dark:to-transparent" style="height:72%;"></div>
 							{% endif %}
 
@@ -227,6 +227,13 @@
 									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium">2x</span>
 								</div>
 								{% elif page.extra.ikon == '💧' %}
+								<div class="flex items-center gap-1">
+									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<span class="text-[10px] text-parchment-400">+</span>
+									<div class="w-9 h-2.5 rounded-full bg-gradient-to-r from-blue-200 to-blue-100 dark:from-blue-400/30 dark:to-blue-300/20"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium">3× vatten</span>
+								</div>
+								{% elif page.extra.ikon == '🌊' %}
 								<div class="flex items-center gap-1">
 									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
 									<span class="text-[10px] text-parchment-400">+</span>

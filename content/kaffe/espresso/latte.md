@@ -2,7 +2,7 @@
 title = "Latte"
 description = "Espresso med rikligt med ångad mjölk – en mild, krämig dryck perfekt för nybörjare."
 template = "coffee_page.html"
-weight = 7
+weight = 8
 
 [extra]
 ikon = "🥛"
