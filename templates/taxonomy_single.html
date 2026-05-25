@@ -4,30 +4,35 @@
 
 {% block content %}
 
-<header class="mb-10">
-	<h1 class="font-extrabold text-4xl tracking-tight animate-slide-up delay-50">#{{ term.name }}</h1>
-	<p class="mt-2 text-seasalt-500 text-sm animate-slide-up delay-150">{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}
-	</p>
+<header class="mb-14 animate-slide-up">
+	<p class="mb-4 font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.3em] uppercase">&#127991; Tagg</p>
+	<h1 class="font-serif font-bold text-5xl sm:text-6xl lg:text-7xl text-espresso-800 dark:text-parchment-100 tracking-tight leading-[1.05]">
+		#{{ term.name }}
+	</h1>
+	<p class="mt-4 text-parchment-500 dark:text-parchment-400 text-lg">{{ term.pages | length }} inlägg</p>
 </header>
 
+{% if term.pages %}
 <ul class="space-y-8">
 	{% for page in term.pages %}
-	<li class="pb-8 border-seasalt-200 dark:border-warm-charcoal-600 last:border-0 border-b animate-slide-up" style="animation-delay: {{ loop.index * 75 + 200 }}ms">
+	<li class="pb-8 border-parchment-200/60 dark:border-espresso-600/40 last:border-0 border-b animate-slide-up"
+		style="animation-delay: {{ loop.index * 80 + 150 }}ms">
 		<a href="{{ page.permalink }}" class="group block">
-			<h2 class="font-semibold group-hover:text-pumpkin text-xl transition-colors">
+			<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
 				{{ page.title }}
 			</h2>
 			{% if page.date %}
-			<time class="block mt-1 text-seasalt-500 text-sm" datetime="{{ page.date }}">
+			<time class="block mt-2 text-parchment-400 dark:text-parchment-500 text-sm" datetime="{{ page.date }}">
 				{{ page.date | date(format="%B %e, %Y") }}
 			</time>
 			{% endif %}
 			{% if page.description %}
-			<p class="mt-2 text-seasalt-600 leading-relaxed">{{ page.description }}</p>
+			<p class="mt-3 text-parchment-500 dark:text-parchment-400 leading-relaxed">{{ page.description }}</p>
 			{% endif %}
 		</a>
 	</li>
 	{% endfor %}
 </ul>
+{% endif %}
 
 {% endblock content %}

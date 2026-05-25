@@ -4,80 +4,144 @@
 	--font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
 	--font-serif: 'Playfair Display', Georgia, serif;
 
-	/* Reset all colors to their initial values for the current theme */
 	--color-*: initial;
-
-	/* Restore white and black */
 	--color-white: #fff;
 	--color-black: #000;
 
-	/* --- Warm Charcoal (Neutral) --- */
-	--color-warm-charcoal-50:  #f2f2f2;
-	--color-warm-charcoal-100: #e6e6e6;
-	--color-warm-charcoal-200: #cccccc;
-	--color-warm-charcoal-300: #b3b3b3;
-	--color-warm-charcoal-400: #808080;
-	--color-warm-charcoal-500: #4d4d4d;
-	--color-warm-charcoal-600: #2e2018;
-	--color-warm-charcoal-700: #1c150c; /* Espresso dark */
-	--color-warm-charcoal-800: #141414;
-	--color-warm-charcoal-900: #0d0d0d;
-	--color-warm-charcoal-950: #050505;
-	--color-warm-charcoal: var(--color-warm-charcoal-700);
+	/* ── Parchment (warm paper/cream) ── */
+	--color-parchment-50:  #fefdf9;
+	--color-parchment-100: #fdf8ee;
+	--color-parchment-200: #f5ecd5;
+	--color-parchment-300: #e8dbb8;
+	--color-parchment-400: #b8a88a;
+	--color-parchment-500: #8c7b60;
+	--color-parchment-600: #6b5d48;
+	--color-parchment-700: #4a4032;
+	--color-parchment-800: #2d261e;
+	--color-parchment-900: #1a1510;
+	--color-parchment-950: #0d0a07;
+	--color-parchment: var(--color-parchment-50);
 
-	/* --- Coffee Amber (Accent) --- */
-	--color-pumpkin-50:  #fdf5e8;
-	--color-pumpkin-100: #faead0;
-	--color-pumpkin-200: #f4d3a0;
-	--color-pumpkin-300: #e8b568;
-	--color-pumpkin-400: #d4923a;
-	--color-pumpkin-500: #b87028; /* Coffee amber */
-	--color-pumpkin-600: #9a5c1e;
-	--color-pumpkin-700: #7a4817;
-	--color-pumpkin-800: #5a3510;
-	--color-pumpkin-900: #3b230a;
-	--color-pumpkin-950: #1e1205;
-	--color-pumpkin: var(--color-pumpkin-500);
+	/* ── Gold (rich metallic accent) ── */
+	--color-gold-50:  #fef9ec;
+	--color-gold-100: #fdf0ce;
+	--color-gold-200: #fbdd9c;
+	--color-gold-300: #f5c65f;
+	--color-gold-400: #eaaa2e;
+	--color-gold-500: #c4842e;
+	--color-gold-600: #a36822;
+	--color-gold-700: #824d18;
+	--color-gold-800: #5e3710;
+	--color-gold-900: #3d2308;
+	--color-gold-950: #1f1003;
+	--color-gold: var(--color-gold-500);
 
-	/* --- Emerald (Success) --- */
-	--color-emerald-50:  #ecfdf5;
-	--color-emerald-100: #d1fae5;
-	--color-emerald-200: #a7f3d0;
-	--color-emerald-300: #6ee7b7;
-	--color-emerald-400: #34d399;
-	--color-emerald-500: #10b981; /* Original Base */
-	--color-emerald-600: #059669;
-	--color-emerald-700: #047857;
-	--color-emerald-800: #065f46;
-	--color-emerald-900: #064e3b;
-	--color-emerald-950: #022c22;
-	--color-emerald: var(--color-emerald-500);
+	/* ── Espresso (deep rich browns) ── */
+	--color-espresso-50:  #f7f3ef;
+	--color-espresso-100: #e8dfd3;
+	--color-espresso-200: #d2bfa9;
+	--color-espresso-300: #b89670;
+	--color-espresso-400: #8c6846;
+	--color-espresso-500: #6b4a2c;
+	--color-espresso-600: #4a2c17;
+	--color-espresso-700: #331c0d;
+	--color-espresso-800: #1a0f07;
+	--color-espresso-900: #0f0804;
+	--color-espresso-950: #070302;
+	--color-espresso: var(--color-espresso-700);
 
-	/* --- Crimson (Danger) --- */
-	--color-crimson-50:  #fef2f2;
-	--color-crimson-100: #fee2e2;
-	--color-crimson-200: #fecaca;
-	--color-crimson-300: #fca5a5;
-	--color-crimson-400: #f87171;
-	--color-crimson-500: #ef4444; /* Original Base */
-	--color-crimson-600: #dc2626;
-	--color-crimson-700: #b91c1c;
-	--color-crimson-800: #991b1b;
-	--color-crimson-900: #7f1d1d;
-	--color-crimson-950: #450a0a;
-	--color-crimson: var(--color-crimson-500);
+	/* ── Berry (for strength/specialty indicators) ── */
+	--color-berry-50:  #fdf2f5;
+	--color-berry-100: #fce4e9;
+	--color-berry-200: #f9c0ce;
+	--color-berry-300: #f28ca3;
+	--color-berry-400: #e8506e;
+	--color-berry-500: #c73852;
+	--color-berry-600: #a52a3e;
+	--color-berry-700: #832031;
+	--color-berry-800: #611825;
+	--color-berry-900: #3f1019;
+	--color-berry-950: #1f080c;
+	--color-berry: var(--color-berry-500);
 
-	/* --- Seasalt (Warm Cream Backgrounds) --- */
-	--color-seasalt-50:  #fdfbf6; /* Warm cream */
-	--color-seasalt-100: #f5f0e8;
-	--color-seasalt-200: #e8e0d0;
-	--color-seasalt-300: #d1d5db;
-	--color-seasalt-400: #9ca3af;
-	--color-seasalt-500: #6b7280;
-	--color-seasalt-600: #4b5563;
-	--color-seasalt-700: #374151;
-	--color-seasalt-800: #1f2937;
-	--color-seasalt-900: #111827;
-	--color-seasalt-950: #030712;
-	--color-seasalt: var(--color-seasalt-50);
+	/* ── Sage (herbal green accent) ── */
+	--color-sage-50:  #f4f8f5;
+	--color-sage-100: #e2efe6;
+	--color-sage-200: #c1dec8;
+	--color-sage-300: #94c5a0;
+	--color-sage-400: #62a474;
+	--color-sage-500: #428555;
+	--color-sage-600: #316941;
+	--color-sage-700: #275234;
+	--color-sage-800: #1e3f28;
+	--color-sage-900: #152c1c;
+	--color-sage-950: #0a180f;
+	--color-sage: var(--color-sage-500);
+
+	/* ── Backwards-compatible aliases ── */
+	--color-seasalt-50:  var(--color-parchment-50);
+	--color-seasalt-100: var(--color-parchment-100);
+	--color-seasalt-200: var(--color-parchment-200);
+	--color-seasalt-300: var(--color-parchment-300);
+	--color-seasalt-400: var(--color-parchment-400);
+	--color-seasalt-500: var(--color-parchment-500);
+	--color-seasalt-600: var(--color-parchment-600);
+	--color-seasalt-700: var(--color-parchment-700);
+	--color-seasalt-800: var(--color-parchment-800);
+	--color-seasalt-900: var(--color-parchment-900);
+	--color-seasalt-950: var(--color-parchment-950);
+	--color-seasalt: var(--color-parchment-50);
+	--color-seasalt: var(--color-parchment-50);
+
+	--color-pumpkin-50:  var(--color-gold-50);
+	--color-pumpkin-100: var(--color-gold-100);
+	--color-pumpkin-200: var(--color-gold-200);
+	--color-pumpkin-300: var(--color-gold-300);
+	--color-pumpkin-400: var(--color-gold-400);
+	--color-pumpkin-500: var(--color-gold-500);
+	--color-pumpkin-600: var(--color-gold-600);
+	--color-pumpkin-700: var(--color-gold-700);
+	--color-pumpkin-800: var(--color-gold-800);
+	--color-pumpkin-900: var(--color-gold-900);
+	--color-pumpkin-950: var(--color-gold-950);
+	--color-pumpkin: var(--color-gold-500);
+
+	--color-warm-charcoal-50:  var(--color-espresso-50);
+	--color-warm-charcoal-100: var(--color-espresso-100);
+	--color-warm-charcoal-200: var(--color-espresso-200);
+	--color-warm-charcoal-300: var(--color-espresso-300);
+	--color-warm-charcoal-400: var(--color-espresso-400);
+	--color-warm-charcoal-500: var(--color-espresso-500);
+	--color-warm-charcoal-600: var(--color-espresso-600);
+	--color-warm-charcoal-700: var(--color-espresso-700);
+	--color-warm-charcoal-800: var(--color-espresso-800);
+	--color-warm-charcoal-900: var(--color-espresso-900);
+	--color-warm-charcoal-950: var(--color-espresso-950);
+	--color-warm-charcoal: var(--color-espresso-700);
+
+	--color-emerald-50:  var(--color-sage-50);
+	--color-emerald-100: var(--color-sage-100);
+	--color-emerald-200: var(--color-sage-200);
+	--color-emerald-300: var(--color-sage-300);
+	--color-emerald-400: var(--color-sage-400);
+	--color-emerald-500: var(--color-sage-500);
+	--color-emerald-600: var(--color-sage-600);
+	--color-emerald-700: var(--color-sage-700);
+	--color-emerald-800: var(--color-sage-800);
+	--color-emerald-900: var(--color-sage-900);
+	--color-emerald-950: var(--color-sage-950);
+	--color-emerald: var(--color-sage-500);
+
+	--color-crimson-50:  var(--color-berry-50);
+	--color-crimson-100: var(--color-berry-100);
+	--color-crimson-200: var(--color-berry-200);
+	--color-crimson-300: var(--color-berry-300);
+	--color-crimson-400: var(--color-berry-400);
+	--color-crimson-500: var(--color-berry-500);
+	--color-crimson-600: var(--color-berry-600);
+	--color-crimson-700: var(--color-berry-700);
+	--color-crimson-800: var(--color-berry-800);
+	--color-crimson-900: var(--color-berry-900);
+	--color-crimson-950: var(--color-berry-950);
+	--color-crimson: var(--color-berry-500);
 }

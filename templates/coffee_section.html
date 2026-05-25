@@ -9,150 +9,274 @@
 {% block content %}
 
 <article>
-	<!-- Breadcrumb -->
-	<nav class="mb-8 text-seasalt-400 dark:text-seasalt-500 text-sm animate-fade-in">
-		<a href="/" class="hover:text-pumpkin transition-colors">Hem</a>
-		<span class="mx-2">/</span>
-		<a href="/kaffe" class="hover:text-pumpkin transition-colors">Kaffe</a>
-		<span class="mx-2">/</span>
-		<span class="text-seasalt-600 dark:text-seasalt-300">{{ section.title }}</span>
+	<nav class="mb-8 text-parchment-400 dark:text-parchment-500 text-sm animate-fade-in">
+		<a href="/" class="hover:text-gold-600 dark:hover:text-gold-400 transition-colors">Hem</a>
+		<span class="mx-2 opacity-30">&frasl;</span>
+		<a href="/kaffe" class="hover:text-gold-600 dark:hover:text-gold-400 transition-colors">Kaffe</a>
+		<span class="mx-2 opacity-30">&frasl;</span>
+		<span class="text-parchment-600 dark:text-parchment-300 font-medium">{{ section.title }}</span>
 	</nav>
 
 	<!-- Hero -->
-	<header class="relative mb-12 rounded-2xl overflow-hidden animate-slide-up">
+	<header class="relative mb-14 rounded-3xl overflow-hidden animate-fade-in-scale shadow-2xl">
 		{% if section.extra.image %}
-		<img src="https://images.unsplash.com/{{ section.extra.image }}?w=1400&h=560&fit=crop&q=80&auto=format"
-			alt="{{ section.title }}" class="w-full h-64 sm:h-80 object-cover" />
+		<img src="https://images.unsplash.com/{{ section.extra.image }}?w=1600&h=700&fit=crop&q=85&auto=format"
+			alt="{{ section.title }}" class="w-full h-80 sm:h-[28rem] object-cover" />
 		{% else %}
-		<div class="bg-linear-to-br from-warm-charcoal-600 to-warm-charcoal-800 w-full h-64 sm:h-80"></div>
+		<div class="bg-gradient-to-br from-espresso-600 to-espresso-800 w-full h-80 sm:h-[28rem]"></div>
 		{% endif %}
-		<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
-		<div class="absolute inset-0 flex flex-col justify-end p-6 sm:p-10">
-			<h1 class="font-serif font-bold text-white text-4xl sm:text-5xl tracking-tight animate-slide-up delay-100">
-				{{
-				section.title }}</h1>
+		<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/5"></div>
+		<div class="absolute bottom-[20%] left-1/2 -translate-x-1/2 pointer-events-none hidden sm:block">
+			<div class="relative">
+				<span class="steam-wisp"></span>
+				<span class="steam-wisp"></span>
+				<span class="steam-wisp"></span>
+			</div>
+		</div>
+		<div class="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 lg:p-16">
+			<p class="mb-3 font-semibold text-gold-400 text-xs tracking-[0.3em] uppercase animate-slide-up">&#9749; Kaffevariant</p>
+			<h1 class="font-serif font-bold text-white text-4xl sm:text-5xl lg:text-7xl tracking-tight animate-slide-up delay-100 leading-[1.05]">
+				{{ section.title }}
+			</h1>
 			{% if section.description %}
-			<p class="mt-3 max-w-2xl text-white/80 text-base sm:text-lg leading-relaxed animate-slide-up delay-200">{{
-				section.description }}</p>
+			<p class="mt-4 max-w-2xl text-white/70 text-base sm:text-lg leading-relaxed animate-slide-up delay-200 font-light">
+				{{ section.description }}
+			</p>
 			{% endif %}
 		</div>
 	</header>
 
-	<!-- Stats grid -->
-	<div class="gap-3 grid grid-cols-2 sm:grid-cols-3 mb-12 animate-slide-up delay-300">
+	<!-- Quick stats -->
+	<div class="gap-3 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 mb-16 animate-slide-up delay-300">
 		{% if section.extra.svarighet %}
-		<div
-			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
-			<div class="mb-1 text-2xl">&#9889;</div>
-			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
-				Sv&#229;righetsgrad</div>
-			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ section.extra.svarighet }}
-			</div>
+		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+			<div class="mb-2 text-2xl">&#9889;</div>
+			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Svårighetsgrad</div>
+			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.svarighet }}</div>
 		</div>
 		{% endif %}
 		{% if section.extra.bryggtid %}
-		<div
-			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
-			<div class="mb-1 text-2xl">&#8987;</div>
-			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
-				Bryggtid</div>
-			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ section.extra.bryggtid }}</div>
+		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+			<div class="mb-2 text-2xl">&#8987;</div>
+			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Bryggtid</div>
+			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.bryggtid }}</div>
 		</div>
 		{% endif %}
 		{% if section.extra.ursprung %}
-		<div
-			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
-			<div class="mb-1 text-2xl">&#127757;</div>
-			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
-				Ursprung</div>
-			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ section.extra.ursprung }}</div>
+		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+			<div class="mb-2 text-2xl">&#127757;</div>
+			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Ursprung</div>
+			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.ursprung }}</div>
 		</div>
 		{% endif %}
 		{% if section.extra.temperatur %}
-		<div
-			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
-			<div class="mb-1 text-2xl">&#127777;&#65039;</div>
-			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
-				Temperatur</div>
-			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ section.extra.temperatur }}
-			</div>
+		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+			<div class="mb-2 text-2xl">&#127777;&#65039;</div>
+			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Temperatur</div>
+			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.temperatur }}</div>
 		</div>
 		{% endif %}
 		{% if section.extra.malningsgrad %}
-		<div
-			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
-			<div class="mb-1 text-2xl">&#9881;&#65039;</div>
-			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
-				Malningsgrad</div>
-			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ section.extra.malningsgrad }}
-			</div>
+		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+			<div class="mb-2 text-2xl">&#9881;&#65039;</div>
+			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Malningsgrad</div>
+			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.malningsgrad }}</div>
 		</div>
 		{% endif %}
 		{% if section.extra.vattenkvot %}
-		<div
-			class="bg-pumpkin-50 dark:bg-warm-charcoal-600 p-4 border border-pumpkin-100 dark:border-warm-charcoal-500 rounded-xl text-center">
-			<div class="mb-1 text-2xl">&#128167;</div>
-			<div class="mb-1 font-semibold text-pumpkin-600 dark:text-pumpkin-400 text-xs uppercase tracking-wider">
-				Vattenkvot</div>
-			<div class="font-semibold text-seasalt-800 dark:text-seasalt-100 text-sm">{{ section.extra.vattenkvot }}
-			</div>
+		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+			<div class="mb-2 text-2xl">&#128167;</div>
+			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Vattenkvot</div>
+			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.vattenkvot }}</div>
 		</div>
 		{% endif %}
 	</div>
 
-	<!-- Content -->
-	<div class="animate-fade-in delay-400 prose">
+	<!-- Article content -->
+	<div class="animate-fade-in delay-400 prose max-w-none">
 		{{ section.content | safe }}
 	</div>
 
-	<!-- Nested drink pages -->
+	<!-- ═══════════════════════════════════════════
+	     ESPRESSO-BASED DRINKS — REFINED SHOWCASE
+	     ═══════════════════════════════════════════ -->
 	{% if section.pages %}
-	<div class="mt-12 pt-8 border-seasalt-200 dark:border-warm-charcoal-600 border-t animate-fade-in delay-500">
-		<h2 class="mb-1 font-bold text-xl">Espressobaserade drycker</h2>
-		<p class="mb-6 text-seasalt-500 dark:text-seasalt-400 text-sm">Utforska alla variationer som b&#246;rjar med en shot espresso &ndash; fr&#229;n koncentrerat till kr&#228;migt.</p>
-		<div class="gap-4 grid sm:grid-cols-2 lg:grid-cols-3">
-			{% for page in section.pages %}
-			<a href="{{ page.permalink }}"
-				class="group flex items-start gap-4 bg-white dark:bg-warm-charcoal-600 hover:shadow-lg p-5 border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-xl transition-all animate-slide-up"
-				style="animation-delay: {{ loop.index * 75 }}ms">
-				<span class="mt-0.5 text-3xl shrink-0">{{ page.extra.ikon | default(value="&#9749;") }}</span>
-				<div class="flex-1 min-w-0">
-					<div class="flex justify-between items-start gap-2">
-						<h3 class="font-bold group-hover:text-pumpkin text-lg transition-colors">{{ page.title }}</h3>
-						<svg xmlns="http://www.w3.org/2000/svg"
-							class="mt-1 size-4 text-seasalt-300 dark:text-seasalt-600 group-hover:text-pumpkin transition-colors shrink-0"
-							fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-						</svg>
+	<div class="mt-20 pt-12 border-parchment-200/60 dark:border-espresso-600/40 border-t animate-fade-in delay-500">
+		<!-- Section header -->
+		<div class="mb-14">
+			<div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+				<div class="max-w-2xl">
+					<div class="flex items-center gap-4 mb-5">
+						<span class="w-8 h-px bg-gold-300 dark:bg-gold-700"></span>
+						<span class="font-semibold text-gold-600 dark:text-gold-400 text-[11px] tracking-[0.35em] uppercase">Alla varianter</span>
 					</div>
+					<h2 class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-espresso-800 dark:text-parchment-100 leading-[1.05]">
+						Espressobaserade<br class="hidden sm:block" /> drycker
+					</h2>
+					<p class="mt-5 text-parchment-500 dark:text-parchment-400 text-base sm:text-lg leading-relaxed max-w-xl font-light">
+						Sju distinkta drycker. En gemensam grund. Upptäck hur mjölk, vatten och teknik formar helt olika smakupplevelser från en och samma espresso.
+					</p>
+				</div>
+				<div class="hidden lg:flex items-end gap-2 text-gold-200/40 dark:text-gold-800/20 select-none animate-float-slow">
+					<span class="text-7xl">&#9749;</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Drink cards -->
+		<div class="space-y-6">
+			{% for page in section.pages %}
+			{% set delay = loop.index * 100 %}
+			<a href="{{ page.permalink }}"
+				class="group relative flex flex-col sm:flex-row gap-6 sm:gap-10 glass-card p-6 sm:p-8 border border-parchment-200/40 dark:border-espresso-600/20 hover:border-gold-300/50 dark:hover:border-gold-600/30 hover:shadow-2xl hover:shadow-gold-500/[0.06] rounded-3xl transition-all duration-500 animate-fade-in-up overflow-hidden"
+				style="animation-delay: {{ delay }}ms">
+
+				<!-- Ambient hover glow -->
+				<div class="absolute inset-0 rounded-3xl bg-[radial-gradient(ellipse_at_70%_50%,rgba(196,132,46,0.06),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+				<!-- ── CUP ILLUSTRATION ── -->
+				<div class="flex items-start justify-center shrink-0 pt-2">
+					<div class="relative cup-container">
+						<!-- Steam -->
+						<div class="absolute -top-9 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+							<div class="relative">
+								<span class="steam-wisp"></span>
+								<span class="steam-wisp"></span>
+								<span class="steam-wisp"></span>
+							</div>
+						</div>
+
+						<!-- Cup body -->
+						<div class="relative w-[72px] sm:w-[84px] cup-body overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-500"
+							style="
+								{% if page.extra.ikon == '🔴' %}height:68px;{% elif page.extra.ikon == '🔵' %}height:88px;{% elif page.extra.ikon == '☕☕' %}height:84px;{% elif page.extra.ikon == '💧' %}height:104px;{% elif page.extra.ikon == '☁️' %}height:100px;{% elif page.extra.ikon == '🥛' %}height:120px;{% elif page.extra.ikon == '🤍' %}height:94px;{% else %}height:94px;{% endif %}
+							">
+
+							<!-- Gloss -->
+							<div class="absolute inset-0 z-20 pointer-events-none bg-gradient-to-r from-white/[0.06] via-white/[0.12] to-transparent w-[40%]"></div>
+
+							<!-- Gold rim -->
+							<div class="absolute top-0 left-0 right-0 h-[3px] z-30 bg-gradient-to-r from-gold-400/70 via-gold-300/90 to-gold-400/70 dark:from-gold-500/50 dark:via-gold-400/70 dark:to-gold-500/50"></div>
+
+							<!-- Espresso layer -->
+							<div class="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-espresso-800 to-espresso-600 dark:from-espresso-600 dark:to-espresso-400"
+								style="
+									{% if page.extra.ikon == '🔴' %}height:100%;{% elif page.extra.ikon == '🔵' %}height:100%;{% elif page.extra.ikon == '☕☕' %}height:100%;{% elif page.extra.ikon == '💧' %}height:28%;{% elif page.extra.ikon == '☁️' %}height:33%;{% elif page.extra.ikon == '🥛' %}height:22%;{% elif page.extra.ikon == '🤍' %}height:38%;{% else %}height:50%;{% endif %}
+								">
+								<!-- Crema -->
+								<div class="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-b from-gold-400/80 to-espresso-600/50 dark:from-gold-400/60 dark:to-espresso-500/40"></div>
+							</div>
+
+							<!-- Water (Americano) -->
+							{% if page.extra.ikon == '💧' %}
+							<div class="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-blue-100/70 via-blue-100/40 to-blue-50/10 dark:from-blue-300/30 dark:via-blue-300/15 dark:to-transparent" style="height:72%;"></div>
+							{% endif %}
+
+							<!-- Milk -->
+							{% if page.extra.ikon == '☁️' %}
+							<div class="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-parchment-50 via-parchment-100 to-parchment-200/60 dark:from-parchment-200/80 dark:via-parchment-300/60 dark:to-parchment-400/30" style="height:34%;"></div>
+							{% elif page.extra.ikon == '🥛' %}
+							<div class="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-parchment-50 via-parchment-100 to-parchment-200/60 dark:from-parchment-200/80 dark:via-parchment-300/60 dark:to-parchment-400/30" style="height:56%;"></div>
+							{% elif page.extra.ikon == '🤍' %}
+							<div class="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-parchment-50 via-parchment-100 to-parchment-200/60 dark:from-parchment-200/80 dark:via-parchment-300/60 dark:to-parchment-400/30" style="height:42%;"></div>
+							{% endif %}
+
+							<!-- Foam -->
+							{% if page.extra.ikon == '☁️' %}
+							<div class="absolute top-[2px] left-0 right-0 z-20 bg-gradient-to-b from-white/95 via-white/80 to-parchment-50/40 dark:from-parchment-100/70 dark:via-parchment-100/50 dark:to-transparent" style="height:33%;"></div>
+							{% elif page.extra.ikon == '🥛' %}
+							<div class="absolute top-[2px] left-0 right-0 z-20 bg-gradient-to-b from-white/95 via-white/80 to-parchment-50/40 dark:from-parchment-100/70 dark:via-parchment-100/50 dark:to-transparent" style="height:22%;"></div>
+							{% elif page.extra.ikon == '🤍' %}
+							<div class="absolute top-[2px] left-0 right-0 z-20 bg-gradient-to-b from-white/90 via-white/70 to-parchment-50/30 dark:from-parchment-100/60 dark:via-parchment-100/40 dark:to-transparent" style="height:20%;"></div>
+							{% endif %}
+						</div>
+
+						<!-- Handle -->
+						<div class="absolute -right-[9px] top-[28%] w-[10px] h-[26px] sm:h-[30px] cup-handle"></div>
+
+						<!-- Saucer -->
+						<div class="w-[92px] sm:w-[104px] h-[3px] rounded-full bg-gradient-to-r from-espresso-300/15 via-espresso-200/25 to-espresso-300/15 dark:from-espresso-500/10 dark:via-espresso-400/20 dark:to-espresso-500/10 -mt-[1px] shadow-sm"></div>
+					</div>
+				</div>
+
+				<!-- ── DRINK INFO ── -->
+				<div class="flex-1 min-w-0 flex flex-col justify-center relative z-10">
+					<div class="mb-3">
+						<h3 class="font-serif font-bold text-2xl sm:text-3xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors leading-tight">
+							{{ page.title }}
+						</h3>
+					</div>
+
 					{% if page.description %}
-					<p class="mt-1 text-seasalt-500 dark:text-seasalt-400 text-sm leading-relaxed line-clamp-2">{{ page.description }}</p>
+					<p class="text-parchment-500 dark:text-parchment-400 text-sm leading-relaxed max-w-lg mb-4">{{ page.description }}</p>
 					{% endif %}
-					<div class="flex flex-wrap gap-1.5 mt-3">
-						{% if page.extra.svarighet %}
-						<span
-							class="bg-pumpkin-50 dark:bg-warm-charcoal-700 px-2 py-0.5 rounded-full font-medium text-pumpkin-700 dark:text-pumpkin-300 text-[11px]">
-							{{ page.extra.svarighet }}
-						</span>
-						{% endif %}
-						{% if page.extra.bryggtid %}
-						<span
-							class="bg-seasalt-100 dark:bg-warm-charcoal-700 px-2 py-0.5 rounded-full font-medium text-seasalt-600 dark:text-seasalt-400 text-[11px]">
-							&#8987; {{ page.extra.bryggtid }}
-						</span>
-						{% endif %}
-						{% if page.extra.temperatur %}
-						<span
-							class="bg-blue-50 dark:bg-warm-charcoal-700 px-2 py-0.5 rounded-full font-medium text-blue-600 dark:text-blue-400 text-[11px]">
-							{{ page.extra.temperatur }}
-						</span>
-						{% endif %}
-						{% if page.extra.vattenkvot %}
-						<span
-							class="bg-emerald-50 dark:bg-warm-charcoal-700 px-2 py-0.5 rounded-full font-medium text-emerald-600 dark:text-emerald-400 text-[11px]">
-							{{ page.extra.vattenkvot }}
-						</span>
-						{% endif %}
+
+					<div class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+						<!-- Ratio pill bar -->
+						<div class="flex items-center gap-3">
+							<span class="text-parchment-400 dark:text-parchment-500 text-[11px] font-medium tracking-wider uppercase shrink-0">Andelar</span>
+							<div class="flex items-center gap-[2px]">
+								{% if page.extra.ikon == '🔴' or page.extra.ikon == '🔵' %}
+								<div class="flex items-center gap-1">
+									<div class="w-7 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium">1</span>
+								</div>
+								{% elif page.extra.ikon == '☕☕' %}
+								<div class="flex items-center gap-1">
+									<div class="w-7 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium">2x</span>
+								</div>
+								{% elif page.extra.ikon == '💧' %}
+								<div class="flex items-center gap-1">
+									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<span class="text-[10px] text-parchment-400">+</span>
+									<div class="w-9 h-2.5 rounded-full bg-gradient-to-r from-blue-200 to-blue-100 dark:from-blue-400/30 dark:to-blue-300/20"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium">3× vatten</span>
+								</div>
+								{% elif page.extra.ikon == '☁️' %}
+								<div class="flex items-center gap-1">
+									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-parchment-100 to-parchment-50 dark:from-parchment-300/60 dark:to-parchment-200/40"></div>
+									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-white to-parchment-50 dark:from-parchment-100/60 dark:to-parchment-100/30"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium ml-0.5">1:1:1</span>
+								</div>
+								{% elif page.extra.ikon == '🥛' %}
+								<div class="flex items-center gap-1">
+									<div class="w-4 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<div class="w-10 h-2.5 rounded-full bg-gradient-to-r from-parchment-100 to-parchment-50 dark:from-parchment-300/60 dark:to-parchment-200/40"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium ml-0.5">1:3½</span>
+								</div>
+								{% elif page.extra.ikon == '🤍' %}
+								<div class="flex items-center gap-1">
+									<div class="w-5 h-2.5 rounded-full bg-gradient-to-r from-espresso-700 to-espresso-500 dark:from-espresso-500 dark:to-espresso-300"></div>
+									<div class="w-6 h-2.5 rounded-full bg-gradient-to-r from-parchment-100 to-parchment-50 dark:from-parchment-300/60 dark:to-parchment-200/40"></div>
+									<span class="text-[10px] text-parchment-500 dark:text-parchment-400 font-medium ml-0.5">1:2</span>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+
+						<span class="w-px h-4 bg-parchment-200 dark:bg-espresso-600/40 hidden sm:block"></span>
+
+						<div class="flex flex-wrap gap-2">
+							{% if page.extra.svarighet %}
+							<span class="inline-flex items-center gap-1 bg-gold-50 dark:bg-gold-900/10 px-2.5 py-1 rounded-full text-gold-700 dark:text-gold-300 text-[11px] font-medium border border-gold-200/40 dark:border-gold-800/20">
+								&#9889; {{ page.extra.svarighet }}
+							</span>
+							{% endif %}
+							{% if page.extra.bryggtid %}
+							<span class="inline-flex items-center gap-1 bg-parchment-100 dark:bg-espresso-600/30 px-2.5 py-1 rounded-full text-parchment-600 dark:text-parchment-300 text-[11px] font-medium border border-parchment-200/40 dark:border-espresso-500/20">
+								&#8987; {{ page.extra.bryggtid }}
+							</span>
+							{% endif %}
+						</div>
+					</div>
+
+					<div class="flex items-center gap-2 mt-4 text-gold-600 dark:text-gold-400 text-xs font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-1">
+						Utforska
+						<svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
 					</div>
 				</div>
 			</a>
@@ -161,10 +285,13 @@
 	</div>
 	{% endif %}
 
-	<!-- Back link -->
-	<div class="mt-12 pt-8 border-seasalt-200 dark:border-warm-charcoal-600 border-t animate-fade-in delay-500">
-		<a href="/kaffe" class="font-medium text-pumpkin hover:underline">
-			&larr; Tillbaka till alla kaffevarianter
+	<!-- Back -->
+	<div class="mt-16 pt-8 border-parchment-200/60 dark:border-espresso-600/40 border-t animate-fade-in delay-500">
+		<a href="/kaffe" class="inline-flex items-center gap-2 font-medium text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 transition-colors group">
+			<svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m0 0l7 7m-7-7l7-7" />
+			</svg>
+			Tillbaka till alla kaffevarianter
 		</a>
 	</div>
 </article>

@@ -1,120 +1,253 @@
 /*
- * Prose styles for rendered Markdown content.
- * Apply the .prose class to any container wrapping {{ page.content | safe }}.
+ * Prose — rich typography for Markdown content
  */
+
 @layer components {
-	.prose p {
-		margin-bottom: 1.25rem;
-		line-height: 1.75;
-		color: var(--color-seasalt-700);
-		@variant dark {
-			color: var(--color-seasalt-300);
-		}
+	.prose {
+		max-width: 68ch;
+		line-height: 1.82;
+		color: var(--color-parchment-700);
+		font-size: 1.0625rem;
 	}
 
-	.prose h1,
-	.prose h2,
-	.prose h3,
-	.prose h4,
-	.prose h5,
-	.prose h6 {
+	.dark .prose {
+		color: var(--color-parchment-300);
+	}
+
+	/* ── Paragraphs ── */
+	.prose p {
+		margin-bottom: 1.6rem;
+		line-height: 1.85;
+	}
+
+	.prose p:has(+ h2),
+	.prose p:has(+ h3) {
+		margin-bottom: 2rem;
+	}
+
+	/* ── Headings ── */
+	.prose h1, .prose h2, .prose h3, .prose h4 {
+		font-family: var(--font-serif);
 		font-weight: 700;
-		line-height: 1.3;
-		margin-top: 2rem;
-		margin-bottom: 0.75rem;
-		color: var(--color-seasalt-900);
-		@variant dark {
-			color: var(--color-seasalt-50);
-		}
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+		color: var(--color-espresso-800);
+	}
+
+	.dark .prose h1,
+	.dark .prose h2,
+	.dark .prose h3,
+	.dark .prose h4 {
+		color: var(--color-parchment-100);
 	}
 
 	.prose h1 {
-		font-size: 2.25rem;
-	}
-	.prose h2 {
-		font-size: 1.875rem;
-	}
-	.prose h3 {
-		font-size: 1.5rem;
-	}
-	.prose h4 {
-		font-size: 1.25rem;
+		font-size: 2.75rem;
+		margin: 3rem 0 1.25rem;
 	}
 
+	.prose h2 {
+		font-size: 2rem;
+		margin: 3rem 0 1rem;
+		padding-bottom: 0.6rem;
+		border-bottom: 2px solid var(--color-gold-200);
+		position: relative;
+	}
+
+	.prose h2::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 60px;
+		height: 2px;
+		background: var(--color-gold-500);
+	}
+
+	.dark .prose h2 {
+		border-bottom-color: var(--color-gold-800);
+	}
+
+	.dark .prose h2::after {
+		background: var(--color-gold-400);
+	}
+
+	.prose h3 {
+		font-size: 1.5rem;
+		margin: 2.25rem 0 0.75rem;
+		color: var(--color-espresso-700);
+	}
+
+	.dark .prose h3 {
+		color: var(--color-parchment-200);
+	}
+
+	.prose h4 {
+		font-size: 1.2rem;
+		margin: 2rem 0 0.5rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-gold-700);
+	}
+
+	.dark .prose h4 {
+		color: var(--color-gold-400);
+	}
+
+	/* ── Links ── */
 	.prose a {
-		color: var(--color-pumpkin);
-		text-decoration: underline;
-		@variant dark {
-			color: var(--color-pumpkin-300);
-		}
+		color: var(--color-gold-600);
+		text-decoration: none;
+		background-image: linear-gradient(var(--color-gold-300), var(--color-gold-300));
+		background-size: 100% 1px;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		transition: all 0.2s ease;
+	}
+
+	.dark .prose a {
+		color: var(--color-gold-400);
+		background-image: linear-gradient(var(--color-gold-700), var(--color-gold-700));
 	}
 
 	.prose a:hover {
-		color: var(--color-pumpkin-700);
-		@variant dark {
-			color: var(--color-pumpkin-200);
-		}
+		color: var(--color-gold-700);
+		background-size: 100% 2px;
+		background-image: linear-gradient(var(--color-gold-500), var(--color-gold-500));
 	}
 
+	.dark .prose a:hover {
+		color: var(--color-gold-300);
+		background-image: linear-gradient(var(--color-gold-500), var(--color-gold-500));
+	}
+
+	/* ── Strong & Em ── */
 	.prose strong {
 		font-weight: 600;
+		color: var(--color-espresso-700);
+	}
+
+	.dark .prose strong {
+		color: var(--color-parchment-200);
 	}
 
 	.prose em {
 		font-style: italic;
+		color: var(--color-parchment-600);
 	}
 
+	.dark .prose em {
+		color: var(--color-parchment-400);
+	}
+
+	/* ── Lists ── */
 	.prose ul {
-		list-style-type: disc;
-		padding-left: 1.5rem;
-		margin-bottom: 1.25rem;
+		list-style: none;
+		padding-left: 0;
+		margin-bottom: 1.6rem;
+	}
+
+	.prose ul li {
+		padding-left: 1.8rem;
+		margin-bottom: 0.5rem;
+		position: relative;
+	}
+
+	.prose ul li::before {
+		content: '';
+		position: absolute;
+		left: 0.15rem;
+		top: 0.65em;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--color-gold-400);
+		box-shadow: 0 0 0 3px var(--color-gold-100);
+	}
+
+	.dark .prose ul li::before {
+		background: var(--color-gold-500);
+		box-shadow: 0 0 0 3px rgba(196,132,46,0.15);
 	}
 
 	.prose ol {
-		list-style-type: decimal;
-		padding-left: 1.5rem;
-		margin-bottom: 1.25rem;
+		padding-left: 1.6rem;
+		margin-bottom: 1.6rem;
+		counter-reset: item;
 	}
 
-	.prose li {
-		margin-bottom: 0.375rem;
-		line-height: 1.75;
+	.prose ol li {
+		margin-bottom: 0.5rem;
+		padding-left: 0.4rem;
+		counter-increment: item;
 	}
 
+	.prose ol li::marker {
+		color: var(--color-gold-500);
+		font-weight: 600;
+	}
+
+	/* ── Blockquotes ── */
 	.prose blockquote {
-		border-left: 4px solid var(--color-seasalt-300);
-		padding-left: 1rem;
+		border-left: 4px solid var(--color-gold-400);
+		background: linear-gradient(to right, var(--color-gold-50), transparent);
+		padding: 1.25rem 1.75rem;
+		margin: 2.25rem 0;
+		border-radius: 0 1rem 1rem 0;
 		font-style: italic;
-		color: var(--color-seasalt-500);
-		margin: 1.5rem 0;
-		@variant dark {
-			border-left-color: var(--color-seasalt-600);
-			color: var(--color-seasalt-400);
-		}
+		color: var(--color-parchment-600);
+		position: relative;
+	}
+
+	.prose blockquote::before {
+		content: '\201C';
+		position: absolute;
+		top: -0.5rem;
+		left: 0.75rem;
+		font-family: var(--font-serif);
+		font-size: 4rem;
+		line-height: 1;
+		color: var(--color-gold-200);
+		pointer-events: none;
+	}
+
+	.dark .prose blockquote {
+		border-left-color: var(--color-gold-600);
+		background: linear-gradient(to right, rgba(196,132,46,0.06), transparent);
+		color: var(--color-parchment-400);
+	}
+
+	.dark .prose blockquote::before {
+		color: rgba(196,132,46,0.1);
+	}
+
+	/* ── Code ── */
+	.prose code {
+		background: var(--color-gold-50);
+		padding: 0.18rem 0.5rem;
+		border-radius: 0.35rem;
+		font-size: 0.875em;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		color: var(--color-espresso-600);
+		font-weight: 500;
+	}
+
+	.dark .prose code {
+		background: var(--color-espresso-600);
+		color: var(--color-parchment-200);
 	}
 
 	.prose pre {
-		background-color: #1e1e2e;
-		color: #cdd6f4;
-		padding: 1.25rem;
-		border-radius: 0.5rem;
+		background: #1a1b26;
+		color: #c0caf5;
+		padding: 1.5rem;
+		border-radius: 1rem;
 		overflow-x: auto;
-		margin: 1.5rem 0;
+		margin: 2rem 0;
 		font-size: 0.875rem;
 		line-height: 1.7;
-	}
-
-	.prose code {
-		background-color: var(--color-seasalt-100);
-		padding: 0.125rem 0.375rem;
-		border-radius: 0.25rem;
-		font-size: 0.875em;
-		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-		color: var(--color-seasalt-900);
-		@variant dark {
-			background-color: var(--color-seasalt-800);
-			color: var(--color-seasalt-50);
-		}
+		border: 1px solid rgba(255,255,255,0.05);
 	}
 
 	.prose pre code {
@@ -123,52 +256,103 @@
 		font-size: inherit;
 		color: inherit;
 		border-radius: 0;
+		font-weight: 400;
 	}
 
+	/* ── Images ── */
 	.prose img {
-		border-radius: 0.5rem;
-		margin: 1.5rem auto;
+		border-radius: 1rem;
+		margin: 2.5rem auto;
 		max-width: 100%;
 		height: auto;
+		box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 	}
 
+	.dark .prose img {
+		box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+	}
+
+	/* ── Horizontal Rule ── */
 	.prose hr {
 		border: none;
-		border-top: 1px solid var(--color-seasalt-200);
-		margin: 2.5rem 0;
-		@variant dark {
-			border-top-color: var(--color-seasalt-700);
-		}
+		height: 1px;
+		background: linear-gradient(to right, transparent, var(--color-gold-200), transparent);
+		margin: 3.5rem 0;
 	}
 
+	.dark .prose hr {
+		background: linear-gradient(to right, transparent, var(--color-gold-800), transparent);
+	}
+
+	/* ── Tables ── */
 	.prose table {
 		width: 100%;
 		border-collapse: collapse;
-		margin: 1.5rem 0;
+		margin: 2rem 0;
 		font-size: 0.9375rem;
+		border-radius: 1rem;
+		overflow: hidden;
+		box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+	}
+
+	.dark .prose table {
+		box-shadow: 0 2px 16px rgba(0,0,0,0.2);
 	}
 
 	.prose th {
-		background-color: var(--color-seasalt-50);
+		background: var(--color-gold-100);
 		font-weight: 600;
 		text-align: left;
-		padding: 0.75rem 1rem;
-		border-bottom: 2px solid var(--color-seasalt-200);
-		@variant dark {
-			background-color: var(--color-seasalt-800);
-			border-bottom-color: var(--color-seasalt-700);
-		}
+		padding: 0.9rem 1.25rem;
+		border-bottom: 2px solid var(--color-gold-300);
+		color: var(--color-espresso-700);
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.dark .prose th {
+		background: var(--color-espresso-600);
+		border-bottom-color: var(--color-gold-700);
+		color: var(--color-parchment-100);
 	}
 
 	.prose td {
-		padding: 0.75rem 1rem;
-		border-bottom: 1px solid var(--color-seasalt-200);
-		@variant dark {
-			border-bottom-color: var(--color-seasalt-700);
-		}
+		padding: 0.85rem 1.25rem;
+		border-bottom: 1px solid var(--color-parchment-200);
+		color: var(--color-parchment-700);
 	}
 
-	.prose tr:last-child td {
-		border-bottom: none;
+	.dark .prose td {
+		border-bottom-color: var(--color-espresso-600);
+		color: var(--color-parchment-300);
 	}
+
+	.prose tr:last-child td { border-bottom: none; }
+
+	.prose tr:nth-child(even) td {
+		background: rgba(196,132,46,0.03);
+	}
+
+	.dark .prose tr:nth-child(even) td {
+		background: rgba(255,255,255,0.015);
+	}
+
+	/* ── Definition-like dl ── */
+	.prose dt {
+		font-weight: 600;
+		color: var(--color-espresso-700);
+		margin-top: 1rem;
+	}
+
+	.prose dd {
+		margin-left: 0;
+		padding-left: 1rem;
+		border-left: 2px solid var(--color-gold-200);
+		color: var(--color-parchment-600);
+		margin-bottom: 0.75rem;
+	}
+
+	.dark .prose dt { color: var(--color-parchment-200); }
+	.dark .prose dd { border-left-color: var(--color-gold-800); color: var(--color-parchment-400); }
 }

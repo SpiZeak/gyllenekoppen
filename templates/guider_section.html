@@ -8,62 +8,77 @@
 
 {% block content %}
 
-<header class="mb-14 text-center animate-slide-up">
-	<p class="mb-3 font-semibold text-pumpkin dark:text-pumpkin-300 text-sm uppercase tracking-[0.2em]">LÄR DIG MER</p>
-	<h1 class="font-serif font-bold text-5xl sm:text-6xl tracking-tight">{{ section.title }}</h1>
+<header class="mb-16 text-center">
+	<div class="inline-flex items-center gap-3 mb-6 animate-fade-in">
+		<span class="w-12 h-px bg-gold-300 dark:bg-gold-700"></span>
+		<span class="font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.3em] uppercase">&#128218; Lär dig brygga</span>
+		<span class="w-12 h-px bg-gold-300 dark:bg-gold-700"></span>
+	</div>
+	<h1 class="font-serif font-bold text-5xl sm:text-6xl lg:text-7xl text-espresso-800 dark:text-parchment-100 tracking-tight leading-[1.05] animate-slide-up">
+		{{ section.title }}
+	</h1>
 	{% if section.description %}
-	<p
-		class="mx-auto mt-5 max-w-2xl text-seasalt-500 dark:text-seasalt-400 text-xl leading-relaxed animate-slide-up delay-150">
+	<p class="mx-auto mt-6 max-w-2xl text-parchment-500 dark:text-parchment-400 text-lg sm:text-xl leading-relaxed animate-slide-up delay-150 font-light">
 		{{ section.description }}
 	</p>
 	{% endif %}
 </header>
 
 {% if section.pages %}
-<div class="space-y-6">
+<div class="space-y-5">
 	{% for page in section.pages %}
+	{% set delay_guide = loop.index * 100 + 300 %}
 	<a href="{{ page.permalink }}"
-		class="group flex gap-5 bg-white dark:bg-warm-charcoal-600 hover:shadow-lg p-6 border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-2xl transition-all animate-slide-up"
-		style="animation-delay: {{ loop.index * 100 + 250 }}ms">
+		class="group flex flex-col sm:flex-row gap-5 glass-card p-5 sm:p-6 lg:p-7 border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 rounded-2xl transition-all duration-500 animate-fade-in-up"
+		style="animation-delay: {{ delay_guide }}ms">
+		<!-- Image -->
 		{% if page.extra.image %}
-		<div class="rounded-xl w-24 h-24 overflow-hidden shrink-0">
-			<img src="https://images.unsplash.com/{{ page.extra.image }}?w=200&h=200&fit=crop&q=80&auto=format"
+		<div class="rounded-2xl w-full sm:w-48 h-44 sm:h-auto overflow-hidden shrink-0 shadow-sm">
+			<img src="https://images.unsplash.com/{{ page.extra.image }}?w=400&h=400&fit=crop&q=80&auto=format"
 				alt="{{ page.title }}"
-				class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+				class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
 				loading="lazy" />
 		</div>
 		{% endif %}
-		<div class="flex-1 min-w-0">
-			<div class="flex flex-wrap items-start gap-3 mb-2">
-				<h2 class="font-bold group-hover:text-pumpkin text-2xl transition-colors">{{ page.title }}</h2>
+
+		<!-- Content -->
+		<div class="flex-1 min-w-0 flex flex-col justify-center">
+			<div class="flex flex-wrap items-center gap-3 mb-3">
+				<span class="inline-flex items-center justify-center bg-gold-50 dark:bg-gold-900/10 text-gold-600 dark:text-gold-400 font-serif font-bold text-sm w-8 h-8 rounded-lg">
+					{{ loop.index }}
+				</span>
+				<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+					{{ page.title }}
+				</h2>
 				{% if page.extra.svarighet %}
-				<span
-					class="bg-pumpkin-50 dark:bg-warm-charcoal-700 mt-1.5 px-2.5 py-1 rounded-full font-medium text-pumpkin-700 dark:text-pumpkin-300 text-xs">
+				<span class="bg-gold-50 dark:bg-gold-900/15 px-2.5 py-1 rounded-full font-medium text-gold-700 dark:text-gold-300 text-xs">
 					{{ page.extra.svarighet }}
 				</span>
 				{% endif %}
 			</div>
+
 			{% if page.description %}
-			<p class="mb-4 text-seasalt-500 dark:text-seasalt-400 leading-relaxed">{{ page.description }}</p>
+			<p class="mb-3 text-parchment-500 dark:text-parchment-400 leading-relaxed">{{ page.description }}</p>
 			{% endif %}
-			<div class="flex flex-wrap gap-4 text-sm">
+
+			<div class="flex flex-wrap items-center gap-5 text-sm mt-auto">
 				{% if page.extra.tidsatgang %}
-				<span class="flex items-center gap-1.5 text-seasalt-500 dark:text-seasalt-400">
-					<span>&#8987;</span>
-					<span>{{ page.extra.tidsatgang }}</span>
+				<span class="flex items-center gap-2 text-parchment-500 dark:text-parchment-400">
+					&#8987; {{ page.extra.tidsatgang }}
 				</span>
 				{% endif %}
 				{% if page.extra.dryck %}
-				<span class="flex items-center gap-1.5 text-seasalt-500 dark:text-seasalt-400">
-					<span>&#9749;</span>
-					<span>{{ page.extra.dryck }}</span>
+				<span class="flex items-center gap-2 text-parchment-500 dark:text-parchment-400">
+					&#9749; {{ page.extra.dryck }}
 				</span>
 				{% endif %}
 			</div>
 		</div>
-		<div class="self-center shrink-0">
+
+		<!-- Arrow -->
+		<div class="self-center shrink-0 hidden sm:block">
 			<svg xmlns="http://www.w3.org/2000/svg"
-				class="size-6 text-seasalt-300 dark:text-seasalt-600 group-hover:text-pumpkin transition-colors"
+				class="size-6 text-parchment-300 dark:text-espresso-500 group-hover:text-gold-500 transition-colors"
 				fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
 			</svg>

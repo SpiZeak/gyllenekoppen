@@ -8,10 +8,12 @@
 
 {% block content %}
 
-<header class="mb-10">
-	<h1 class="font-extrabold text-4xl tracking-tight animate-slide-up delay-50">{{ section.title }}</h1>
+<header class="mb-14 animate-slide-up">
+	<h1 class="font-serif font-bold text-5xl sm:text-6xl lg:text-7xl text-espresso-800 dark:text-parchment-100 tracking-tight leading-[1.05]">
+		{{ section.title }}
+	</h1>
 	{% if section.content %}
-	<div class="mt-4 animate-slide-up delay-150 prose">{{ section.content | safe }}</div>
+	<div class="mt-6 animate-slide-up delay-150 prose max-w-none">{{ section.content | safe }}</div>
 	{% endif %}
 </header>
 
@@ -24,26 +26,26 @@
 {% if pages %}
 <ul class="space-y-8">
 	{% for page in pages %}
-	<li class="pb-8 border-seasalt-200 dark:border-warm-charcoal-600 last:border-0 border-b animate-slide-up" style="animation-delay: {{ loop.index * 75 + 150 }}ms">
+	<li class="pb-8 border-parchment-200/60 dark:border-espresso-600/40 last:border-0 border-b animate-slide-up"
+		style="animation-delay: {{ loop.index * 80 + 150 }}ms">
 		<a href="{{ page.permalink }}" class="group block">
-			<h2 class="font-semibold group-hover:text-pumpkin text-xl transition-colors">
+			<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
 				{{ page.title }}
 			</h2>
 			{% if page.date %}
-			<time class="block mt-1 text-seasalt-400 dark:text-seasalt-500 text-sm" datetime="{{ page.date }}">
+			<time class="block mt-2 text-parchment-400 dark:text-parchment-500 text-sm" datetime="{{ page.date }}">
 				{{ page.date | date(format="%B %e, %Y") }}
 			</time>
 			{% endif %}
 			{% if page.taxonomies.tags %}
-			<span class="flex flex-wrap gap-2 mt-2">
+			<span class="flex flex-wrap gap-2 mt-3">
 				{% for tag in page.taxonomies.tags %}
-				<span class="bg-seasalt-100 dark:bg-seasalt-800 px-2 py-0.5 rounded text-pumpkin dark:text-pumpkin-300 text-xs">#{{ tag
-					}}</span>
+				<span class="bg-gold-50 dark:bg-gold-900/15 px-2.5 py-1 rounded-full text-gold-600 dark:text-gold-300 text-xs font-medium">#{{ tag }}</span>
 				{% endfor %}
 			</span>
 			{% endif %}
 			{% if page.description %}
-			<p class="mt-3 text-seasalt-500 dark:text-seasalt-400 leading-relaxed">{{ page.description }}</p>
+			<p class="mt-3 text-parchment-500 dark:text-parchment-400 leading-relaxed">{{ page.description }}</p>
 			{% endif %}
 		</a>
 	</li>
@@ -51,15 +53,15 @@
 </ul>
 
 {% if paginator %}
-<nav class="flex justify-between mt-12 font-medium text-sm animate-slide-up delay-150" aria-label="Pagination">
+<nav class="flex justify-between items-center mt-14 font-medium text-sm animate-slide-up delay-150" aria-label="Pagination">
 	{% if paginator.previous %}
-	<a href="{{ paginator.previous }}" class="text-pumpkin hover:underline">← Newer posts</a>
+	<a href="{{ paginator.previous }}" class="text-gold-600 dark:text-gold-400 hover:underline">&larr; Newer posts</a>
 	{% else %}
 	<span></span>
 	{% endif %}
-	<span class="text-seasalt-500">Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
+	<span class="text-parchment-500 dark:text-parchment-400">Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
 	{% if paginator.next %}
-	<a href="{{ paginator.next }}" class="text-pumpkin hover:underline">Older posts →</a>
+	<a href="{{ paginator.next }}" class="text-gold-600 dark:text-gold-400 hover:underline">Older posts &rarr;</a>
 	{% else %}
 	<span></span>
 	{% endif %}
@@ -67,7 +69,10 @@
 {% endif %}
 
 {% else %}
-<p class="text-seasalt-500">No posts yet. Check back soon!</p>
+<div class="text-center py-20">
+	<div class="text-6xl mb-4 animate-float">&#9749;</div>
+	<p class="text-parchment-500 dark:text-parchment-400 text-lg">Inga inlägg ännu. Brygger något gott – kom snart tillbaka!</p>
+</div>
 {% endif %}
 
 {% endblock content %}

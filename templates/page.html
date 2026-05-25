@@ -9,16 +9,19 @@
 {% block content %}
 
 <article>
-	<header class="mb-10">
-		<h1 class="font-extrabold text-4xl tracking-tight animate-slide-up delay-50">{{ page.title }}</h1>
+	<header class="mb-14 animate-slide-up">
+		<p class="mb-4 font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.3em] uppercase">&#9749; Gyllene Koppen</p>
+		<h1 class="font-serif font-bold text-5xl sm:text-6xl lg:text-7xl text-espresso-800 dark:text-parchment-100 tracking-tight leading-[1.05]">
+			{{ page.title }}
+		</h1>
 		{% if page.date %}
-		<div class="flex flex-wrap items-center gap-4 mt-3 text-seasalt-400 dark:text-seasalt-500 text-sm animate-slide-up delay-150">
+		<div class="flex flex-wrap items-center gap-4 mt-5 text-parchment-400 dark:text-parchment-500 text-sm animate-slide-up delay-150">
 			<time datetime="{{ page.date }}">{{ page.date | date(format="%B %e, %Y") }}</time>
 			{% if page.taxonomies.tags %}
 			<span class="flex flex-wrap gap-2">
 				{% for tag in page.taxonomies.tags %}
 				<a href="/tags/{{ tag | slugify }}"
-					class="bg-seasalt-100 hover:bg-pumpkin-50 dark:bg-seasalt-800 dark:hover:bg-seasalt-700 px-2 py-0.5 rounded text-pumpkin dark:text-pumpkin-300 transition-colors">
+					class="bg-gold-50 hover:bg-gold-100 dark:bg-gold-900/15 dark:hover:bg-gold-900/25 px-2.5 py-1 rounded-full text-gold-700 dark:text-gold-300 text-xs font-medium transition-colors">
 					#{{ tag }}
 				</a>
 				{% endfor %}
@@ -28,7 +31,7 @@
 		{% endif %}
 	</header>
 
-	<div class="animate-fade-in delay-250 prose">
+	<div class="animate-fade-in delay-250 prose max-w-none">
 		{{ page.content | safe }}
 	</div>
 </article>

@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %}Tags | {{ config.title }}{% endblock title %}
+{% block title %}Taggar | {{ config.title }}{% endblock title %}
 
 {% block content %}
 
-<header class="mb-10">
-	<h1 class="font-extrabold text-4xl tracking-tight animate-slide-up delay-50">Tags</h1>
+<header class="mb-14 animate-slide-up">
+	<p class="mb-4 font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.3em] uppercase">&#127991; Utforska</p>
+	<h1 class="font-serif font-bold text-5xl sm:text-6xl lg:text-7xl text-espresso-800 dark:text-parchment-100 tracking-tight leading-[1.05]">
+		Taggar
+	</h1>
 </header>
 
 {% if terms %}
-<ul class="flex flex-wrap gap-3">
-	{% for term in terms %}
-	<li class="animate-slide-up" style="animation-delay: {{ loop.index * 50 + 100 }}ms">
-		<a href="{{ term.permalink }}"
-			class="inline-flex items-center gap-1.5 bg-seasalt-100 hover:bg-pumpkin-50 dark:bg-seasalt-800 dark:hover:bg-seasalt-700 px-3 py-1.5 rounded-lg font-medium text-pumpkin dark:text-pumpkin-300 text-sm transition-colors">
-			#{{ term.name }}
-			<span class="text-emerald text-xs">({{ term.pages | length }})</span>
-		</a>
-	</li>
+<div class="flex flex-wrap gap-3">
+	{% for tag in terms %}
+	<a href="{{ tag.permalink }}"
+		class="inline-flex items-center gap-2 glass-card px-5 py-3 rounded-2xl border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 text-parchment-700 dark:text-parchment-300 hover:text-gold-700 dark:hover:text-gold-300 font-medium text-sm transition-all shadow-sm hover:shadow-md animate-fade-in-scale"
+		style="animation-delay: {{ loop.index * 50 }}ms">
+		<span class="text-gold-500">#</span>
+		{{ tag.name }}
+		<span class="text-parchment-400 dark:text-parchment-500 text-xs">({{ tag.pages | length }})</span>
+	</a>
 	{% endfor %}
-</ul>
-{% else %}
-<p class="text-seasalt-500">No tags yet.</p>
+</div>
 {% endif %}
 
 {% endblock content %}
