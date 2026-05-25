@@ -67,7 +67,7 @@
 					KAFFEVARIANTER</p>
 				<h2 class="font-serif font-bold text-3xl animate-slide-up delay-350">Kaffevarianter</h2>
 				<p class="mt-2 text-seasalt-500 dark:text-seasalt-400 animate-slide-up delay-400">
-					Tre klassiker &ndash; tre helt olika upplevelser.
+					Fr&#229;n espresso till pour-over &ndash; alla v&#229;ra varianter.
 				</p>
 			</div>
 			<a href="/kaffe"
@@ -106,6 +106,43 @@
 						<span
 							class="bg-seasalt-100 dark:bg-warm-charcoal-700 px-2 py-1 rounded-full font-medium text-seasalt-600 dark:text-seasalt-400 text-xs">
 							{{ page.extra.bryggtid }}
+						</span>
+						{% endif %}
+					</div>
+				</div>
+			</a>
+			{% endfor %}
+			{% set num_frontpages = kaffe.pages | length %}
+			{% for s in kaffe.subsections %}
+			{% set subsection = get_section(path=s) %}
+			<a href="{{ subsection.permalink }}"
+				class="group flex flex-col bg-white dark:bg-warm-charcoal-600 hover:shadow-lg border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-2xl overflow-hidden transition-all animate-slide-up"
+				style="animation-delay: {{ 450 + num_frontpages * 100 + loop.index0 * 100 }}ms">
+				{% if subsection.extra.image %}
+				<div class="h-44 overflow-hidden shrink-0">
+					<img src="https://images.unsplash.com/{{ subsection.extra.image }}?w=600&h=300&fit=crop&q=80&auto=format"
+						alt="{{ subsection.title }}"
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+						loading="lazy" />
+				</div>
+				{% endif %}
+				<div class="flex flex-col flex-1 p-5">
+					<h3 class="mb-2 font-bold group-hover:text-pumpkin text-xl transition-colors">{{ subsection.title }}</h3>
+					{% if subsection.description %}
+					<p class="flex-1 text-seasalt-500 dark:text-seasalt-400 text-sm leading-relaxed">{{ subsection.description }}
+					</p>
+					{% endif %}
+					<div class="flex flex-wrap gap-2 mt-4">
+						{% if subsection.extra.svarighet %}
+						<span
+							class="bg-pumpkin-50 dark:bg-warm-charcoal-700 px-2 py-1 rounded-full font-medium text-pumpkin-700 dark:text-pumpkin-300 text-xs">
+							{{ subsection.extra.svarighet }}
+						</span>
+						{% endif %}
+						{% if subsection.extra.bryggtid %}
+						<span
+							class="bg-seasalt-100 dark:bg-warm-charcoal-700 px-2 py-1 rounded-full font-medium text-seasalt-600 dark:text-seasalt-400 text-xs">
+							{{ subsection.extra.bryggtid }}
 						</span>
 						{% endif %}
 					</div>

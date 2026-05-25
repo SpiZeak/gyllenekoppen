@@ -6,7 +6,7 @@ weight = 3
 
 [extra]
 ikon = "☕"
-image = "photo-1509042239860-f550ce710b93"
+image = "photo-1517668808822-9ebb02f2a0e6"
 svarighet = "Nybörjarvänlig"
 bryggtid = "6–10 minuter"
 ursprung = "USA / Globalt"

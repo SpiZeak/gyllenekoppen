@@ -5,8 +5,8 @@ template = "coffee_page.html"
 weight = 7
 
 [extra]
-ikon = "☕"
-image = "photo-1572442388796-116a8f002870"
+ikon = "🥛"
+image = "photo-1559056199-641a0ac8b55e"
 svarighet = "Nybörjarvänlig"
 bryggtid = "1–2 minuter"
 ursprung = "Italien"

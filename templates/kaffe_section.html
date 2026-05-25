@@ -76,6 +76,59 @@
 		</div>
 	</a>
 	{% endfor %}
+	{% set num_pages = section.pages | length %}
+	{% for s in section.subsections %}
+	{% set subsection = get_section(path=s) %}
+	<a href="{{ subsection.permalink }}"
+		class="group flex flex-col bg-white dark:bg-warm-charcoal-600 hover:shadow-xl border border-seasalt-200 hover:border-pumpkin dark:border-warm-charcoal-500 dark:hover:border-pumpkin-400 rounded-2xl overflow-hidden transition-all animate-slide-up"
+		style="animation-delay: {{ num_pages * 100 + loop.index * 100 + 250 }}ms">
+		{% if subsection.extra.image %}
+		<div class="h-52 overflow-hidden shrink-0">
+			<img src="https://images.unsplash.com/{{ subsection.extra.image }}?w=700&h=400&fit=crop&q=80&auto=format"
+				alt="{{ subsection.title }}"
+				class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+				loading="lazy" />
+		</div>
+		{% endif %}
+		<div class="flex flex-col flex-1 p-6">
+			<h2 class="mb-2 font-bold group-hover:text-pumpkin text-2xl transition-colors">{{ subsection.title }}</h2>
+			{% if subsection.description %}
+			<p class="flex-1 mb-5 text-seasalt-500 dark:text-seasalt-400 text-sm leading-relaxed">{{ subsection.description }}
+			</p>
+			{% endif %}
+			<div class="space-y-2 mt-auto">
+				{% if subsection.extra.svarighet %}
+				<div class="flex items-center gap-2 text-sm">
+					<span
+						class="w-28 font-semibold text-pumpkin-600 dark:text-pumpkin-400 shrink-0">Sv&#229;righetsgrad</span>
+					<span class="text-seasalt-700 dark:text-seasalt-300">{{ subsection.extra.svarighet }}</span>
+				</div>
+				{% endif %}
+				{% if subsection.extra.bryggtid %}
+				<div class="flex items-center gap-2 text-sm">
+					<span class="w-28 font-semibold text-pumpkin-600 dark:text-pumpkin-400 shrink-0">Bryggtid</span>
+					<span class="text-seasalt-700 dark:text-seasalt-300">{{ subsection.extra.bryggtid }}</span>
+				</div>
+				{% endif %}
+				{% if subsection.extra.temperatur %}
+				<div class="flex items-center gap-2 text-sm">
+					<span class="w-28 font-semibold text-pumpkin-600 dark:text-pumpkin-400 shrink-0">Temperatur</span>
+					<span class="text-seasalt-700 dark:text-seasalt-300">{{ subsection.extra.temperatur }}</span>
+				</div>
+				{% endif %}
+			</div>
+			<div
+				class="flex justify-between items-center mt-5 pt-4 border-seasalt-100 dark:border-warm-charcoal-500 border-t">
+				<span class="font-semibold text-pumpkin text-sm group-hover:underline">L&#228;s mer</span>
+				<svg xmlns="http://www.w3.org/2000/svg"
+					class="size-4 text-pumpkin transition-transform group-hover:translate-x-1" fill="none"
+					viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+				</svg>
+			</div>
+		</div>
+	</a>
+	{% endfor %}
 </div>
 {% endif %}
 
