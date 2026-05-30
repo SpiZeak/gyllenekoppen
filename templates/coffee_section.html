@@ -46,52 +46,6 @@
 		</div>
 	</header>
 
-	<!-- Quick stats -->
-	<div class="gap-3 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 mb-16 animate-slide-up delay-300">
-		{% if section.extra.svarighet %}
-		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
-			<div class="mb-2 text-2xl">&#9889;</div>
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Svårighetsgrad</div>
-			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.svarighet }}</div>
-		</div>
-		{% endif %}
-		{% if section.extra.bryggtid %}
-		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
-			<div class="mb-2 text-2xl">&#8987;</div>
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Bryggtid</div>
-			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.bryggtid }}</div>
-		</div>
-		{% endif %}
-		{% if section.extra.ursprung %}
-		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
-			<div class="mb-2 text-2xl">&#127757;</div>
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Ursprung</div>
-			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.ursprung }}</div>
-		</div>
-		{% endif %}
-		{% if section.extra.temperatur %}
-		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
-			<div class="mb-2 text-2xl">&#127777;&#65039;</div>
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Temperatur</div>
-			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.temperatur }}</div>
-		</div>
-		{% endif %}
-		{% if section.extra.malningsgrad %}
-		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
-			<div class="mb-2 text-2xl">&#9881;&#65039;</div>
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Malningsgrad</div>
-			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.malningsgrad }}</div>
-		</div>
-		{% endif %}
-		{% if section.extra.vattenkvot %}
-		<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
-			<div class="mb-2 text-2xl">&#128167;</div>
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Vattenkvot</div>
-			<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ section.extra.vattenkvot }}</div>
-		</div>
-		{% endif %}
-	</div>
-
 	<!-- Article content -->
 	<div class="animate-fade-in delay-400 prose max-w-none">
 		{{ section.content | safe }}

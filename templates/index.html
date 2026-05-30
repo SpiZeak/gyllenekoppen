@@ -23,13 +23,6 @@
 		<div class="coffee-ring bottom-1/4 right-[20%] w-36 h-36 opacity-8"></div>
 	</div>
 
-	<!-- Bean silhouettes (decorative) -->
-	<div class="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.03]">
-		<div class="absolute top-[15%] left-[8%] text-[12rem] rotate-12 select-none">&#9749;</div>
-		<div class="absolute top-[45%] right-[5%] text-[8rem] -rotate-12 select-none">&#9749;</div>
-		<div class="absolute bottom-[20%] left-[12%] text-[6rem] rotate-45 select-none">&#9749;</div>
-	</div>
-
 	<!-- Steam effect in hero -->
 	<div class="absolute bottom-[28%] left-1/2 -translate-x-1/2 pointer-events-none">
 		<div class="relative">
@@ -138,13 +131,7 @@
 					{% endif %}
 					<!-- Gradient overlay for readability -->
 					<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-					<!-- Icon badge -->
-					{% if page.extra.ikon %}
-					<div
-						class="absolute top-4 left-4 bg-white/90 dark:bg-espresso-800/90 backdrop-blur-sm w-11 h-11 rounded-xl flex items-center justify-center text-lg shadow-sm">
-						{{ page.extra.ikon }}
-					</div>
-					{% endif %}
+		
 				</div>
 
 				<!-- Card body -->
@@ -197,12 +184,7 @@
 					<div class="w-full h-full bg-gradient-to-br from-espresso-400 to-espresso-600"></div>
 					{% endif %}
 					<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-					{% if subsection.extra.ikon %}
-					<div
-						class="absolute top-4 left-4 bg-white/90 dark:bg-espresso-800/90 backdrop-blur-sm w-11 h-11 rounded-xl flex items-center justify-center text-lg shadow-sm">
-						{{ subsection.extra.ikon }}
-					</div>
-					{% endif %}
+		
 				</div>
 				<div class="flex flex-col flex-1 p-5 sm:p-6">
 					<h3
