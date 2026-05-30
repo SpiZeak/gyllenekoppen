@@ -88,130 +88,38 @@
 	{% set kaffe = get_section(path="kaffe/_index.md") %}
 	{% if kaffe.pages %}
 	<section class="pt-20 sm:pt-28">
-		<!-- Section header -->
-		<div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-12">
-			<div class="max-w-xl">
-				<p
-					class="mb-3 font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.25em] uppercase animate-fade-in">
-					&#9749; Kaffebiblioteket</p>
-				<h2
-					class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-espresso-800 dark:text-parchment-100 leading-[1.05] animate-slide-up">
-					Kaffevarianter</h2>
-				<p class="mt-4 text-parchment-500 dark:text-parchment-400 text-lg max-w-lg animate-slide-up delay-100">
-					Från espresso till pour-over &mdash; upptäck våra omsorgsfullt beskrivna bryggmetoder.
-				</p>
-			</div>
-			<a href="/kaffe"
-				class="inline-flex items-center gap-2 font-medium text-gold-600 dark:text-gold-400 text-sm hover:text-gold-700 dark:hover:text-gold-300 transition-colors group animate-fade-in delay-200">
-				Se alla varianter
-				<svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-transform group-hover:translate-x-1"
-					fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-				</svg>
-			</a>
-		</div>
+		{% set label = "&#9749; Kaffebiblioteket" %}
+		{% set title = "Kaffevarianter" %}
+		{% set description = "Från espresso till pour-over &mdash; upptäck våra omsorgsfullt beskrivna bryggmetoder." %}
+		{% set link_url = "/kaffe" %}
+		{% set link_text = "Se alla varianter" %}
+		{% include "partials/section_header.html" %}
 
 		<!-- Drink grid -->
 		<div class="gap-5 sm:gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
 			{% for page in kaffe.pages %}
-			{% set delay_card = loop.index * 100 + 400 %}
-			<a href="{{ page.permalink }}"
-				class="group flex flex-col glass-card rounded-2xl overflow-hidden border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-2xl hover:shadow-gold-500/5 transition-all duration-500 animate-fade-in-up"
-				style="animation-delay: {{ delay_card }}ms">
-				<!-- Image area -->
-				<div class="relative h-56 overflow-hidden shrink-0">
-					{% if page.extra.image %}
-					<img
-						src="https://images.unsplash.com/{{ page.extra.image }}?w=800&h=500&fit=crop&q=80&auto=format"
-						alt="{{ page.title }}"
-						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-						loading="lazy" />
-					{% else %}
-					<div class="w-full h-full bg-gradient-to-br from-espresso-400 to-espresso-600"></div>
-					{% endif %}
-					<!-- Gradient overlay for readability -->
-					<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-		
-				</div>
-
-				<!-- Card body -->
-				<div class="flex flex-col flex-1 p-5 sm:p-6">
-					<h3
-						class="font-serif font-bold text-xl sm:text-2xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors leading-tight">
-						{{ page.title }}
-					</h3>
-					{% if page.description %}
-					<p class="flex-1 mt-2 text-parchment-500 dark:text-parchment-400 text-sm leading-relaxed line-clamp-2">
-						{{ page.description }}
-					</p>
-					{% endif %}
-
-					<!-- Meta pills -->
-					<div class="flex flex-wrap gap-2 mt-4 pt-4 border-parchment-100 dark:border-espresso-600/40 border-t">
-						{% if page.extra.svarighet %}
-						<span
-							class="inline-flex items-center gap-1.5 bg-gold-50 dark:bg-gold-900/15 px-3 py-1 rounded-full text-gold-700 dark:text-gold-300 text-xs font-medium">
-							&#9889; {{ page.extra.svarighet }}
-						</span>
-						{% endif %}
-						{% if page.extra.bryggtid %}
-						<span
-							class="inline-flex items-center gap-1.5 bg-parchment-100 dark:bg-espresso-600/40 px-3 py-1 rounded-full text-parchment-600 dark:text-parchment-300 text-xs font-medium">
-							&#8987; {{ page.extra.bryggtid }}
-						</span>
-						{% endif %}
-					</div>
-				</div>
-			</a>
+			{% set permalink = page.permalink %}
+			{% set title = page.title %}
+			{% set description = page.description %}
+			{% set image = page.extra.image %}
+			{% set svarighet = page.extra.svarighet %}
+			{% set bryggtid = page.extra.bryggtid %}
+			{% set delay = loop.index * 100 + 400 %}
+			{% include "partials/cards.html" %}
 			{% endfor %}
 
 			<!-- Subsections as cards -->
 			{% for s in kaffe.subsections %}
 			{% set subsection = get_section(path=s) %}
 			{% set num_pages = kaffe.pages | length %}
-			{% set delay_sub = 400 + num_pages * 100 + loop.index0 * 100 %}
-			<a href="{{ subsection.permalink }}"
-				class="group flex flex-col glass-card rounded-2xl overflow-hidden border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-2xl hover:shadow-gold-500/5 transition-all duration-500 animate-fade-in-up"
-				style="animation-delay: {{ delay_sub }}ms">
-				<div class="relative h-56 overflow-hidden shrink-0">
-					{% if subsection.extra.image %}
-					<img
-						src="https://images.unsplash.com/{{ subsection.extra.image }}?w=800&h=500&fit=crop&q=80&auto=format"
-						alt="{{ subsection.title }}"
-						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-						loading="lazy" />
-					{% else %}
-					<div class="w-full h-full bg-gradient-to-br from-espresso-400 to-espresso-600"></div>
-					{% endif %}
-					<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-		
-				</div>
-				<div class="flex flex-col flex-1 p-5 sm:p-6">
-					<h3
-						class="font-serif font-bold text-xl sm:text-2xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors leading-tight">
-						{{ subsection.title }}
-					</h3>
-					{% if subsection.description %}
-					<p class="flex-1 mt-2 text-parchment-500 dark:text-parchment-400 text-sm leading-relaxed line-clamp-2">
-						{{ subsection.description }}
-					</p>
-					{% endif %}
-					<div class="flex flex-wrap gap-2 mt-4 pt-4 border-parchment-100 dark:border-espresso-600/40 border-t">
-						{% if subsection.extra.svarighet %}
-						<span
-							class="inline-flex items-center gap-1.5 bg-gold-50 dark:bg-gold-900/15 px-3 py-1 rounded-full text-gold-700 dark:text-gold-300 text-xs font-medium">
-							&#9889; {{ subsection.extra.svarighet }}
-						</span>
-						{% endif %}
-						{% if subsection.extra.bryggtid %}
-						<span
-							class="inline-flex items-center gap-1.5 bg-parchment-100 dark:bg-espresso-600/40 px-3 py-1 rounded-full text-parchment-600 dark:text-parchment-300 text-xs font-medium">
-							&#8987; {{ subsection.extra.bryggtid }}
-						</span>
-						{% endif %}
-					</div>
-				</div>
-			</a>
+			{% set permalink = subsection.permalink %}
+			{% set title = subsection.title %}
+			{% set description = subsection.description %}
+			{% set image = subsection.extra.image %}
+			{% set svarighet = subsection.extra.svarighet %}
+			{% set bryggtid = subsection.extra.bryggtid %}
+			{% set delay = 400 + num_pages * 100 + loop.index0 * 100 %}
+			{% include "partials/cards.html" %}
 			{% endfor %}
 		</div>
 	</section>
@@ -221,73 +129,23 @@
 	{% set guider = get_section(path="guider/_index.md") %}
 	{% if guider.pages %}
 	<section class="pt-24 sm:pt-32">
-		<div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-12">
-			<div class="max-w-xl">
-				<p
-					class="mb-3 font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.25em] uppercase animate-fade-in">
-					&#128218; Lär dig brygga</p>
-				<h2
-					class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-espresso-800 dark:text-parchment-100 leading-[1.05] animate-slide-up">
-					Guider</h2>
-				<p class="mt-4 text-parchment-500 dark:text-parchment-400 text-lg max-w-lg animate-slide-up delay-100">
-					Steg-för-steg för att bemästra hemmabryggningen.
-				</p>
-			</div>
-			<a href="/guider"
-				class="inline-flex items-center gap-2 font-medium text-gold-600 dark:text-gold-400 text-sm hover:text-gold-700 dark:hover:text-gold-300 transition-colors group animate-fade-in delay-200">
-				Se alla guider
-				<svg xmlns="http://www.w3.org/2000/svg" class="size-4 transition-transform group-hover:translate-x-1"
-					fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-				</svg>
-			</a>
-		</div>
+		{% set label = "&#128218; Lär dig brygga" %}
+		{% set title = "Guider" %}
+		{% set description = "Steg-för-steg för att bemästra hemmabryggningen." %}
+		{% set link_url = "/guider" %}
+		{% set link_text = "Se alla guider" %}
+		{% include "partials/section_header.html" %}
 
 		<div class="space-y-4">
 			{% for page in guider.pages | slice(end=4) %}
-			{% set delay_guide = loop.index * 100 + 700 %}
-			<a href="{{ page.permalink }}"
-				class="group flex items-center gap-4 sm:gap-6 glass-card p-5 sm:p-6 border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 rounded-2xl transition-all duration-300 animate-fade-in-up"
-				style="animation-delay: {{ delay_guide }}ms">
-				<!-- Step number -->
-				<div
-					class="hidden sm:flex items-center justify-center w-12 h-12 rounded-xl bg-gold-50 dark:bg-gold-900/10 text-gold-600 dark:text-gold-400 font-serif font-bold text-xl shrink-0">
-					{{ loop.index }}
-				</div>
-
-				{% if page.extra.image %}
-				<div class="rounded-xl w-16 h-16 sm:w-20 sm:h-20 overflow-hidden shrink-0 shadow-sm">
-					<img
-						src="https://images.unsplash.com/{{ page.extra.image }}?w=200&h=200&fit=crop&q=80&auto=format"
-						alt="{{ page.title }}"
-						class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-						loading="lazy" />
-				</div>
-				{% endif %}
-
-				<div class="flex-1 min-w-0">
-					<h3
-						class="font-serif font-bold text-lg sm:text-xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
-						{{ page.title }}</h3>
-					{% if page.description %}
-					<p class="mt-1 text-parchment-500 dark:text-parchment-400 text-sm line-clamp-1">
-						{{ page.description }}</p>
-					{% endif %}
-				</div>
-
-				<div class="flex items-center gap-4 shrink-0">
-					{% if page.extra.tidsatgang %}
-					<span class="hidden sm:flex items-center gap-1.5 text-parchment-400 dark:text-parchment-500 text-sm">
-						&#8987; {{ page.extra.tidsatgang }}
-					</span>
-					{% endif %}
-					<svg xmlns="http://www.w3.org/2000/svg"
-						class="size-5 text-parchment-300 dark:text-espresso-500 group-hover:text-gold-500 transition-colors"
-						fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-					</svg>
-				</div>
-			</a>
+			{% set permalink = page.permalink %}
+			{% set title = page.title %}
+			{% set description = page.description %}
+			{% set image = page.extra.image %}
+			{% set step = loop.index %}
+			{% set tidsatgang = page.extra.tidsatgang %}
+			{% set delay = loop.index * 100 + 700 %}
+			{% include "partials/guide_card.html" %}
 			{% endfor %}
 		</div>
 	</section>
@@ -297,8 +155,6 @@
 	<section class="relative mt-24 sm:mt-32 rounded-3xl overflow-hidden animate-fade-in delay-1000">
 		<div
 			class="absolute inset-0 bg-gradient-to-br from-gold-100 via-parchment-50 to-parchment-100 dark:from-espresso-700 dark:via-espresso-800 dark:to-espresso-700"></div>
-		<!-- Decorative coffee ring -->
-		<div class="absolute -top-16 -right-16 opacity-[0.04] text-[20rem] select-none pointer-events-none">&#9749;</div>
 		<div class="relative p-8 sm:p-12 lg:p-16">
 			<p
 				class="mb-3 font-semibold text-gold-600 dark:text-gold-400 text-xs tracking-[0.25em] uppercase">Om kaffe</p>

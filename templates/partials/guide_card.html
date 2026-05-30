@@ -1,0 +1,41 @@
+<a href="{{ permalink }}"
+	class="group flex items-center gap-4 sm:gap-6 glass-card p-5 sm:p-6 border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 rounded-2xl transition-all duration-300 animate-fade-in-up"
+	style="animation-delay: {{ delay }}ms">
+	<div
+		class="hidden sm:flex items-center justify-center w-12 h-12 rounded-xl bg-gold-50 dark:bg-gold-900/10 text-gold-600 dark:text-gold-400 font-serif font-bold text-xl shrink-0">
+		{{ step }}
+	</div>
+
+	{% if image %}
+	<div class="rounded-xl w-16 h-16 sm:w-20 sm:h-20 overflow-hidden shrink-0 shadow-sm">
+		<img
+			src="https://images.unsplash.com/{{ image }}?w=200&h=200&fit=crop&q=80&auto=format"
+			alt="{{ title }}"
+			class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+			loading="lazy" />
+	</div>
+	{% endif %}
+
+	<div class="flex-1 min-w-0">
+		<h3
+			class="font-serif font-bold text-lg sm:text-xl text-espresso-800 dark:text-parchment-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+			{{ title }}</h3>
+		{% if description %}
+		<p class="mt-1 text-parchment-500 dark:text-parchment-400 text-sm line-clamp-1">
+			{{ description }}</p>
+		{% endif %}
+	</div>
+
+	<div class="flex items-center gap-4 shrink-0">
+		{% if tidsatgang %}
+		<span class="hidden sm:flex items-center gap-1.5 text-parchment-400 dark:text-parchment-500 text-sm">
+			&#8987; {{ tidsatgang }}
+		</span>
+		{% endif %}
+		<svg xmlns="http://www.w3.org/2000/svg"
+			class="size-5 text-parchment-300 dark:text-espresso-500 group-hover:text-gold-500 transition-colors"
+			fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+		</svg>
+	</div>
+</a>
