@@ -1,9 +1,11 @@
 {
-	"scripts": {
-		"build": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --minify && zola build"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.4.15",
-		"@tailwindcss/cli": "^4.3.0"
-	}
+  "scripts": {
+    "build": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --minify && zola build",
+    "dev": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --watch & wrangler pages dev --d1 DB",
+    "db:init": "wrangler d1 create gyllene-koppen-db && wrangler d1 execute gyllene-koppen-db --file=./schema.sql"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "@tailwindcss/cli": "^4.3.0"
+  }
 }

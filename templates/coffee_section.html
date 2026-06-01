@@ -51,6 +51,36 @@
 		{{ section.content | safe }}
 	</div>
 
+	<!-- Search / filter -->
+	<div class="mt-10 mb-8 animate-fade-in delay-450">
+		<div class="relative max-w-md">
+			<svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-parchment-400 dark:text-parchment-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+			</svg>
+			<input type="text" id="section-filter" placeholder="Sök drycker..." aria-label="Sök bland drycker"
+				class="w-full pl-11 pr-4 py-3 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+		</div>
+	</div>
+
+	<script>
+	(function() {
+		var input = document.getElementById('section-filter');
+		if (!input) return;
+		var cards = document.querySelectorAll('[data-filter-card]');
+		var timer;
+		input.addEventListener('input', function() {
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				var q = input.value.toLowerCase().trim();
+				cards.forEach(function(card) {
+					var text = card.textContent.toLowerCase();
+					card.style.display = q === '' || text.indexOf(q) !== -1 ? '' : 'none';
+				});
+			}, 200);
+		});
+	})();
+	</script>
+
 	<!-- ═══════════════════════════════════════════
 	     ESPRESSO-BASED DRINKS — REFINED SHOWCASE
 	     ═══════════════════════════════════════════ -->
@@ -81,7 +111,7 @@
 		<div class="space-y-6">
 			{% for page in section.pages %}
 			{% set delay = loop.index * 100 %}
-			<a href="{{ page.permalink }}"
+			<a href="{{ page.permalink }}" data-filter-card
 				class="group relative flex flex-col sm:flex-row gap-6 sm:gap-10 glass-card p-6 sm:p-8 border border-parchment-200/40 dark:border-espresso-600/20 hover:border-gold-300/50 dark:hover:border-gold-600/30 hover:shadow-2xl hover:shadow-gold-500/[0.06] rounded-3xl transition-all duration-500 animate-fade-in-up overflow-hidden"
 				style="animation-delay: {{ delay }}ms">
 

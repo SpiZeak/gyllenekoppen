@@ -3,10 +3,10 @@ services:
     user: "1000:1000"
     image: ghcr.io/getzola/zola:v0.22.1
     ports:
-      - "5000:5000"
+      - "${ZOLA_PORT:-1111}:1111"
     volumes:
       - .:/project
-    command: serve --interface 0.0.0.0 --port 5000 --base-url localhost
+    command: serve --interface 0.0.0.0 --base-url localhost
     working_dir: /project
 
   tailwind:

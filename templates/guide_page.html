@@ -210,11 +210,12 @@
 
 	{# ── Main layout: content + sidebar ── #}
 	<div class="xl:flex xl:gap-12">
-		{# ── Content area ── #}
-		<div class="xl:flex-1 min-w-0">
-			<div class="animate-fade-in delay-250 prose max-w-none guide-steps">
-				{{ page.content | safe }}
-			</div>
+					{# ── Content area ── #}
+					<div class="xl:flex-1 min-w-0">
+						<div class="ratio-calc-container mb-8 animate-fade-in delay-200"></div>
+						<div class="animate-fade-in delay-250 prose max-w-none guide-steps">
+							{{ page.content | safe }}
+						</div>
 
 			{# ── Equipment checklist ── #}
 			{% if page.extra.utrustning %}
