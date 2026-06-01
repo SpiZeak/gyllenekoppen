@@ -1,66 +1,61 @@
+import { requireUserId, jsonResponse } from '../../_utils/auth.js';
+
 export async function onRequestGet(context) {
-	const { env, params } = context;
+	var userId = await requireUserId(context);
+	if (userId instanceof Response) return userId;
+
 	try {
-		const result = await env.DB.prepare('SELECT * FROM brews WHERE id = ?').bind(params.id).first();
+		var result = await context.env.DB.prepare(
+			'SELECT * FROM brews WHERE id = ? AND user_id = ?'
+		).bind(context.params.id, userId).first();
 		if (!result) {
-			return new Response(JSON.stringify({ error: 'Not found' }), {
-				status: 404,
-				headers: { 'Content-Type': 'application/json' }
-			});
+			return jsonResponse({ error: 'Not found' }, 404);
 		}
-		return new Response(JSON.stringify(result), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse(result);
 	} catch (e) {
-		return new Response(JSON.stringify({ error: e.message }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ error: e.message }, 500);
 	}
 }
 
 export async function onRequestPut(context) {
-	const { request, env, params } = context;
-	try {
-		const body = await request.json();
+	var userId = await requireUserId(context);
+	if (userId instanceof Response) return userId;
 
-		const {
+	try {
+		var body = await context.request.json();
+
+		var {
 			date, beanName, roaster, roastDate, grind,
 			dose, water, ratio, temperature, brewMethod, brewTime,
 			equipment, tasteNotes, rating, notes
 		} = body;
 
-		await env.DB.prepare(
-			`UPDATE brews SET date=?, bean_name=?, roaster=?, roast_date=?, grind=?, dose=?, water=?, ratio=?, temperature=?, brew_method=?, brew_time=?, equipment=?, taste_notes=?, rating=?, notes=? WHERE id=?`
+		await context.env.DB.prepare(
+			`UPDATE brews SET date=?, bean_name=?, roaster=?, roast_date=?, grind=?, dose=?, water=?, ratio=?, temperature=?, brew_method=?, brew_time=?, equipment=?, taste_notes=?, rating=?, notes=?
+			 WHERE id=? AND user_id=?`
 		).bind(
 			date, beanName, roaster || '', roastDate || '', grind || '',
 			dose || 0, water || 0, ratio || 0, temperature || 0,
 			brewMethod, brewTime || 0, equipment || '', tasteNotes || '',
-			rating || 0, notes || '', params.id
+			rating || 0, notes || '', context.params.id, userId
 		).run();
 
-		return new Response(JSON.stringify({ success: true }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ success: true });
 	} catch (e) {
-		return new Response(JSON.stringify({ error: e.message }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ error: e.message }, 500);
 	}
 }
 
 export async function onRequestDelete(context) {
-	const { env, params } = context;
+	var userId = await requireUserId(context);
+	if (userId instanceof Response) return userId;
+
 	try {
-		await env.DB.prepare('DELETE FROM brews WHERE id = ?').bind(params.id).run();
-		return new Response(JSON.stringify({ success: true }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+		await context.env.DB.prepare(
+			'DELETE FROM brews WHERE id = ? AND user_id = ?'
+		).bind(context.params.id, userId).run();
+		return jsonResponse({ success: true });
 	} catch (e) {
-		return new Response(JSON.stringify({ error: e.message }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ error: e.message }, 500);
 	}
 }

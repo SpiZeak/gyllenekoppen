@@ -3,8 +3,7 @@
 
 	var entries = [];
 	var editingId = null;
-	var loading = false;
-	var error = null;
+	var currentUser = null;
 
 	var els = {};
 
@@ -25,6 +24,11 @@
 		els.statsBest = qs('stat-best');
 		els.ratioDisplay = qs('field-ratio-display');
 		els.clearConfirm = qs('clear-confirm');
+		els.journalSection = qs('journal-section');
+		els.authSection = qs('auth-section');
+		els.setupSection = qs('setup-section');
+		els.authBar = qs('auth-bar');
+		els.authUsername = qs('auth-username');
 
 		els.fieldBean = qs('field-bean');
 		els.fieldRoaster = qs('field-roaster');
@@ -43,47 +47,101 @@
 		els.sortBy = qs('sort-by');
 
 		bindEvents();
+		checkAuth();
+	}
+
+	function show(element) {
+		if (element) element.classList.remove('hidden');
+	}
+
+	function hide(element) {
+		if (element) element.classList.add('hidden');
+	}
+
+	function showLoading() {
+		hide(els.authSection);
+		hide(els.setupSection);
+		hide(els.journalSection);
+		hide(els.authBar);
+		hide(els.errorState);
+		show(els.loadingState);
+	}
+
+	function hideLoading() {
+		hide(els.loadingState);
+	}
+
+	function showAuthError(el, msg) {
+		var errEl = el.querySelector('#login-error') || el.querySelector('#setup-error');
+		if (errEl) {
+			errEl.textContent = msg;
+			show(errEl);
+		}
+	}
+
+	function hideAuthError(el) {
+		var errEl = el.querySelector('#login-error') || el.querySelector('#setup-error');
+		if (errEl) hide(errEl);
+	}
+
+	function showLoginForm() {
+		hideLoading();
+		hide(els.journalSection);
+		hide(els.authBar);
+		hide(els.setupSection);
+		show(els.authSection);
+		hideAuthError(els.authSection);
+	}
+
+	function showSetupForm() {
+		hideLoading();
+		hide(els.journalSection);
+		hide(els.authBar);
+		hide(els.authSection);
+		show(els.setupSection);
+		hideAuthError(els.setupSection);
+	}
+
+	function showJournal(user) {
+		currentUser = user;
+		hideLoading();
+		hide(els.authSection);
+		hide(els.setupSection);
+		show(els.authBar);
+		show(els.journalSection);
+		if (els.authUsername) els.authUsername.textContent = user.username;
+
 		loadEntries().then(function () {
 			populateMethodFilter();
 			renderAll();
 		});
 	}
 
-	function showLoading() {
-		loading = true;
-		if (els.loadingState) els.loadingState.classList.remove('hidden');
-		if (els.entryList) els.entryList.classList.add('hidden');
-		if (els.emptyState) els.emptyState.classList.add('hidden');
-		if (els.errorState) els.errorState.classList.add('hidden');
-	}
-
-	function hideLoading() {
-		loading = false;
-		if (els.loadingState) els.loadingState.classList.add('hidden');
-	}
-
-	function showError(msg) {
-		error = msg;
+	function showBrewError(msg) {
 		if (els.errorState) {
-			els.errorState.classList.remove('hidden');
+			show(els.errorState);
 			var msgEl = els.errorState.querySelector('[data-error-msg]');
 			if (msgEl) msgEl.textContent = msg;
 		}
-		if (els.entryList) els.entryList.classList.add('hidden');
-		if (els.emptyState) els.emptyState.classList.add('hidden');
-		if (els.loadingState) els.loadingState.classList.add('hidden');
+		hide(els.emptyState);
+		hide(els.entryList);
 	}
 
-	function hideError() {
-		error = null;
-		if (els.errorState) els.errorState.classList.add('hidden');
+	function hideBrewError() {
+		hide(els.errorState);
 	}
 
 	async function apiFetch(url, options) {
+		var opts = options || {};
+		var headers = opts.headers || {};
+		headers['Content-Type'] = 'application/json';
+		headers['Accept'] = 'application/json';
+
 		var resp = await fetch(url, {
-			headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-			...options
+			headers: headers,
+			...opts
 		});
+
 		if (!resp.ok) {
 			var body = await resp.json().catch(function () { return {}; });
 			throw new Error(body.error || 'Ett fel uppstod (' + resp.status + ')');
@@ -91,17 +149,74 @@
 		return resp.json();
 	}
 
-	async function loadEntries() {
-		hideError();
+	async function checkAuth() {
 		showLoading();
+		try {
+			var data = await apiFetch('/api/auth/me');
+			if (data.authenticated && data.user) {
+				showJournal(data.user);
+			} else {
+				hideLoading();
+				showLoginForm();
+			}
+		} catch (e) {
+			hideLoading();
+			showLoginForm();
+		}
+	}
+
+	async function handleLogin(username, password) {
+		hideAuthError(els.authSection);
+		try {
+			var data = await apiFetch('/api/auth/login', {
+				method: 'POST',
+				body: JSON.stringify({ username: username, password: password })
+			});
+			showJournal(data.user);
+		} catch (e) {
+			var msg = e.message;
+			if (msg.indexOf('Inloggning') !== -1 || msg.indexOf('användarnamn') !== -1 || msg.indexOf('lösenord') !== -1) {
+				showAuthError(els.authSection, msg);
+			} else {
+				showAuthError(els.authSection, 'Fel användarnamn eller lösenord');
+			}
+		}
+	}
+
+	async function handleSetup(username, password) {
+		hideAuthError(els.setupSection);
+		try {
+			var data = await apiFetch('/api/auth/setup', {
+				method: 'POST',
+				body: JSON.stringify({ username: username, password: password })
+			});
+			showJournal(data.user);
+		} catch (e) {
+			showAuthError(els.setupSection, e.message);
+		}
+	}
+
+	async function handleLogout() {
+		try {
+			await apiFetch('/api/auth/logout', { method: 'POST' });
+		} catch (e) {
+			// ignore
+		}
+		currentUser = null;
+		entries = [];
+		hide(els.authBar);
+		hide(els.journalSection);
+		showLoginForm();
+	}
+
+	async function loadEntries() {
+		hideBrewError();
 		try {
 			var data = await apiFetch('/api/brews');
 			entries = data.entries || [];
 		} catch (e) {
 			entries = [];
-			showError('Kunde inte ladda bryggningar: ' + e.message);
-		} finally {
-			hideLoading();
+			showBrewError('Kunde inte ladda bryggningar: ' + e.message);
 		}
 	}
 
@@ -229,13 +344,13 @@
 		var filtered = getFilteredAndSorted();
 
 		if (entries.length === 0) {
-			els.entryList.classList.add('hidden');
-			els.emptyState.classList.remove('hidden');
+			hide(els.entryList);
+			show(els.emptyState);
 			return;
 		}
 
-		els.emptyState.classList.add('hidden');
-		els.entryList.classList.remove('hidden');
+		hide(els.emptyState);
+		show(els.entryList);
 		els.entryList.innerHTML = '';
 
 		filtered.forEach(function (entry, idx) {
@@ -244,7 +359,6 @@
 			card.style.animationDelay = (idx * 50) + 'ms';
 
 			var dateStr = entry.date ? new Date(entry.date + 'T12:00:00').toLocaleDateString('sv-SE', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
-
 			var ratingStars = renderStars(entry.rating || 0);
 
 			card.innerHTML =
@@ -407,22 +521,20 @@
 	}
 
 	function showForm() {
-		els.formContainer.classList.remove('hidden');
+		hide(els.formContainer);
+		show(els.formContainer);
 		els.formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 
 	function hideForm() {
-		els.formContainer.classList.add('hidden');
+		hide(els.formContainer);
 		resetForm();
 	}
 
 	function startEdit(id) {
 		var entry = null;
 		for (var i = 0; i < entries.length; i++) {
-			if (entries[i].id === id) {
-				entry = entries[i];
-				break;
-			}
+			if (entries[i].id === id) { entry = entries[i]; break; }
 		}
 		if (!entry) return;
 		editingId = id;
@@ -432,15 +544,12 @@
 	}
 
 	async function addEntry(data) {
-		hideError();
+		hideBrewError();
 		try {
 			if (editingId) {
 				await updateEntry(editingId, data);
 				for (var i = 0; i < entries.length; i++) {
-					if (entries[i].id === editingId) {
-						entries[i] = data;
-						break;
-					}
+					if (entries[i].id === editingId) { entries[i] = data; break; }
 				}
 			} else {
 				await createEntry(data);
@@ -450,33 +559,33 @@
 			renderAll();
 			hideForm();
 		} catch (e) {
-			showError('Kunde inte spara inlägg: ' + e.message);
+			showBrewError('Kunde inte spara inlägg: ' + e.message);
 		}
 	}
 
 	async function deleteEntry(id) {
 		if (!confirm('Radera detta inlägg?')) return;
-		hideError();
+		hideBrewError();
 		try {
 			await deleteEntryFromApi(id);
 			entries = entries.filter(function (e) { return e.id !== id; });
 			populateMethodFilter();
 			renderAll();
 		} catch (e) {
-			showError('Kunde inte radera inlägg: ' + e.message);
+			showBrewError('Kunde inte radera inlägg: ' + e.message);
 		}
 	}
 
 	async function clearAllEntries() {
-		hideError();
+		hideBrewError();
 		try {
 			await clearAllEntriesFromApi();
 			entries = [];
 			populateMethodFilter();
 			renderAll();
-			els.clearConfirm.classList.add('hidden');
+			hide(els.clearConfirm);
 		} catch (e) {
-			showError('Kunde inte radera alla inlägg: ' + e.message);
+			showBrewError('Kunde inte radera alla inlägg: ' + e.message);
 		}
 	}
 
@@ -494,15 +603,14 @@
 
 	function updateClearSection() {
 		if (entries.length > 0) {
-			els.clearSection.classList.remove('hidden');
+			show(els.clearSection);
 		} else {
-			els.clearSection.classList.add('hidden');
+			hide(els.clearSection);
 		}
 	}
 
 	function updateStarDisplay(rating) {
-		var btns = document.querySelectorAll('.star-btn');
-		btns.forEach(function (btn) {
+		document.querySelectorAll('.star-btn').forEach(function (btn) {
 			var val = parseInt(btn.getAttribute('data-value'), 10);
 			if (val <= rating) {
 				btn.classList.remove('text-parchment-300', 'dark:text-espresso-500');
@@ -517,6 +625,31 @@
 	}
 
 	function bindEvents() {
+		// Login form
+		qs('login-form').addEventListener('submit', function (e) {
+			e.preventDefault();
+			var username = qs('login-username').value.trim();
+			var password = qs('login-password').value;
+			if (username && password) handleLogin(username, password);
+		});
+
+		// Setup form
+		qs('setup-form').addEventListener('submit', function (e) {
+			e.preventDefault();
+			var username = qs('setup-username').value.trim();
+			var password = qs('setup-password').value;
+			if (username && password.length >= 4) handleSetup(username, password);
+			else showAuthError(els.setupSection, 'Lösenordet måste vara minst 4 tecken');
+		});
+
+		// Switch between login / setup
+		qs('btn-show-setup').addEventListener('click', showSetupForm);
+		qs('btn-show-login').addEventListener('click', showLoginForm);
+
+		// Logout
+		qs('btn-logout').addEventListener('click', handleLogout);
+
+		// Add entry buttons
 		qs('btn-add-entry').addEventListener('click', function () {
 			resetForm();
 			showForm();
@@ -525,14 +658,20 @@
 			resetForm();
 			showForm();
 		});
+
+		// Cancel form
 		qs('btn-cancel-form').addEventListener('click', hideForm);
+
+		// Retry
 		qs('btn-retry-load').addEventListener('click', function () {
+			hideBrewError();
 			loadEntries().then(function () {
 				populateMethodFilter();
 				renderAll();
 			});
 		});
 
+		// Form submit
 		els.form.addEventListener('submit', function (e) {
 			e.preventDefault();
 			var data = getFormData();
@@ -543,9 +682,11 @@
 			addEntry(data);
 		});
 
+		// Auto-calculate ratio
 		els.fieldDose.addEventListener('input', calculateRatio);
 		els.fieldWater.addEventListener('input', calculateRatio);
 
+		// Star rating
 		document.querySelectorAll('.star-btn').forEach(function (btn) {
 			btn.addEventListener('click', function () {
 				var val = parseInt(this.getAttribute('data-value'), 10);
@@ -562,17 +703,20 @@
 			});
 		});
 
+		// Filter / sort
 		els.filterMethod.addEventListener('change', renderEntries);
 		els.sortBy.addEventListener('change', renderEntries);
 
+		// Export
 		qs('btn-export').addEventListener('click', exportEntries);
 
+		// Clear all
 		qs('btn-clear-all').addEventListener('click', function () {
 			els.clearConfirm.classList.toggle('hidden');
 		});
 		qs('btn-confirm-clear').addEventListener('click', clearAllEntries);
 		qs('btn-cancel-clear').addEventListener('click', function () {
-			els.clearConfirm.classList.add('hidden');
+			hide(els.clearConfirm);
 		});
 	}
 

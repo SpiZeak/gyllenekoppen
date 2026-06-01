@@ -1,77 +1,68 @@
+import { requireUserId, jsonResponse } from '../../_utils/auth.js';
+
 export async function onRequestGet(context) {
-	const { env } = context;
+	var userId = await requireUserId(context);
+	if (userId instanceof Response) return userId;
+
 	try {
-		const { results } = await env.DB.prepare(
-			'SELECT * FROM brews ORDER BY created_at DESC'
-		).all();
-		return new Response(JSON.stringify({ entries: results }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+		var { results } = await context.env.DB.prepare(
+			'SELECT * FROM brews WHERE user_id = ? ORDER BY created_at DESC'
+		).bind(userId).all();
+		return jsonResponse({ entries: results });
 	} catch (e) {
-		return new Response(JSON.stringify({ error: e.message, entries: [] }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ error: e.message, entries: [] }, 500);
 	}
 }
 
 export async function onRequestPost(context) {
-	const { request, env } = context;
-	try {
-		const body = await request.json();
+	var userId = await requireUserId(context);
+	if (userId instanceof Response) return userId;
 
-		const {
+	try {
+		var body = await context.request.json();
+
+		var {
 			id, date, beanName, roaster, roastDate, grind,
 			dose, water, ratio, temperature, brewMethod, brewTime,
 			equipment, tasteNotes, rating, notes, createdAt
 		} = body;
 
 		if (!id || !date || !beanName || !brewMethod) {
-			return new Response(JSON.stringify({ error: 'Missing required fields' }), {
-				status: 400,
-				headers: { 'Content-Type': 'application/json' }
-			});
+			return jsonResponse({ error: 'Missing required fields' }, 400);
 		}
 
-		await env.DB.prepare(
-			`INSERT INTO brews (id, date, bean_name, roaster, roast_date, grind, dose, water, ratio, temperature, brew_method, brew_time, equipment, taste_notes, rating, notes, created_at)
-			 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+		await context.env.DB.prepare(
+			`INSERT INTO brews (id, user_id, date, bean_name, roaster, roast_date, grind, dose, water, ratio, temperature, brew_method, brew_time, equipment, taste_notes, rating, notes, created_at)
+			 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
 		).bind(
-			id, date, beanName, roaster || '', roastDate || '', grind || '',
+			id, userId, date, beanName, roaster || '', roastDate || '', grind || '',
 			dose || 0, water || 0, ratio || 0, temperature || 0,
 			brewMethod, brewTime || 0, equipment || '', tasteNotes || '',
 			rating || 0, notes || '', createdAt || Date.now()
 		).run();
 
-		return new Response(JSON.stringify({ success: true, id }), {
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ success: true, id });
 	} catch (e) {
-		return new Response(JSON.stringify({ error: e.message }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ error: e.message }, 500);
 	}
 }
 
 export async function onRequestDelete(context) {
-	const { env, request } = context;
+	var userId = await requireUserId(context);
+	if (userId instanceof Response) return userId;
+
 	try {
-		const url = new URL(request.url);
+		var url = new URL(context.request.url);
 		if (url.searchParams.get('all') === 'true') {
-			await env.DB.prepare('DELETE FROM brews').run();
-			return new Response(JSON.stringify({ success: true }), {
-				headers: { 'Content-Type': 'application/json' }
-			});
+			await context.env.DB.prepare(
+				'DELETE FROM brews WHERE user_id = ?'
+			).bind(userId).run();
+			return jsonResponse({ success: true });
 		}
-		return new Response(JSON.stringify({ error: 'Use DELETE /api/brews/:id for single delete' }), {
-			status: 400,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse(
+			{ error: 'Use DELETE /api/brews/:id for single delete' }, 400
+		);
 	} catch (e) {
-		return new Response(JSON.stringify({ error: e.message }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		});
+		return jsonResponse({ error: e.message }, 500);
 	}
 }

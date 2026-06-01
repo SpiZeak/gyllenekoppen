@@ -7,6 +7,16 @@
 {% block content %}
 
 <article class="brew-log">
+
+	<!-- Auth state bar -->
+	<div id="auth-bar" class="hidden flex justify-end items-center gap-3 mb-6 animate-fade-in text-sm">
+		<span id="auth-username" class="text-parchment-500 dark:text-parchment-400 font-medium"></span>
+		<button id="btn-logout"
+			class="px-3 py-1.5 rounded-lg font-medium text-parchment-500 dark:text-parchment-400 text-xs border border-parchment-200 dark:border-espresso-600 hover:border-red-300 dark:hover:border-red-700 hover:text-red-500 transition-all">
+			Logga ut
+		</button>
+	</div>
+
 	<!-- Header -->
 	<header class="mb-12 text-center">
 		<div class="inline-flex items-center gap-3 mb-6 animate-fade-in">
@@ -22,251 +32,293 @@
 		</p>
 	</header>
 
-	<!-- Stats panel -->
-	<div id="brew-stats-panel" class="gap-4 grid grid-cols-2 sm:grid-cols-4 mb-10 animate-fade-in delay-200">
-		<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Totalt bryggningar</div>
-			<div id="stat-total" class="font-serif font-bold text-3xl text-espresso-800 dark:text-parchment-100">0</div>
-		</div>
-		<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Vanligaste metod</div>
-			<div id="stat-method" class="font-serif font-bold text-lg text-espresso-800 dark:text-parchment-100 truncate">—</div>
-		</div>
-		<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Snittkvot</div>
-			<div id="stat-ratio" class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100">—</div>
-		</div>
-		<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
-			<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Högst betyg</div>
-			<div id="stat-best" class="font-serif font-bold text-lg text-espresso-800 dark:text-parchment-100 truncate">—</div>
-		</div>
-	</div>
-
-	<!-- Controls row -->
-	<div class="flex flex-wrap justify-between items-center gap-4 mb-8 animate-fade-in delay-300">
-		<div class="flex flex-wrap items-center gap-3">
-			<button id="btn-add-entry"
-				class="bg-gold-500 hover:bg-gold-400 px-5 py-2.5 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-				+ Nytt inlägg
-			</button>
-			<button id="btn-export"
-				class="px-4 py-2.5 rounded-full font-medium text-parchment-600 dark:text-parchment-300 text-xs tracking-wider uppercase border border-parchment-200 dark:border-espresso-600 hover:border-gold-300 dark:hover:border-gold-600 hover:text-gold-600 dark:hover:text-gold-400 transition-all">
-				Exportera JSON
-			</button>
-		</div>
-
-		<!-- Filter / sort -->
-		<div class="flex flex-wrap items-center gap-3">
-			<select id="filter-method"
-				class="px-3 py-2 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all">
-				<option value="">Alla metoder</option>
-			</select>
-			<select id="sort-by"
-				class="px-3 py-2 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all">
-				<option value="date-desc">Senast först</option>
-				<option value="date-asc">Äldst först</option>
-				<option value="rating-desc">Högst betyg</option>
-				<option value="rating-asc">Lägst betyg</option>
-			</select>
-		</div>
-	</div>
-
-	<!-- Entry form (hidden by default) -->
-	<div id="entry-form-container" class="hidden mb-10 animate-slide-down">
-		<form id="brew-entry-form"
-			class="glass-card p-6 sm:p-8 rounded-2xl border border-parchment-200/50 dark:border-espresso-600/30">
-			<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100 mb-6" id="form-title">Nytt brygginlägg</h2>
-
-			<div class="gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-				<!-- Bean name -->
-				<div class="sm:col-span-2 lg:col-span-1">
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bönans namn/ursprung</label>
-					<input type="text" id="field-bean" required
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Roaster -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Rosteri</label>
-					<input type="text" id="field-roaster"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Roast date -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Rostdatum</label>
-					<input type="date" id="field-roast-date"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Grind size -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Malningsgrad</label>
-					<select id="field-grind"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all">
-						<option value="">Välj...</option>
-						<option value="Extra fint">Extra fint</option>
-						<option value="Fint">Fint</option>
-						<option value="Medium-fint">Medium-fint</option>
-						<option value="Medium">Medium</option>
-						<option value="Medium-grovt">Medium-grovt</option>
-						<option value="Grovt">Grovt</option>
-					</select>
-				</div>
-
-				<!-- Dose -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Kaffe (g)</label>
-					<input type="number" id="field-dose" step="0.1" min="1" required
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Water -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Vatten (g)</label>
-					<input type="number" id="field-water" step="1" min="1" required
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Ratio display -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Kvot (vatten:kaffe)</label>
-					<div id="field-ratio-display"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-100 dark:bg-espresso-700 border border-parchment-200 dark:border-espresso-600 text-parchment-500 dark:text-parchment-400">
-						—
-					</div>
-				</div>
-
-				<!-- Temperature -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Vattentemp (°C)</label>
-					<input type="number" id="field-temp" step="0.5" value="93"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Brew method -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bryggmetod</label>
-					<input type="text" id="field-method" list="method-list" required
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-					<datalist id="method-list">
-						<option value="Espresso">
-						<option value="Pour-over">
-						<option value="Bryggkaffe">
-						<option value="French press">
-						<option value="Aeropress">
-						<option value="Moka pot">
-						<option value="Kallbryggd">
-						<option value="Sifon">
-						<option value="Chemex">
-						<option value="Kokkaffe">
-					</datalist>
-				</div>
-
-				<!-- Brew time -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bryggtid (sekunder)</label>
-					<input type="number" id="field-brew-time" step="1" min="0"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Equipment -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Utrustning</label>
-					<input type="text" id="field-equipment"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Taste notes -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Smaknoteringar</label>
-					<input type="text" id="field-taste"
-						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
-				</div>
-
-				<!-- Rating -->
-				<div>
-					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Betyg</label>
-					<div id="star-rating" class="flex gap-1 text-2xl" role="radiogroup" aria-label="Betyg 1 till 5">
-						<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="1" aria-label="1 av 5" role="radio" aria-checked="false">&#9733;</button>
-						<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="2" aria-label="2 av 5" role="radio" aria-checked="false">&#9733;</button>
-						<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="3" aria-label="3 av 5" role="radio" aria-checked="false">&#9733;</button>
-						<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="4" aria-label="4 av 5" role="radio" aria-checked="false">&#9733;</button>
-						<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="5" aria-label="5 av 5" role="radio" aria-checked="false">&#9733;</button>
-					</div>
-					<input type="hidden" id="field-rating" value="0" />
-				</div>
-			</div>
-
-			<!-- Notes -->
-			<div class="mt-5">
-				<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Anteckningar</label>
-				<textarea id="field-notes" rows="3"
-					class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all resize-y"></textarea>
-			</div>
-
-			<div class="flex flex-wrap items-center gap-3 mt-6 pt-4 border-parchment-200/60 dark:border-espresso-600/40 border-t">
-				<button type="submit"
-					class="bg-gold-500 hover:bg-gold-400 px-6 py-2.5 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-					Spara inlägg
-				</button>
-				<button type="button" id="btn-cancel-form"
-					class="px-4 py-2.5 rounded-full font-medium text-parchment-500 dark:text-parchment-400 text-xs tracking-wider uppercase hover:text-parchment-700 dark:hover:text-parchment-200 transition-all">
-					Avbryt
-				</button>
-			</div>
-		</form>
-	</div>
-
 	<!-- Loading state -->
 	<div id="brew-loading-state" class="text-center py-16 hidden animate-fade-in">
 		<div class="inline-block w-10 h-10 border-4 border-gold-300 dark:border-gold-600 border-t-gold-500 rounded-full animate-spin mb-4"></div>
-		<p class="text-parchment-400 dark:text-parchment-500">Laddar bryggningar...</p>
+		<p class="text-parchment-400 dark:text-parchment-500">Laddar...</p>
 	</div>
 
-	<!-- Error state -->
-	<div id="brew-error-state" class="text-center py-16 hidden animate-fade-in">
-		<div class="text-5xl mb-4 opacity-40">&#9888;&#65039;</div>
-		<h2 class="font-serif font-bold text-2xl text-red-500 mb-2">Något gick fel</h2>
-		<p class="text-parchment-400 dark:text-parchment-500 mb-6" data-error-msg></p>
-		<button id="btn-retry-load"
-			class="bg-gold-500 hover:bg-gold-400 px-6 py-3 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md transition-all">
-			Försök igen
-		</button>
-	</div>
-
-	<!-- Empty state -->
-	<div id="brew-empty-state" class="text-center py-16 animate-fade-in">
-		<div class="text-6xl mb-4 opacity-30">&#9749;</div>
-		<h2 class="font-serif font-bold text-2xl text-parchment-400 dark:text-parchment-500 mb-2">Inga bryggningar än</h2>
-		<p class="text-parchment-400 dark:text-parchment-500 mb-6">Logga din första bryggning för att komma igång!</p>
-		<button id="btn-empty-add"
-			class="bg-gold-500 hover:bg-gold-400 px-6 py-3 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md transition-all">
-			+ Lägg till bryggning
-		</button>
-	</div>
-
-	<!-- Entry list -->
-	<div id="brew-entry-list" class="space-y-4 hidden"></div>
-
-	<!-- Clear all -->
-	<div id="brew-clear-section" class="mt-10 pt-6 border-parchment-200/60 dark:border-espresso-600/40 border-t text-center hidden">
-		<button id="btn-clear-all"
-			class="px-4 py-2 rounded-lg font-medium text-red-500 hover:text-red-400 text-xs tracking-wider uppercase border border-red-200 dark:border-red-800 hover:border-red-300 dark:hover:border-red-700 transition-all">
-			Radera alla inlägg
-		</button>
-		<div id="clear-confirm" class="hidden mt-3 flex items-center justify-center gap-3">
-			<span class="text-sm text-parchment-500 dark:text-parchment-400">Är du säker?</span>
-			<button id="btn-confirm-clear"
-				class="px-4 py-1.5 rounded-lg font-semibold text-white text-xs bg-red-500 hover:bg-red-400 transition-all">
-				Ja, radera allt
-			</button>
-			<button id="btn-cancel-clear"
-				class="px-4 py-1.5 rounded-lg font-medium text-parchment-500 dark:text-parchment-400 text-xs border border-parchment-200 dark:border-espresso-600 hover:border-parchment-300 dark:hover:border-espresso-500 transition-all">
-				Avbryt
-			</button>
+	<!-- ═══ AUTH: Login form ═══ -->
+	<div id="auth-section" class="mx-auto max-w-md py-8 hidden">
+		<div class="glass-card p-8 rounded-2xl border border-parchment-200/50 dark:border-espresso-600/30">
+			<div class="text-center mb-6">
+				<div class="text-4xl mb-3">&#128273;</div>
+				<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100">Logga in</h2>
+				<p class="mt-2 text-parchment-400 dark:text-parchment-500 text-sm">Logga in för att komma åt din bryggdagbok</p>
+			</div>
+			<form id="login-form">
+				<div class="mb-4">
+					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Användarnamn</label>
+					<input type="text" id="login-username" required autocomplete="username"
+						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+				</div>
+				<div class="mb-6">
+					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Lösenord</label>
+					<input type="password" id="login-password" required autocomplete="current-password"
+						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+				</div>
+				<div id="login-error" class="hidden mb-4 text-sm text-red-500 text-center"></div>
+				<button type="submit"
+					class="w-full bg-gold-500 hover:bg-gold-400 py-2.5 rounded-full font-semibold text-white text-sm tracking-wider uppercase shadow-sm hover:shadow-md transition-all">
+					Logga in
+				</button>
+			</form>
+			<div class="mt-4 text-center">
+				<button id="btn-show-setup" class="text-xs text-parchment-400 dark:text-parchment-500 hover:text-gold-600 dark:hover:text-gold-400 underline transition-all">
+					Inget konto? Skapa ett
+				</button>
+			</div>
 		</div>
 	</div>
+
+	<!-- ═══ AUTH: Setup form (first user) ═══ -->
+	<div id="setup-section" class="mx-auto max-w-md py-8 hidden">
+		<div class="glass-card p-8 rounded-2xl border border-parchment-200/50 dark:border-espresso-600/30">
+			<div class="text-center mb-6">
+				<div class="text-4xl mb-3">&#127873;</div>
+				<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100">Skapa konto</h2>
+				<p class="mt-2 text-parchment-400 dark:text-parchment-500 text-sm">Skapa ditt första konto för att komma igång</p>
+			</div>
+			<form id="setup-form">
+				<div class="mb-4">
+					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Användarnamn</label>
+					<input type="text" id="setup-username" required autocomplete="username"
+						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+				</div>
+				<div class="mb-6">
+					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Lösenord</label>
+					<input type="password" id="setup-password" required minlength="4" autocomplete="new-password"
+						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+				</div>
+				<div id="setup-error" class="hidden mb-4 text-sm text-red-500 text-center"></div>
+				<button type="submit"
+					class="w-full bg-gold-500 hover:bg-gold-400 py-2.5 rounded-full font-semibold text-white text-sm tracking-wider uppercase shadow-sm hover:shadow-md transition-all">
+					Skapa konto
+				</button>
+			</form>
+			<div class="mt-4 text-center">
+				<button id="btn-show-login" class="text-xs text-parchment-400 dark:text-parchment-500 hover:text-gold-600 dark:hover:text-gold-400 underline transition-all">
+					Har du redan ett konto? Logga in
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- ═══ BREW JOURNAL (requires auth) ═══ -->
+	<div id="journal-section" class="hidden">
+
+		<!-- Stats panel -->
+		<div id="brew-stats-panel" class="gap-4 grid grid-cols-2 sm:grid-cols-4 mb-10 animate-fade-in delay-200">
+			<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
+				<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Totalt bryggningar</div>
+				<div id="stat-total" class="font-serif font-bold text-3xl text-espresso-800 dark:text-parchment-100">0</div>
+			</div>
+			<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
+				<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Vanligaste metod</div>
+				<div id="stat-method" class="font-serif font-bold text-lg text-espresso-800 dark:text-parchment-100 truncate">—</div>
+			</div>
+			<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
+				<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Snittkvot</div>
+				<div id="stat-ratio" class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100">—</div>
+			</div>
+			<div class="glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30">
+				<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">Högst betyg</div>
+				<div id="stat-best" class="font-serif font-bold text-lg text-espresso-800 dark:text-parchment-100 truncate">—</div>
+			</div>
+		</div>
+
+		<!-- Controls row -->
+		<div class="flex flex-wrap justify-between items-center gap-4 mb-8 animate-fade-in delay-300">
+			<div class="flex flex-wrap items-center gap-3">
+				<button id="btn-add-entry"
+					class="bg-gold-500 hover:bg-gold-400 px-5 py-2.5 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+					+ Nytt inlägg
+				</button>
+				<button id="btn-export"
+					class="px-4 py-2.5 rounded-full font-medium text-parchment-600 dark:text-parchment-300 text-xs tracking-wider uppercase border border-parchment-200 dark:border-espresso-600 hover:border-gold-300 dark:hover:border-gold-600 hover:text-gold-600 dark:hover:text-gold-400 transition-all">
+					Exportera JSON
+				</button>
+			</div>
+
+			<div class="flex flex-wrap items-center gap-3">
+				<select id="filter-method"
+					class="px-3 py-2 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all">
+					<option value="">Alla metoder</option>
+				</select>
+				<select id="sort-by"
+					class="px-3 py-2 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all">
+					<option value="date-desc">Senast först</option>
+					<option value="date-asc">Äldst först</option>
+					<option value="rating-desc">Högst betyg</option>
+					<option value="rating-asc">Lägst betyg</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Entry form -->
+		<div id="entry-form-container" class="hidden mb-10 animate-slide-down">
+			<form id="brew-entry-form"
+				class="glass-card p-6 sm:p-8 rounded-2xl border border-parchment-200/50 dark:border-espresso-600/30">
+				<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100 mb-6" id="form-title">Nytt brygginlägg</h2>
+
+				<div class="gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+					<div class="sm:col-span-2 lg:col-span-1">
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bönans namn/ursprung</label>
+						<input type="text" id="field-bean" required
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Rosteri</label>
+						<input type="text" id="field-roaster"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Rostdatum</label>
+						<input type="date" id="field-roast-date"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Malningsgrad</label>
+						<select id="field-grind"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all">
+							<option value="">Välj...</option>
+							<option value="Extra fint">Extra fint</option>
+							<option value="Fint">Fint</option>
+							<option value="Medium-fint">Medium-fint</option>
+							<option value="Medium">Medium</option>
+							<option value="Medium-grovt">Medium-grovt</option>
+							<option value="Grovt">Grovt</option>
+						</select>
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Kaffe (g)</label>
+						<input type="number" id="field-dose" step="0.1" min="1" required
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Vatten (g)</label>
+						<input type="number" id="field-water" step="1" min="1" required
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Kvot (vatten:kaffe)</label>
+						<div id="field-ratio-display"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-100 dark:bg-espresso-700 border border-parchment-200 dark:border-espresso-600 text-parchment-500 dark:text-parchment-400">—</div>
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Vattentemp (°C)</label>
+						<input type="number" id="field-temp" step="0.5" value="93"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bryggmetod</label>
+						<input type="text" id="field-method" list="method-list" required
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+						<datalist id="method-list">
+							<option value="Espresso">
+							<option value="Pour-over">
+							<option value="Bryggkaffe">
+							<option value="French press">
+							<option value="Aeropress">
+							<option value="Moka pot">
+							<option value="Kallbryggd">
+							<option value="Sifon">
+							<option value="Chemex">
+							<option value="Kokkaffe">
+						</datalist>
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bryggtid (sekunder)</label>
+						<input type="number" id="field-brew-time" step="1" min="0"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Utrustning</label>
+						<input type="text" id="field-equipment"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Smaknoteringar</label>
+						<input type="text" id="field-taste"
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Betyg</label>
+						<div id="star-rating" class="flex gap-1 text-2xl" role="radiogroup" aria-label="Betyg 1 till 5">
+							<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="1" aria-label="1 av 5" role="radio" aria-checked="false">&#9733;</button>
+							<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="2" aria-label="2 av 5" role="radio" aria-checked="false">&#9733;</button>
+							<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="3" aria-label="3 av 5" role="radio" aria-checked="false">&#9733;</button>
+							<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="4" aria-label="4 av 5" role="radio" aria-checked="false">&#9733;</button>
+							<button type="button" class="star-btn text-parchment-300 dark:text-espresso-500 hover:text-gold-400 transition-colors cursor-pointer" data-value="5" aria-label="5 av 5" role="radio" aria-checked="false">&#9733;</button>
+						</div>
+						<input type="hidden" id="field-rating" value="0" />
+					</div>
+				</div>
+
+				<div class="mt-5">
+					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Anteckningar</label>
+					<textarea id="field-notes" rows="3"
+						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all resize-y"></textarea>
+				</div>
+
+				<div class="flex flex-wrap items-center gap-3 mt-6 pt-4 border-parchment-200/60 dark:border-espresso-600/40 border-t">
+					<button type="submit"
+						class="bg-gold-500 hover:bg-gold-400 px-6 py-2.5 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+						Spara inlägg
+					</button>
+					<button type="button" id="btn-cancel-form"
+						class="px-4 py-2.5 rounded-full font-medium text-parchment-500 dark:text-parchment-400 text-xs tracking-wider uppercase hover:text-parchment-700 dark:hover:text-parchment-200 transition-all">
+						Avbryt
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<!-- Error state -->
+		<div id="brew-error-state" class="text-center py-16 hidden animate-fade-in">
+			<div class="text-5xl mb-4 opacity-40">&#9888;&#65039;</div>
+			<h2 class="font-serif font-bold text-2xl text-red-500 mb-2">Något gick fel</h2>
+			<p class="text-parchment-400 dark:text-parchment-500 mb-6" data-error-msg></p>
+			<button id="btn-retry-load"
+				class="bg-gold-500 hover:bg-gold-400 px-6 py-3 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md transition-all">
+				Försök igen
+			</button>
+		</div>
+
+		<!-- Empty state -->
+		<div id="brew-empty-state" class="text-center py-16 animate-fade-in">
+			<div class="text-6xl mb-4 opacity-30">&#9749;</div>
+			<h2 class="font-serif font-bold text-2xl text-parchment-400 dark:text-parchment-500 mb-2">Inga bryggningar än</h2>
+			<p class="text-parchment-400 dark:text-parchment-500 mb-6">Logga din första bryggning för att komma igång!</p>
+			<button id="btn-empty-add"
+				class="bg-gold-500 hover:bg-gold-400 px-6 py-3 rounded-full font-semibold text-white text-xs tracking-wider uppercase shadow-sm hover:shadow-md transition-all">
+				+ Lägg till bryggning
+			</button>
+		</div>
+
+		<!-- Entry list -->
+		<div id="brew-entry-list" class="space-y-4 hidden"></div>
+
+		<!-- Clear all -->
+		<div id="brew-clear-section" class="mt-10 pt-6 border-parchment-200/60 dark:border-espresso-600/40 border-t text-center hidden">
+			<button id="btn-clear-all"
+				class="px-4 py-2 rounded-lg font-medium text-red-500 hover:text-red-400 text-xs tracking-wider uppercase border border-red-200 dark:border-red-800 hover:border-red-300 dark:hover:border-red-700 transition-all">
+				Radera alla inlägg
+			</button>
+			<div id="clear-confirm" class="hidden mt-3 flex items-center justify-center gap-3">
+				<span class="text-sm text-parchment-500 dark:text-parchment-400">Är du säker?</span>
+				<button id="btn-confirm-clear"
+					class="px-4 py-1.5 rounded-lg font-semibold text-white text-xs bg-red-500 hover:bg-red-400 transition-all">
+					Ja, radera allt
+				</button>
+				<button id="btn-cancel-clear"
+					class="px-4 py-1.5 rounded-lg font-medium text-parchment-500 dark:text-parchment-400 text-xs border border-parchment-200 dark:border-espresso-600 hover:border-parchment-300 dark:hover:border-espresso-500 transition-all">
+					Avbryt
+				</button>
+			</div>
+		</div>
+	</div>
+
 </article>
 
 <script src="/brew-log.js" defer></script>
