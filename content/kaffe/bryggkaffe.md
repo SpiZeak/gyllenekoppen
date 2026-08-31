@@ -13,6 +13,7 @@ ursprung = "USA / Globalt"
 temperatur = "90–96°C"
 malningsgrad = "Mediumgrovt"
 vattenkvot = "1:15–1:17 (1&thinsp;g kaffe → 15–17&thinsp;g vatten)"
+smaker = ["Choklad", "Nötig", "Rostat"]
 dryck = "Bryggkaffe"
 +++
 

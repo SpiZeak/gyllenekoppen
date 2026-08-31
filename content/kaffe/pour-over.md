@@ -13,6 +13,7 @@ ursprung = "Japan / Globalt"
 temperatur = "92–96°C"
 malningsgrad = "Mediumfint"
 vattenkvot = "1:15 (1&thinsp;g kaffe → 15&thinsp;g vatten)"
+smaker = ["Blommig", "Fruktig", "Citrus"]
 dryck = "Pour-Over"
 +++
 

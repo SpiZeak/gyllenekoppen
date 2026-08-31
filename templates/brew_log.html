@@ -87,7 +87,7 @@
 				</div>
 				<div class="mb-6">
 					<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Lösenord</label>
-					<input type="password" id="setup-password" required minlength="4" autocomplete="new-password"
+					<input type="password" id="setup-password" required minlength="8" autocomplete="new-password"
 						class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
 				</div>
 				<div id="setup-error" class="hidden mb-4 text-sm text-red-500 text-center"></div>
@@ -162,6 +162,11 @@
 				<h2 class="font-serif font-bold text-2xl text-espresso-800 dark:text-parchment-100 mb-6" id="form-title">Nytt brygginlägg</h2>
 
 				<div class="gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+					<div>
+						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Datum</label>
+						<input type="date" id="field-date" required
+							class="w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-800 border border-parchment-200 dark:border-espresso-600 text-parchment-700 dark:text-parchment-200 focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 outline-none transition-all" />
+					</div>
 					<div class="sm:col-span-2 lg:col-span-1">
 						<label class="block mb-1.5 font-medium text-parchment-700 dark:text-parchment-300 text-sm">Bönans namn/ursprung</label>
 						<input type="text" id="field-bean" required
@@ -315,6 +320,24 @@
 					class="px-4 py-1.5 rounded-lg font-medium text-parchment-500 dark:text-parchment-400 text-xs border border-parchment-200 dark:border-espresso-600 hover:border-parchment-300 dark:hover:border-espresso-500 transition-all">
 					Avbryt
 				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Generic modal (confirm/alert) -->
+	<div id="app-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" role="dialog"
+		aria-modal="true" aria-labelledby="modal-title">
+		<div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+		<div
+			class="relative glass-card bg-parchment-50 dark:bg-espresso-800 rounded-2xl border border-parchment-200/60 dark:border-espresso-600/40 max-w-sm w-full p-6 shadow-2xl">
+			<h3 id="modal-title"
+				class="font-serif font-bold text-xl text-espresso-800 dark:text-parchment-100 mb-2"></h3>
+			<p id="modal-message" class="text-parchment-500 dark:text-parchment-400 text-sm leading-relaxed mb-6"></p>
+			<div class="flex justify-end gap-3">
+				<button type="button" id="modal-cancel"
+					class="px-4 py-2 rounded-full font-medium text-parchment-500 dark:text-parchment-400 text-xs tracking-wider uppercase hover:text-parchment-700 dark:hover:text-parchment-200 transition-all">Avbryt</button>
+				<button type="button" id="modal-confirm"
+					class="px-5 py-2 rounded-full font-semibold text-white text-xs tracking-wider uppercase bg-gold-500 hover:bg-gold-400 transition-all">OK</button>
 			</div>
 		</div>
 	</div>

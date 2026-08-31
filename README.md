@@ -1,239 +1,117 @@
-# Zola + Tailwind CSS Boilerplate
+# Gyllene Koppen
 
-[![GitHub](https://img.shields.io/badge/GitHub-SpiZeak%2Fzola--tailwind-181717?logo=github)](https://github.com/SpiZeak/zola-tailwind)
+Kaffesajt på svenska byggd med [Zola](https://www.getzola.org/) (statiskt innehåll) och
+[Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/) + D1
+(bryggdagboken med inloggning). Styling via Tailwind CSS v4 med egen färgpalett.
 
-A minimal, production-ready boilerplate for building static sites with [Zola](https://www.getzola.org/) and [Tailwind CSS v4](https://tailwindcss.com/). The entire development environment runs inside Docker — no local Rust or Node.js required.
-
-## Features
-
-- **[Zola](https://www.getzola.org/) v0.22.1** — single-binary static site generator written in Rust
-- **[Tailwind CSS v4](https://tailwindcss.com/)** — utility-first CSS with automatic content scanning
-- **Docker Compose** — zero local toolchain setup; one command to start
-- **Blog section** — with date sorting, pagination, and tag taxonomies
-- **Syntax highlighting** — via Zola's built-in highlighter (catppuccin-mocha theme)
-- **Prose styles** — `@layer components` CSS for nicely formatted Markdown output
-- **SEO-friendly** — `<title>` and `<meta name="description">` on every page
-
-## Prerequisites
-
-- [Docker](https://docs.docker.com/get-docker/) with Compose v2
-
-That's it. No Node.js, no Rust, no other local installs needed.
-
-## Quick Start
-
-```bash
-git clone https://github.com/SpiZeak/zola-tailwind.git my-site
-cd my-site
-docker compose up
-```
-
-Open [http://localhost](http://localhost) in your browser. Zola and the Tailwind watcher both reload automatically when you edit files.
-
-## Project Structure
+## Arkitektur
 
 ```
 .
-├── compose.yml               # Docker Compose — Zola + Tailwind services
-├── zola.toml                 # Zola site configuration
+├── compose.yml               # Docker: zola serve + tailwind watch (innehållsdev)
+├── zola.toml                 # Zola-konfiguration
+├── wrangler.toml             # Cloudflare Pages + D1-binding (DB)
+├── schema.sql                # D1-schema (users, sessions, brews)
 │
-├── css/
-│   └── tailwind.css          # Tailwind source (edit this)
+├── content/                  # Markdown-innehåll → URLs
+│   ├── kaffe/                # Kaffevarianter (espresso/ som subsection)
+│   ├── guider/               # Steg-för-steg-guider
+│   └── bryggdagbok.md        # Inloggade sidan (template brew_log.html)
 │
-├── static/
-│   └── tailwind.css          # Compiled CSS (auto-generated — do not edit)
+├── functions/                # Pages Functions (API)
+│   ├── _utils/auth.js        # Sessioner, PBKDF2, rate limit, felhantering
+│   └── api/
+│       ├── auth/             # setup (första användaren), login, logout, me
+│       └── brews/            # CRUD för bryggningar (autentiserat)
 │
-├── content/                  # Markdown content, mirrored to URLs
-│   ├── _index.md             # Homepage
-│   ├── about.md              # /about/
-│   └── blog/
-│       ├── _index.md         # /blog/ (section config)
-│       └── *.md              # /blog/<slug>/
+├── static/                   # Kopieras rakt av till sajten
+│   ├── brew-log.js           # Bryggdagbokens klientlogik
+│   ├── timer.js / ratio-calc.js / theme-init.js
+│   └── fonts/                # Self-hostade woff2 (Montserrat, Playfair Display)
 │
-├── templates/                # Tera HTML templates
-│   ├── base.html             # Shared layout (navbar, footer)
-│   ├── index.html            # Homepage template
-│   ├── page.html             # Single page / blog post template
-│   └── section.html          # Section listing template (e.g. /blog/)
-│
-└── docker/
-    └── tailwind/
-        └── Dockerfile        # Tailwind CLI image (Bun-based)
+├── css/                      # Tailwind-källor (theme, prose, guide, fonts)
+├── templates/                # Tera-mallar (macros.html har återanvända kort)
+├── tests/                    # Vitest-tester för functions (mock-D1)
+└── docker/tailwind/          # Tailwind CLI-image (Bun-baserad)
 ```
 
-## Configuration
+## Förutsättningar
 
-Edit `zola.toml` to configure your site:
+- [Bun](https://bun.sh) (eller Node 18+) för Tailwind, Biome, Vitest och Wrangler
+- Docker med Compose v2 — alternativ för Zola/Tailwind utan lokal toolchain
+- Zola v0.22.1 lokalt, eller Docker-varianten nedan
 
-```toml
-base_url   = "https://your-domain.com"  # Production URL (required)
-title      = "My Site"                   # Available as {{ config.title }}
-description = "My site description"      # Available as {{ config.description }}
-```
+## Utveckling
 
-Custom variables can be added under `[extra]` and accessed in any template as `{{ config.extra.variable_name }}`.
-
-See the [Zola configuration reference](https://www.getzola.org/documentation/getting-started/configuration/) for all available options.
-
-## Adding Content
-
-### Page
-
-Create a Markdown file anywhere under `content/`:
-
-```markdown
-+++
-title = "My Page"
-description = "A short description for SEO."
-+++
-
-Page content goes here.
-```
-
-### Blog Post
-
-Create a Markdown file under `content/blog/`:
-
-```markdown
-+++
-title = "My Post"
-date = 2026-01-01
-description = "A one-sentence summary shown in listings and meta tags."
-
-[taxonomies]
-tags = ["tutorial", "zola"]
-+++
-
-Post content goes here.
-```
-
-Set `draft = true` in front matter to hide a post from production while still previewing it locally (run `docker compose up` — Zola serves drafts automatically in dev mode).
-
-### Front Matter Reference
-
-| Field         | Type     | Description                                     |
-| ------------- | -------- | ----------------------------------------------- |
-| `title`       | string   | Page / post title                               |
-| `date`        | date     | Publication date `YYYY-MM-DD`                   |
-| `description` | string   | Short summary (listings + `<meta>` description) |
-| `draft`       | bool     | Hide from production builds                     |
-| `weight`      | integer  | Manual sort order within a section              |
-| `tags`        | string[] | Under `[taxonomies]`, list of tag strings       |
-
-## Templates
-
-Templates use [Tera](https://keats.github.io/tera/docs/) syntax (similar to Jinja2).
-
-| Template       | Renders                                       |
-| -------------- | --------------------------------------------- |
-| `base.html`    | Shared layout — extend this in all templates  |
-| `index.html`   | Root `_index.md` (homepage)                   |
-| `page.html`    | All individual pages and blog posts           |
-| `section.html` | All section `_index.md` files (e.g. `/blog/`) |
-
-### Key Template Variables
-
-**Pages (`page.*`)**
-
-```
-{{ page.title }}              Page title
-{{ page.content | safe }}     Rendered HTML body
-{{ page.date }}               Publication date
-{{ page.description }}        Front matter description
-{{ page.permalink }}          Full canonical URL
-{{ page.taxonomies.tags }}    List of tags
-```
-
-**Sections (`section.*`)**
-
-```
-{{ section.title }}           Section title
-{{ section.pages }}           List of pages in the section
-{{ section.content | safe }}  Rendered HTML body
-```
-
-**Global (`config.*`)**
-
-```
-{{ config.title }}            Site title
-{{ config.description }}      Site description
-{{ config.base_url }}         Base URL
-{{ config.extra.* }}          Custom variables from [extra]
-```
-
-### Section-specific Templates
-
-To override a template for a specific section, create a matching subdirectory under `templates/`. For example:
-
-```
-templates/
-└── blog/
-    ├── page.html     ← used only for posts under content/blog/
-    └── section.html  ← used only for content/blog/_index.md
-```
-
-## Customising Tailwind CSS
-
-Edit `css/tailwind.css`. The Tailwind watcher recompiles `static/tailwind.css` on every save.
-
-Add custom component or utility styles using standard CSS layers:
-
-```css
-@layer components {
-  .btn {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-  }
-  .btn-primary {
-    background-color: #2563eb;
-    color: #fff;
-  }
-}
-```
-
-### Adding Tailwind Plugins
-
-1. Add the package in `docker/tailwind/Dockerfile`:
-   ```dockerfile
-   RUN bun add @tailwindcss/typography
-   ```
-2. Import it in `css/tailwind.css`:
-   ```css
-   @plugin "@tailwindcss/typography";
-   ```
-3. Rebuild the container:
-   ```bash
-   docker compose build tailwind && docker compose up
-   ```
-
-## Building for Production
-
-**Step 1 — compile CSS (minified):**
+### Innehåll och styling (ingen backend)
 
 ```bash
-docker compose run --rm tailwind \
-  -i ./css/tailwind.css -o ./static/tailwind.css --minify
+docker compose up
+# → http://localhost:1111 (zola serve + tailwind watch)
 ```
 
-**Step 2 — build the site:**
+### Fullstack med Functions och lokal D1
 
 ```bash
-docker compose run --rm zola build
+bun install
+bun run build:css            # kompilerar static/tailwind.css (minifierad)
+zola build                   # eller: docker compose run --rm zola build
+bun run db:migrate:local     # applicera schema.sql på lokal D1 (miniflare)
+bun run dev                  # wrangler pages dev → http://localhost:8788
 ```
 
-The finished site is output to `public/`. Upload that directory to any static host.
+CSS-watcher under fullstack-dev: `bun run watch:css` i en andra terminal.
 
-## Deployment
+Lokal D1-lagring ligger i `.wrangler/state` (gitignorad). Nollställ genom att ta
+bort den katalogen och kör `db:migrate:local` igen.
 
-After building, deploy the `public/` directory to any static hosting provider:
+## Databas
 
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-- [Netlify](https://netlify.com)
-- [Vercel](https://vercel.com)
-- [GitHub Pages](https://pages.github.com)
-- Any web server (nginx, Caddy, Apache, etc.)
+`schema.sql` skapar `users`, `sessions` och `brews` med `ON DELETE CASCADE` och
+index. Sessions-tabellen lagrar SHA-256-hashen av sessionstoken — aldrig
+tokenet i klartext.
 
-## License
+```bash
+bun run db:create            # engångs: skapa fjärr-D1 (id ska in i wrangler.toml)
+bun run db:migrate:remote    # applicera schema på fjärr-D1
+```
+
+Notera vid migrering av en befintlig databas: schema.sql ändrades 2026-08-31
+(`CASCADE`, index, hashade tokens). Befintliga klartext-sessioner blir ogiltiga
+— användare loggar in igen. Tabellerna behöver återskapas för att få nya
+FK-villkor.
+
+## Autentisering (design)
+
+- Lösenord hashas med PBKDF2-SHA-256, 100 000 iterationer. OWASP rekommenderar
+  600 000, men varje derivation kostar CPU-tid i Workers-runtime; 100k är en
+  medveten avvägning för den här hotbilden.
+- `/api/auth/setup` skapar endast den första användaren via ett atomiskt
+  `INSERT ... WHERE NOT EXISTS` — race-säkert.
+- Login/setup rate-limitas (best effort per isolate, 10 försök/15 min per IP).
+  Med Cloudflare Turnstile framför endpoints kan skyddet göras hårt.
+- Jämförelse av lösenordshash sker i konstant tid.
+- `id`/`created_at` på bryggningar genereras server-side; numeriska fält
+  tvingas till tal innan lagring.
+
+## Bygg och deploy
+
+```bash
+bun run build        # tailwind --minify + zola build → public/
+wrangler pages deploy   # eller git-integrerad deploy i Cloudflare-dashboarden
+```
+
+## Kvalitet
+
+```bash
+bun run lint         # biome check
+bun run format       # biome format --write
+bun run test         # vitest (functions-logik mot mock-D1)
+```
+
+CI (`.github/workflows/ci.yml`) kör lint, tester och en full sitebyggnad på
+varje push och PR.
+
+## Licens
 
 MIT

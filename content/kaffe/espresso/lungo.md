@@ -13,6 +13,7 @@ ursprung = "Italien"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:4 (1 g kaffe → 4 g lungo)"
+smaker = ["Jordig", "Rostat", "Choklad"]
 +++
 
 ## Vad är lungo?

@@ -42,7 +42,16 @@
 		}
 	},
 	"files": {
-		"includes": ["**", "!public/", "!static/tailwind.css", "!templates/"]
+		"includes": [
+			"**",
+			"!public",
+			"!static/tailwind.css",
+			"!static/fonts",
+			"!templates",
+			"!css/theme.css",
+			"!.wrangler",
+			"!.kilo"
+		]
 	},
 	"overrides": [
 		{

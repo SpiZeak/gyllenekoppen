@@ -13,6 +13,7 @@ ursprung = "Italien"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:1 (1 g kaffe → 1 g ristretto)"
+smaker = ["Choklad", "Fruktig", "Kryddig"]
 +++
 
 ## Vad är ristretto?

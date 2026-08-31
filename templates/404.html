@@ -7,21 +7,8 @@
 	<title>Sidan hittades inte | Gyllene Koppen</title>
 	<link rel="icon"
 		href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2615;</text></svg>" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800;900&display=swap" />
 	<link rel="stylesheet" href="/tailwind.css" />
-	<style>
-		body { background-color: #fefdf9; }
-		html.dark body { background-color: #0d0a07; }
-	</style>
-	<script>
-		const saved = localStorage.getItem('theme');
-		if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-			document.documentElement.classList.add('dark');
-		}
-	</script>
+	<script src="/theme-init.js"></script>
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-parchment dark:bg-espresso-950 text-espresso-800 dark:text-parchment-200 p-6">

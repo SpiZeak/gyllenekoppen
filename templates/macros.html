@@ -1,0 +1,25 @@
+{% macro stat_card(ikon, label, varde) %}
+<div class="group glass-card p-5 rounded-2xl text-center border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 hover:shadow-lg transition-all duration-300">
+	<div class="mb-2 text-2xl">{{ ikon }}</div>
+	<div class="mb-1 font-semibold text-gold-600 dark:text-gold-400 text-[10px] uppercase tracking-wider">{{ label }}</div>
+	<div class="font-semibold text-espresso-800 dark:text-parchment-200 text-sm">{{ varde }}</div>
+</div>
+{% endmacro stat_card %}
+
+{% macro summary_card(description, ikoner, texter, margin="mb-12") %}
+<div class="bg-gradient-to-br from-gold-50 via-parchment-50 to-gold-50 dark:from-espresso-700 dark:via-espresso-800 dark:to-espresso-700 border border-gold-200/60 dark:border-gold-800/30 rounded-2xl p-6 sm:p-8 {{ margin }} animate-fade-in delay-350 shadow-sm">
+	<div class="flex flex-col sm:flex-row items-start gap-5">
+		<div>
+			<h3 class="font-serif font-bold text-xl text-espresso-800 dark:text-parchment-100 mb-2">I korthet</h3>
+			<p class="text-parchment-600 dark:text-parchment-300 leading-relaxed">{{ description }}</p>
+			<div class="flex flex-wrap gap-2 mt-4">
+				{% for text in texter %}
+				<span class="inline-flex items-center gap-1.5 bg-white dark:bg-espresso-600 px-3 py-1.5 rounded-full text-sm text-parchment-700 dark:text-parchment-200 border border-parchment-200 dark:border-espresso-500">
+					<span class="text-gold-500">{{ ikoner[loop.index0] }}</span> {{ text }}
+				</span>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endmacro summary_card %}

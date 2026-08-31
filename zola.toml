@@ -15,7 +15,6 @@ build_search_index = false
 
 [[taxonomies]]
 name = "tags"
-url = "taggar"
 feed = true
 
 [markdown]

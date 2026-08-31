@@ -34,7 +34,7 @@
 			</h2>
 			{% if page.date %}
 			<time class="block mt-2 text-parchment-400 dark:text-parchment-500 text-sm" datetime="{{ page.date }}">
-				{{ page.date | date(format="%B %e, %Y") }}
+				{{ page.date | date(format="%-d %B %Y", locale="sv") }}
 			</time>
 			{% endif %}
 			{% if page.taxonomies.tags %}

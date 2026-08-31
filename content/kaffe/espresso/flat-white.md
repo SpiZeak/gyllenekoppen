@@ -13,6 +13,7 @@ ursprung = "Australien / Nya Zeeland"
 temperatur = "60–65°C (mjölk)"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (espresso) + lite mjölk"
+smaker = ["Choklad", "Rostat", "Nötig"]
 +++
 
 ## Vad är flat white?

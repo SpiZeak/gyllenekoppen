@@ -1,11 +1,20 @@
 {
-  "scripts": {
-    "build": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --minify && zola build",
-    "dev": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --watch & wrangler pages dev --d1 DB",
-    "db:init": "wrangler d1 create gyllene-koppen-db && wrangler d1 execute gyllene-koppen-db --file=./schema.sql"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "@tailwindcss/cli": "^4.3.0"
-  }
+	"scripts": {
+		"build": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --minify && zola build",
+		"build:css": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --minify",
+		"watch:css": "tailwindcss -i ./css/tailwind.css -o ./static/tailwind.css --watch",
+		"dev": "wrangler pages dev",
+		"db:create": "wrangler d1 create gyllene-koppen-db",
+		"db:migrate:local": "wrangler d1 execute gyllene-koppen-db --local --file=./schema.sql",
+		"db:migrate:remote": "wrangler d1 execute gyllene-koppen-db --remote --file=./schema.sql",
+		"lint": "biome check .",
+		"format": "biome format --write .",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.15",
+		"@tailwindcss/cli": "^4.3.0",
+		"vitest": "^3.2.4",
+		"wrangler": "^4.0.0"
+	}
 }

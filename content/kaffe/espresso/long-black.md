@@ -13,6 +13,7 @@ ursprung = "Australien, 1990-talet"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:4–1:6 (1 g kaffe → 4–6 g vatten)"
+smaker = ["Choklad", "Fruktig", "Rostat"]
 +++
 
 ## Vad är long black?

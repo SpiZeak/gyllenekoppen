@@ -13,6 +13,7 @@ ursprung = "Italien"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (2 g kaffe → 4 g doppio)"
+smaker = ["Rostat", "Choklad", "Kryddig"]
 +++
 
 ## Vad är doppio?

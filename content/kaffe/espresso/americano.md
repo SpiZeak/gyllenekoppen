@@ -13,6 +13,7 @@ ursprung = "USA, andra världskriget"
 temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:4–1:6 (1 g kaffe → 4–6 g vatten)"
+smaker = ["Choklad", "Rostat", "Jordig"]
 +++
 
 ## Vad är americano?

@@ -16,7 +16,7 @@
 		</h1>
 		{% if page.date %}
 		<div class="flex flex-wrap items-center gap-4 mt-5 text-parchment-400 dark:text-parchment-500 text-sm animate-slide-up delay-150">
-			<time datetime="{{ page.date }}">{{ page.date | date(format="%B %e, %Y") }}</time>
+			<time datetime="{{ page.date }}">{{ page.date | date(format="%-d %B %Y", locale="sv") }}</time>
 			{% if page.taxonomies.tags %}
 			<span class="flex flex-wrap gap-2">
 				{% for tag in page.taxonomies.tags %}

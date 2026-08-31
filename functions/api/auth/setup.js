@@ -1,46 +1,48 @@
 import {
-	generateToken, generateSalt, hashPassword,
-	setSessionCookie, jsonResponse
-} from '../../_utils/auth.js';
+	createSession,
+	deleteExpiredSessions,
+	enforceRateLimit,
+	generateSalt,
+	HttpError,
+	handler,
+	hashPassword,
+	jsonResponse,
+	readJsonBody,
+	setSessionCookie,
+} from "../../_utils/auth.js";
 
-export async function onRequestPost(context) {
-	try {
-		var body = await context.request.json();
-		var username = (body.username || '').trim();
-		var password = body.password || '';
+export const onRequestPost = handler(async (context) => {
+	enforceRateLimit(context, "setup", 10, 15 * 60 * 1000);
 
-		if (!username || password.length < 4) {
-			return jsonResponse({ error: 'Ange användarnamn och lösenord (minst 4 tecken)' }, 400);
-		}
+	const body = await readJsonBody(context.request);
+	const username = String(body.username || "").trim();
+	const password = String(body.password || "");
 
-		var existing = await context.env.DB.prepare(
-			'SELECT COUNT(*) as count FROM users'
-		).first();
-
-		if (existing && existing.count > 0) {
-			return jsonResponse({ error: 'En användare finns redan. Logga in istället.' }, 400);
-		}
-
-		var userId = crypto.randomUUID();
-		var salt = generateSalt();
-		var passwordHash = await hashPassword(password, salt);
-		var now = Date.now();
-
-		await context.env.DB.prepare(
-			'INSERT INTO users (id, username, password_hash, salt, created_at) VALUES (?, ?, ?, ?, ?)'
-		).bind(userId, username, passwordHash, salt, now).run();
-
-		var sessionToken = generateToken();
-		var sessionExpiry = now + 30 * 24 * 60 * 60 * 1000;
-
-		await context.env.DB.prepare(
-			'INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)'
-		).bind(sessionToken, userId, sessionExpiry).run();
-
-		var response = jsonResponse({ success: true, user: { id: userId, username: username } });
-		response.headers.append('Set-Cookie', setSessionCookie(sessionToken));
-		return response;
-	} catch (e) {
-		return jsonResponse({ error: e.message }, 500);
+	if (!username || password.length < 8) {
+		throw new HttpError(400, "Ange användarnamn och lösenord (minst 8 tecken)");
 	}
-}
+
+	const userId = crypto.randomUUID();
+	const salt = generateSalt();
+	const passwordHash = await hashPassword(password, salt);
+
+	// INSERT ... WHERE NOT EXISTS is a single atomic statement, so two
+	// concurrent setup requests cannot both create the first user.
+	const { meta } = await context.env.DB.prepare(
+		`INSERT INTO users (id, username, password_hash, salt, created_at)
+		 SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM users)`,
+	)
+		.bind(userId, username, passwordHash, salt, Date.now())
+		.run();
+
+	if (meta.changes === 0) {
+		throw new HttpError(400, "En användare finns redan. Logga in istället.");
+	}
+
+	await deleteExpiredSessions(context.env);
+	const token = await createSession(context.env, userId);
+
+	const response = jsonResponse({ success: true, user: { id: userId, username } });
+	response.headers.append("Set-Cookie", setSessionCookie(token));
+	return response;
+});

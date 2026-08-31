@@ -1,44 +1,50 @@
 import {
-	generateToken, hashPassword,
-	setSessionCookie, jsonResponse
-} from '../../_utils/auth.js';
+	createSession,
+	deleteExpiredSessions,
+	enforceRateLimit,
+	HttpError,
+	handler,
+	hashPassword,
+	jsonResponse,
+	readJsonBody,
+	setSessionCookie,
+	verifyPassword,
+} from "../../_utils/auth.js";
 
-export async function onRequestPost(context) {
-	try {
-		var body = await context.request.json();
-		var username = (body.username || '').trim();
-		var password = body.password || '';
+export const onRequestPost = handler(async (context) => {
+	enforceRateLimit(context, "login", 10, 15 * 60 * 1000);
 
-		if (!username || !password) {
-			return jsonResponse({ error: 'Ange användarnamn och lösenord' }, 400);
-		}
+	const body = await readJsonBody(context.request);
+	const username = String(body.username || "").trim();
+	const password = String(body.password || "");
 
-		var user = await context.env.DB.prepare(
-			'SELECT * FROM users WHERE username = ?'
-		).bind(username).first();
-
-		if (!user) {
-			return jsonResponse({ error: 'Fel användarnamn eller lösenord' }, 401);
-		}
-
-		var passwordHash = await hashPassword(password, user.salt);
-
-		if (passwordHash !== user.password_hash) {
-			return jsonResponse({ error: 'Fel användarnamn eller lösenord' }, 401);
-		}
-
-		var sessionToken = generateToken();
-		var now = Date.now();
-		var sessionExpiry = now + 30 * 24 * 60 * 60 * 1000;
-
-		await context.env.DB.prepare(
-			'INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)'
-		).bind(sessionToken, user.id, sessionExpiry).run();
-
-		var response = jsonResponse({ success: true, user: { id: user.id, username: user.username } });
-		response.headers.append('Set-Cookie', setSessionCookie(sessionToken));
-		return response;
-	} catch (e) {
-		return jsonResponse({ error: e.message }, 500);
+	if (!username || !password) {
+		throw new HttpError(400, "Ange användarnamn och lösenord");
 	}
-}
+
+	const user = await context.env.DB.prepare("SELECT * FROM users WHERE username = ?")
+		.bind(username)
+		.first();
+
+	if (!user) {
+		// Burn a comparable PBKDF2 derivation so response timing does not
+		// reveal whether the username exists.
+		await hashPassword(password, "timing-equalizer-salt");
+		throw new HttpError(401, "Fel användarnamn eller lösenord");
+	}
+
+	const passwordHash = await hashPassword(password, user.salt);
+	if (!(await verifyPassword(passwordHash, user.password_hash))) {
+		throw new HttpError(401, "Fel användarnamn eller lösenord");
+	}
+
+	await deleteExpiredSessions(context.env);
+	const token = await createSession(context.env, user.id);
+
+	const response = jsonResponse({
+		success: true,
+		user: { id: user.id, username: user.username },
+	});
+	response.headers.append("Set-Cookie", setSessionCookie(token));
+	return response;
+});

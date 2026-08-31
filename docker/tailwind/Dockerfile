@@ -1,7 +1,7 @@
 FROM oven/bun:alpine
 
 WORKDIR /app
-RUN bun add @tailwindcss/cli
+RUN bun add @tailwindcss/cli@^4.3.0
 
 ENV NODE_PATH=/app/node_modules
 

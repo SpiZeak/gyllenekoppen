@@ -3,3 +3,5 @@ public
 !.gitkeep
 static/tailwind.css
 .env
+.wrangler
+.kilo

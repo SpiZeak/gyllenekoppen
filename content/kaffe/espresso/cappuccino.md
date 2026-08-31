@@ -13,6 +13,7 @@ ursprung = "Italien"
 temperatur = "65–70°C (mjölk)"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (espresso) + mjölk"
+smaker = ["Choklad", "Nötig"]
 +++
 
 ## Vad är cappuccino?
