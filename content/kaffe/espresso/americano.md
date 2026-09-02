@@ -1,11 +1,10 @@
 +++
 title = "Americano"
 description = "Espresso spädd med hett vatten – en mildare, större kopp med samma karaktär."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 5
 
 [extra]
-ikon = "💧"
 image = "photo-1504630083234-14187a9df0f5"
 svarighet = "Nybörjarvänlig"
 bryggtid = "30–45 sekunder"
@@ -14,6 +13,21 @@ temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:4–1:6 (1 g kaffe → 4–6 g vatten)"
 smaker = ["Choklad", "Rostat", "Jordig"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 104
+espresso = 28
+vatten = 72
+etikett = "3× vatten"
+
+[[extra.kopp.andel]]
+bredd = 20
+typ = "espresso"
+
+[[extra.kopp.andel]]
+bredd = 36
+typ = "vatten"
 +++
 
 ## Vad är americano?

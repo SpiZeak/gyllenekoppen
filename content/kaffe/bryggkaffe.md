@@ -1,7 +1,7 @@
 +++
 title = "Bryggkaffe"
 description = "Det svenska hushållets klassiker – enkel att brygga men med stor potential när man väljer rätt bönor, kvarn och vatten."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 3
 
 [extra]

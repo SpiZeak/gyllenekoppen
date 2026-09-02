@@ -1,11 +1,10 @@
 +++
 title = "Cappuccino"
 description = "Espresso krönt med ångad mjölk och ett tjockt lager mjölkskum – den italienska klassikern."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 7
 
 [extra]
-ikon = "☁️"
 image = "photo-1541167760496-1628856ab772"
 svarighet = "Mellannivå"
 bryggtid = "1–2 minuter"
@@ -14,6 +13,26 @@ temperatur = "65–70°C (mjölk)"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (espresso) + mjölk"
 smaker = ["Choklad", "Nötig"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 100
+espresso = 33
+mjolk = 34
+skum = 33
+etikett = "1:1:1"
+
+[[extra.kopp.andel]]
+bredd = 20
+typ = "espresso"
+
+[[extra.kopp.andel]]
+bredd = 20
+typ = "mjolk"
+
+[[extra.kopp.andel]]
+bredd = 20
+typ = "skum"
 +++
 
 ## Vad är cappuccino?

@@ -1,7 +1,7 @@
 +++
 title = "Pour-Over"
 description = "En manuell bryggmetod som framhäver kaffets subtila smaker och aromer – perfekt för den nyfiken kaffevännen som vill ha kontroll."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 2
 
 [extra]

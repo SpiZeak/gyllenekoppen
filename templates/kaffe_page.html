@@ -26,7 +26,7 @@
 	<!-- Hero -->
 	<header class="relative mb-14 rounded-3xl overflow-hidden animate-fade-in-scale shadow-2xl">
 		{% if page.extra.image %}
-		<img src="https://images.unsplash.com/{{ page.extra.image }}?w=1600&h=700&fit=crop&q=85&auto=format"
+		<img src="/images/{{ page.extra.image }}.jpg"
 			alt="{{ page.title }}" class="w-full h-80 sm:h-[28rem] object-cover" />
 		{% else %}
 		<div class="bg-gradient-to-br from-espresso-600 to-espresso-800 w-full h-80 sm:h-[28rem]"></div>
@@ -141,7 +141,7 @@
 				class="group flex items-center gap-4 glass-card p-5 border border-parchment-200/50 dark:border-espresso-600/30 hover:border-gold-300/60 dark:hover:border-gold-600/30 rounded-2xl transition-all duration-300">
 				{% if guide.extra.image %}
 				<div class="rounded-xl w-14 h-14 overflow-hidden shrink-0 shadow-sm">
-					<img src="https://images.unsplash.com/{{ guide.extra.image }}?w=120&h=120&fit=crop&q=80&auto=format"
+					<img src="/images/{{ guide.extra.image }}.jpg"
 						alt="{{ guide.title }}" class="w-full h-full object-cover" loading="lazy" />
 				</div>
 				{% endif %}

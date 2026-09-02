@@ -3,7 +3,10 @@ import {
 	onRequestDelete as deleteBrew,
 	onRequestPut as updateBrew,
 } from "../functions/api/brews/[id].js";
-import { onRequestPost as createBrew } from "../functions/api/brews/index.js";
+import {
+	onRequestPost as createBrew,
+	onRequestDelete as deleteAllBrews,
+} from "../functions/api/brews/index.js";
 import { MockDB, makeContext } from "./helpers/mock-d1.js";
 
 const COOKIE = { Cookie: "gk_session=valid-token" };
@@ -78,6 +81,27 @@ describe("POST /api/brews", () => {
 		expect(entry.rating).toBe(0);
 	});
 
+	it("caps runaway text field lengths", async () => {
+		const db = new MockDB()
+			.enqueue(() => ({ user_id: "u1", expires_at: Date.now() + 20 * 24 * 3600 * 1000 }))
+			.enqueue(() => ({ meta: { changes: 1 } }));
+		const context = authedContext(db, {
+			body: JSON.stringify({
+				date: "2026-08-31",
+				beanName: "x".repeat(10_000),
+				brewMethod: "Espresso",
+				notes: "y".repeat(100_000),
+			}),
+			url: "https://x.com/api/brews",
+		});
+
+		const resp = await createBrew(context);
+		expect(resp.status).toBe(201);
+		const { entry } = await resp.json();
+		expect(entry.beanName.length).toBe(200);
+		expect(entry.notes.length).toBe(5000);
+	});
+
 	it("requires date, bean name and brew method", async () => {
 		const db = new MockDB().enqueue(() => ({
 			user_id: "u1",
@@ -134,5 +158,35 @@ describe("DELETE /api/brews/:id", () => {
 		});
 		const resp = await deleteBrew(context);
 		expect(resp.status).toBe(404);
+	});
+});
+
+describe("DELETE /api/brews?all=true", () => {
+	it("deletes every brew for the user when all=true", async () => {
+		const db = new MockDB()
+			.enqueue(() => ({ user_id: "u1", expires_at: Date.now() + 20 * 24 * 3600 * 1000 }))
+			.enqueue(() => ({ meta: { changes: 3 } }));
+		const context = authedContext(db, {
+			method: "DELETE",
+			url: "https://x.com/api/brews?all=true",
+		});
+		const resp = await deleteAllBrews(context);
+		expect(resp.status).toBe(200);
+		const del = db.calls.find((c) => c.sql.startsWith("DELETE FROM brews"));
+		expect(del.sql).toContain("WHERE user_id = ?");
+		expect(del.params).toEqual(["u1"]);
+	});
+
+	it("refuses to delete without all=true", async () => {
+		const db = new MockDB().enqueue(() => ({
+			user_id: "u1",
+			expires_at: Date.now() + 20 * 24 * 3600 * 1000,
+		}));
+		const context = authedContext(db, {
+			method: "DELETE",
+			url: "https://x.com/api/brews",
+		});
+		const resp = await deleteAllBrews(context);
+		expect(resp.status).toBe(400);
 	});
 });

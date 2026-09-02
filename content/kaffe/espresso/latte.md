@@ -1,11 +1,10 @@
 +++
 title = "Latte"
 description = "Espresso med rikligt med ångad mjölk – en mild, krämig dryck perfekt för nybörjare."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 8
 
 [extra]
-ikon = "🥛"
 image = "photo-1559056199-641a0ac8b55e"
 svarighet = "Nybörjarvänlig"
 bryggtid = "1–2 minuter"
@@ -14,6 +13,22 @@ temperatur = "65–70°C (mjölk)"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (espresso) + mycket mjölk"
 smaker = ["Choklad", "Nötig"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 120
+espresso = 22
+mjolk = 56
+skum = 22
+etikett = "1:3½"
+
+[[extra.kopp.andel]]
+bredd = 16
+typ = "espresso"
+
+[[extra.kopp.andel]]
+bredd = 40
+typ = "mjolk"
 +++
 
 ## Vad är latte?

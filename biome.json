@@ -58,6 +58,15 @@
 			"includes": ["templates/**"],
 			"linter": { "enabled": false },
 			"assist": { "enabled": false }
+		},
+		{
+			"includes": ["css/guide.css"],
+			"linter": {
+				"rules": {
+					"complexity": { "noImportantStyles": "off" },
+					"style": { "noDescendingSpecificity": "off" }
+				}
+			}
 		}
 	]
 }

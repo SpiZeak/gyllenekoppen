@@ -55,8 +55,27 @@
 
 	// ── Generic modal (replaces blocking alert/confirm) ──
 
+	const MODAL_FOCUSABLE =
+		"a[href], button:not([disabled]), input:not([disabled]), select, textarea";
+
+	function trapTab(container, e) {
+		const items = Array.from(container.querySelectorAll(MODAL_FOCUSABLE));
+		if (items.length === 0) return;
+		e.preventDefault();
+		const idx = items.indexOf(document.activeElement);
+		const next = e.shiftKey
+			? idx <= 0
+				? items.length - 1
+				: idx - 1
+			: idx === items.length - 1 || idx === -1
+				? 0
+				: idx + 1;
+		items[next].focus();
+	}
+
 	function openModal({ title, message, confirmText, cancelText, danger }) {
 		return new Promise((resolve) => {
+			const previouslyFocused = document.activeElement;
 			els.modalTitle.textContent = title;
 			els.modalMessage.textContent = message;
 			els.modalConfirm.textContent = confirmText || "OK";
@@ -68,14 +87,17 @@
 					(danger ? "bg-red-500 hover:bg-red-400" : "bg-gold-500 hover:bg-gold-400")
 				: "px-5 py-2 rounded-full font-semibold text-white text-xs tracking-wider uppercase bg-gold-500 hover:bg-gold-400 transition-all";
 			els.modal.classList.remove("hidden");
+			els.modal.classList.add("flex");
 			els.modalConfirm.focus();
 
 			const close = (result) => {
 				els.modal.classList.add("hidden");
+				els.modal.classList.remove("flex");
 				els.modalConfirm.removeEventListener("click", onConfirm);
 				els.modalCancel.removeEventListener("click", onCancel);
 				els.modal.removeEventListener("click", onBackdrop);
 				document.removeEventListener("keydown", onKeydown);
+				if (previouslyFocused) previouslyFocused.focus?.();
 				resolve(result);
 			};
 			const onConfirm = () => close(true);
@@ -85,7 +107,11 @@
 			};
 			const onKeydown = (e) => {
 				if (e.key === "Escape") close(false);
-				if (e.key === "Enter") close(true);
+				if (e.key === "Enter") {
+					// Enter on the Cancel button must cancel, not confirm.
+					close(document.activeElement !== els.modalCancel);
+				}
+				if (e.key === "Tab") trapTab(els.modal, e);
 			};
 
 			els.modalConfirm.addEventListener("click", onConfirm);
@@ -161,7 +187,10 @@
 		show(els.journalSection);
 		if (els.authUsername) els.authUsername.textContent = user.username;
 
-		loadEntries().then(() => {
+		// On load failure the error state stays up alone; the list and
+		// empty state must not render behind it.
+		loadEntries().then((ok) => {
+			if (!ok) return;
 			populateMethodFilter();
 			renderAll();
 		});
@@ -256,9 +285,11 @@
 		try {
 			const data = await apiFetch("/api/brews");
 			entries = data.entries || [];
+			return true;
 		} catch (e) {
 			entries = [];
 			showBrewError(`Kunde inte ladda bryggningar: ${e.message}`);
+			return false;
 		}
 	}
 
@@ -527,19 +558,22 @@
 
 	// ── Form ──
 
+	const RATIO_CLASS_SET =
+		"w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-700 border border-gold-300 dark:border-gold-600 text-espresso-800 dark:text-gold-300 font-medium";
+	const RATIO_CLASS_EMPTY =
+		"w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-100 dark:bg-espresso-700 border border-parchment-200 dark:border-espresso-600 text-parchment-500 dark:text-parchment-400";
+
 	function calculateRatio() {
 		const dose = Number.parseFloat(els.fieldDose.value);
 		const water = Number.parseFloat(els.fieldWater.value);
 		if (dose > 0 && water > 0) {
 			const ratio = (water / dose).toFixed(1);
 			els.ratioDisplay.textContent = `1:${ratio}`;
-			els.ratioDisplay.className =
-				"w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-50 dark:bg-espresso-700 border border-gold-300 dark:border-gold-600 text-espresso-800 dark:text-gold-300 font-medium";
+			els.ratioDisplay.className = RATIO_CLASS_SET;
 			return Number.parseFloat(ratio);
 		}
 		els.ratioDisplay.textContent = "—";
-		els.ratioDisplay.className =
-			"w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-100 dark:bg-espresso-700 border border-parchment-200 dark:border-espresso-600 text-parchment-500 dark:text-parchment-400";
+		els.ratioDisplay.className = RATIO_CLASS_EMPTY;
 		return null;
 	}
 
@@ -595,8 +629,7 @@
 		els.fieldTemp.value = 93;
 		updateStarDisplay(0);
 		els.ratioDisplay.textContent = "—";
-		els.ratioDisplay.className =
-			"w-full px-4 py-2.5 rounded-xl text-sm bg-parchment-100 dark:bg-espresso-700 border border-parchment-200 dark:border-espresso-600 text-parchment-500 dark:text-parchment-400";
+		els.ratioDisplay.className = RATIO_CLASS_EMPTY;
 	}
 
 	function showForm() {
@@ -743,7 +776,8 @@
 
 		qs("btn-retry-load").addEventListener("click", () => {
 			hideBrewError();
-			loadEntries().then(() => {
+			loadEntries().then((ok) => {
+				if (!ok) return;
 				populateMethodFilter();
 				renderAll();
 			});

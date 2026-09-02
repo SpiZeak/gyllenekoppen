@@ -1,7 +1,7 @@
 +++
 title = "Espresso"
 description = "Den intensiva grundpelaren i kaffevärlden – en liten, kraftfull kopp med djup smak och krämig crema."
-template = "coffee_section.html"
+template = "espresso_section.html"
 weight = 1
 
 [extra]

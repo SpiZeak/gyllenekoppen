@@ -1,11 +1,10 @@
 +++
 title = "Ristretto"
 description = "En kortare och mer koncentrerad espresso – renare smak med mindre bitterhet."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 2
 
 [extra]
-ikon = "🔴"
 image = "photo-1511920170033-f8396924c348"
 svarighet = "Mellannivå"
 bryggtid = "15–20 sekunder"
@@ -14,6 +13,16 @@ temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:1 (1 g kaffe → 1 g ristretto)"
 smaker = ["Choklad", "Fruktig", "Kryddig"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 68
+espresso = 100
+etikett = "1"
+
+[[extra.kopp.andel]]
+bredd = 28
+typ = "espresso"
 +++
 
 ## Vad är ristretto?

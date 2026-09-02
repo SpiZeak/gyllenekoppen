@@ -1,20 +1,10 @@
-import { getUserIdFromSession, handler, jsonResponse } from "../../_utils/auth.js";
+import { getUserFromSession, handler, jsonResponse } from "../../_utils/auth.js";
 
 export const onRequestGet = handler(async (context) => {
-	const userId = await getUserIdFromSession(context.request, context.env);
-	if (!userId) {
-		return jsonResponse({ authenticated: false, user: null });
-	}
-
-	const user = await context.env.DB.prepare(
-		"SELECT id, username, created_at FROM users WHERE id = ?",
-	)
-		.bind(userId)
-		.first();
-
+	// Single JOIN: session lookup and user fetch in one D1 round trip.
+	const user = await getUserFromSession(context.request, context.env);
 	if (!user) {
 		return jsonResponse({ authenticated: false, user: null });
 	}
-
-	return jsonResponse({ authenticated: true, user: { id: user.id, username: user.username } });
+	return jsonResponse({ authenticated: true, user });
 });

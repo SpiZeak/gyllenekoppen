@@ -4,6 +4,8 @@ const RENEW_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000;
 // invocation costs CPU time inside the Workers runtime; 100k is a
 // deliberate compromise for this application's threat model.
 const PBKDF2_ITERATIONS = 100000;
+const COOKIE_NAME = "gk_session";
+const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 export class HttpError extends Error {
 	constructor(status, message) {
@@ -44,33 +46,54 @@ function randomHex(bytes) {
 		.join("");
 }
 
+// In production (https) the cookie uses the __Host- prefix, which pins it
+// to the exact host and forbids Domain attributes. Plain http dev servers
+// (wrangler pages dev) cannot set __Host- cookies, so there it falls back
+// to the unprefixed name without Secure.
+function cookieAttributes(request) {
+	if (new URL(request.url).protocol === "https:") {
+		return {
+			name: `__Host-${COOKIE_NAME}`,
+			extra: " HttpOnly; Secure",
+		};
+	}
+	return { name: COOKIE_NAME, extra: " HttpOnly" };
+}
+
 export function getSessionToken(request) {
 	const cookie = request.headers.get("Cookie") || "";
-	const match = cookie.match(/(?:^|;\s*)gk_session=([^;]*)/);
+	const match = cookie.match(/(?:^|;\s*)(?:__Host-)?gk_session=([^;]*)/);
 	return match ? decodeURIComponent(match[1]) : null;
 }
 
-export function setSessionCookie(token) {
+export function setSessionCookie(token, request) {
+	const { name, extra } = cookieAttributes(request);
 	return (
-		"gk_session=" +
-		encodeURIComponent(token) +
-		"; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=" +
-		SESSION_DURATION_MS / 1000
+		`${name}=${encodeURIComponent(token)}` +
+		`; SameSite=Lax; Path=/; Max-Age=${SESSION_DURATION_MS / 1000}` +
+		extra
 	);
 }
 
-export function clearSessionCookie() {
-	return "gk_session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0";
+export function clearSessionCookie(request) {
+	const { name, extra } = cookieAttributes(request);
+	return `${name}=; SameSite=Lax; Path=/; Max-Age=0${extra}`;
 }
 
 export async function createSession(env, userId) {
 	const token = randomHex(32);
 	// Only the SHA-256 hash of the token is stored, so a database leak
-	// cannot be replayed as valid sessions.
+	// cannot be replayed as valid sessions. The batch also sweeps expired
+	// sessions in the same transactional round trip.
 	const id = await sha256Hex(token);
-	await env.DB.prepare("INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)")
-		.bind(id, userId, Date.now() + SESSION_DURATION_MS)
-		.run();
+	await env.DB.batch([
+		env.DB.prepare("DELETE FROM sessions WHERE expires_at <= ?").bind(Date.now()),
+		env.DB.prepare("INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)").bind(
+			id,
+			userId,
+			Date.now() + SESSION_DURATION_MS,
+		),
+	]);
 	return token;
 }
 
@@ -81,20 +104,12 @@ export async function deleteSession(env, request) {
 	await env.DB.prepare("DELETE FROM sessions WHERE id = ?").bind(id).run();
 }
 
-export async function deleteExpiredSessions(env) {
-	await env.DB.prepare("DELETE FROM sessions WHERE expires_at <= ?").bind(Date.now()).run();
-}
-
-export async function getUserIdFromSession(request, env) {
+async function loadSession(env, request, sql) {
 	const token = getSessionToken(request);
 	if (!token) return null;
 	try {
 		const id = await sha256Hex(token);
-		const session = await env.DB.prepare(
-			"SELECT user_id, expires_at FROM sessions WHERE id = ?",
-		)
-			.bind(id)
-			.first();
+		const session = await env.DB.prepare(sql).bind(id).first();
 		if (!session || session.expires_at <= Date.now()) return null;
 		// Sliding expiry, but only rewritten when close to expiring so a
 		// normal request stream does not turn into one D1 write per call.
@@ -103,11 +118,33 @@ export async function getUserIdFromSession(request, env) {
 				.bind(Date.now() + SESSION_DURATION_MS, id)
 				.run();
 		}
-		return session.user_id;
+		return session;
 	} catch (e) {
 		console.error("Session lookup failed:", e);
 		return null;
 	}
+}
+
+export async function getUserIdFromSession(request, env) {
+	const session = await loadSession(
+		env,
+		request,
+		"SELECT user_id, expires_at FROM sessions WHERE id = ?",
+	);
+	return session ? session.user_id : null;
+}
+
+// Resolves the session and its user in a single JOIN, for endpoints that
+// need the username too (avoids the session + user round trip).
+export async function getUserFromSession(request, env) {
+	const session = await loadSession(
+		env,
+		request,
+		`SELECT u.id AS user_id, u.username, s.expires_at
+		 FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.id = ?`,
+	);
+	if (!session) return null;
+	return { id: session.user_id, username: session.username };
 }
 
 export async function getRequiredUserId(context) {
@@ -160,6 +197,28 @@ export async function verifyPassword(candidate, expected) {
 		diff |= a[i] ^ b[i];
 	}
 	return diff === 0;
+}
+
+// Optional Cloudflare Turnstile enforcement. When TURNSTILE_SECRET is not
+// configured this is a no-op and the per-isolate rate limiter remains the
+// brute-force guard; once configured, every login/setup must carry a valid
+// turnstileToken from the client widget.
+export async function verifyTurnstile(env, token) {
+	const secret = env.TURNSTILE_SECRET;
+	if (!secret) return true;
+	if (!token) return false;
+	try {
+		const resp = await fetch(TURNSTILE_VERIFY_URL, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ secret, response: token }),
+		});
+		const data = await resp.json();
+		return Boolean(data.success);
+	} catch (e) {
+		console.error("Turnstile verification failed:", e);
+		return false;
+	}
 }
 
 // Best-effort brute-force protection, tracked per isolate. Cloudflare

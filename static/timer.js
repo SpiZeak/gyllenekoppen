@@ -9,6 +9,9 @@
 	let isRunning = false;
 	let intervalId = null;
 	let audioCtx = null;
+	let lastFocused = null;
+
+	const FOCUSABLE = "a[href], button:not([disabled]), input:not([disabled]), select, textarea";
 
 	const PRESETS = [
 		{ label: "Espresso", seconds: 30 },
@@ -32,8 +35,10 @@
 
 		overlay = document.createElement("div");
 		overlay.id = "timer-overlay";
+		// hidden/flex are toggled together in openOverlay/closeOverlay so
+		// the display classes never depend on Tailwind's rule order.
 		overlay.className =
-			"fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm hidden";
+			"fixed inset-0 z-[60] items-center justify-center bg-black/40 backdrop-blur-sm hidden";
 		overlay.setAttribute("role", "dialog");
 		overlay.setAttribute("aria-modal", "true");
 		overlay.setAttribute("aria-label", "Bryggtimer");
@@ -81,8 +86,9 @@
 		}
 
 		document.getElementById("timer-fab").addEventListener("click", () => {
-			overlay.classList.remove("hidden");
-			document.addEventListener("keydown", handleKeydown);
+			lastFocused = document.activeElement;
+			openOverlay();
+			startBtn.focus();
 		});
 
 		closeBtn.addEventListener("click", closeOverlay);
@@ -95,6 +101,19 @@
 		setTimer(PRESETS[0].seconds);
 	}
 
+	function openOverlay() {
+		overlay.classList.remove("hidden");
+		overlay.classList.add("flex");
+		document.addEventListener("keydown", handleKeydown);
+	}
+
+	function closeOverlay() {
+		overlay.classList.add("hidden");
+		overlay.classList.remove("flex");
+		document.removeEventListener("keydown", handleKeydown);
+		if (lastFocused) lastFocused.focus?.();
+	}
+
 	function handleKeydown(e) {
 		if (e.key === "Escape") {
 			closeOverlay();
@@ -103,11 +122,20 @@
 			e.preventDefault();
 			toggleTimer();
 		}
-	}
-
-	function closeOverlay() {
-		overlay.classList.add("hidden");
-		document.removeEventListener("keydown", handleKeydown);
+		if (e.key === "Tab") {
+			const items = Array.from(overlay.querySelectorAll(FOCUSABLE));
+			if (items.length === 0) return;
+			e.preventDefault();
+			const idx = items.indexOf(document.activeElement);
+			const next = e.shiftKey
+				? idx <= 0
+					? items.length - 1
+					: idx - 1
+				: idx === items.length - 1 || idx === -1
+					? 0
+					: idx + 1;
+			items[next].focus();
+		}
 	}
 
 	function setTimer(seconds) {

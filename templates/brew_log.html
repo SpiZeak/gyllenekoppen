@@ -8,13 +8,16 @@
 
 <article class="brew-log">
 
-	<!-- Auth state bar -->
-	<div id="auth-bar" class="hidden flex justify-end items-center gap-3 mb-6 animate-fade-in text-sm">
-		<span id="auth-username" class="text-parchment-500 dark:text-parchment-400 font-medium"></span>
-		<button id="btn-logout"
-			class="px-3 py-1.5 rounded-lg font-medium text-parchment-500 dark:text-parchment-400 text-xs border border-parchment-200 dark:border-espresso-600 hover:border-red-300 dark:hover:border-red-700 hover:text-red-500 transition-all">
-			Logga ut
-		</button>
+	<!-- Auth state bar (outer div only toggles visibility; the inner div
+	     owns the flex layout so the classes never conflict) -->
+	<div id="auth-bar" class="hidden mb-6 text-sm animate-fade-in">
+		<div class="flex justify-end items-center gap-3">
+			<span id="auth-username" class="text-parchment-500 dark:text-parchment-400 font-medium"></span>
+			<button id="btn-logout"
+				class="px-3 py-1.5 rounded-lg font-medium text-parchment-500 dark:text-parchment-400 text-xs border border-parchment-200 dark:border-espresso-600 hover:border-red-300 dark:hover:border-red-700 hover:text-red-500 transition-all">
+				Logga ut
+			</button>
+		</div>
 	</div>
 
 	<!-- Header -->
@@ -310,7 +313,8 @@
 				class="px-4 py-2 rounded-lg font-medium text-red-500 hover:text-red-400 text-xs tracking-wider uppercase border border-red-200 dark:border-red-800 hover:border-red-300 dark:hover:border-red-700 transition-all">
 				Radera alla inlägg
 			</button>
-			<div id="clear-confirm" class="hidden mt-3 flex items-center justify-center gap-3">
+		<div id="clear-confirm" class="hidden mt-3">
+			<div class="flex items-center justify-center gap-3">
 				<span class="text-sm text-parchment-500 dark:text-parchment-400">Är du säker?</span>
 				<button id="btn-confirm-clear"
 					class="px-4 py-1.5 rounded-lg font-semibold text-white text-xs bg-red-500 hover:bg-red-400 transition-all">
@@ -322,10 +326,12 @@
 				</button>
 			</div>
 		</div>
+		</div>
 	</div>
 
-	<!-- Generic modal (confirm/alert) -->
-	<div id="app-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" role="dialog"
+	<!-- Generic modal (confirm/alert). hidden/flex are toggled together by
+	     brew-log.js so the display classes never fight. -->
+	<div id="app-modal" class="hidden fixed inset-0 z-[70] items-center justify-center p-4" role="dialog"
 		aria-modal="true" aria-labelledby="modal-title">
 		<div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
 		<div

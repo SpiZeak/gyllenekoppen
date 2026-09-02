@@ -1,11 +1,10 @@
 +++
 title = "Doppio"
 description = "En dubbel shot espresso – mer intensitet och volym för den som vill ha extra styrka."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 4
 
 [extra]
-ikon = "☕☕"
 image = "photo-1526256262350-7da7584cf5eb"
 svarighet = "Mellannivå"
 bryggtid = "25–30 sekunder"
@@ -14,6 +13,16 @@ temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (2 g kaffe → 4 g doppio)"
 smaker = ["Rostat", "Choklad", "Kryddig"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 84
+espresso = 100
+etikett = "2x"
+
+[[extra.kopp.andel]]
+bredd = 28
+typ = "espresso"
 +++
 
 ## Vad är doppio?

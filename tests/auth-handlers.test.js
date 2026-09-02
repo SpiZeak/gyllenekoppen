@@ -1,6 +1,8 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { hashPassword } from "../functions/_utils/auth.js";
 import { onRequestPost as login } from "../functions/api/auth/login.js";
+import { onRequestPost as logout } from "../functions/api/auth/logout.js";
+import { onRequestGet as me } from "../functions/api/auth/me.js";
 import { onRequestPost as setup } from "../functions/api/auth/setup.js";
 import { MockDB, makeContext } from "./helpers/mock-d1.js";
 
@@ -11,11 +13,6 @@ function postBody(payload) {
 }
 
 describe("POST /api/auth/setup", () => {
-	beforeEach(() => {
-		// New module-level rate limiter state per test file run is shared;
-		// tests use few requests so this stays under the limit.
-	});
-
 	it("creates the first user and sets a session cookie", async () => {
 		const db = new MockDB()
 			.enqueue(() => ({ meta: { changes: 1 } })) // INSERT user
@@ -141,5 +138,55 @@ describe("POST /api/auth/login", () => {
 		const resp = await login(context);
 		expect(resp.status).toBe(401);
 		expect((await resp.json()).error).toBe("Fel användarnamn eller lösenord");
+	});
+});
+
+describe("POST /api/auth/logout", () => {
+	it("deletes the session and clears the cookie", async () => {
+		const db = new MockDB().enqueue(() => ({ meta: { changes: 1 } }));
+		const context = makeContext({
+			method: "POST",
+			db,
+			url: "https://x.com/api/auth/logout",
+			cookie: "gk_session=tok",
+		});
+
+		const resp = await logout(context);
+		expect(resp.status).toBe(200);
+		expect(resp.headers.get("Set-Cookie")).toContain("Max-Age=0");
+		const del = db.calls.find((c) => c.sql.startsWith("DELETE FROM sessions"));
+		expect(del).toBeTruthy();
+		// The deleted id must be the SHA-256 of the cookie token, not the
+		// raw token itself.
+		expect(del.params[0]).toMatch(/^[0-9a-f]{64}$/);
+		expect(del.params[0]).not.toBe("tok");
+	});
+});
+
+describe("GET /api/auth/me", () => {
+	it("returns the user for a valid session", async () => {
+		const db = new MockDB().enqueue(() => ({
+			user_id: "u1",
+			username: "kaffe",
+			expires_at: Date.now() + 20 * 24 * 3600 * 1000,
+		}));
+		const context = makeContext({
+			db,
+			url: "https://x.com/api/auth/me",
+			cookie: "gk_session=tok",
+		});
+
+		const body = await (await me(context)).json();
+		expect(body.authenticated).toBe(true);
+		expect(body.user.username).toBe("kaffe");
+		// Session + user resolved in one JOIN, no follow-up query.
+		expect(db.calls).toHaveLength(1);
+	});
+
+	it("reports unauthenticated without a session cookie", async () => {
+		const context = makeContext({ db: new MockDB(), url: "https://x.com/api/auth/me" });
+		const body = await (await me(context)).json();
+		expect(body.authenticated).toBe(false);
+		expect(body.user).toBeNull();
 	});
 });

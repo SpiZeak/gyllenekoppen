@@ -1,6 +1,5 @@
 import {
 	createSession,
-	deleteExpiredSessions,
 	enforceRateLimit,
 	generateSalt,
 	HttpError,
@@ -9,12 +8,20 @@ import {
 	jsonResponse,
 	readJsonBody,
 	setSessionCookie,
+	verifyTurnstile,
 } from "../../_utils/auth.js";
 
 export const onRequestPost = handler(async (context) => {
 	enforceRateLimit(context, "setup", 10, 15 * 60 * 1000);
 
 	const body = await readJsonBody(context.request);
+	if (!(await verifyTurnstile(context.env, body.turnstileToken))) {
+		throw new HttpError(
+			400,
+			"Captcha-verifiering misslyckades. Ladda om sidan och försök igen.",
+		);
+	}
+
 	const username = String(body.username || "").trim();
 	const password = String(body.password || "");
 
@@ -39,10 +46,9 @@ export const onRequestPost = handler(async (context) => {
 		throw new HttpError(400, "En användare finns redan. Logga in istället.");
 	}
 
-	await deleteExpiredSessions(context.env);
 	const token = await createSession(context.env, userId);
 
 	const response = jsonResponse({ success: true, user: { id: userId, username } });
-	response.headers.append("Set-Cookie", setSessionCookie(token));
+	response.headers.append("Set-Cookie", setSessionCookie(token, context.request));
 	return response;
 });

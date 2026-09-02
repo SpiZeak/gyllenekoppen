@@ -1,11 +1,10 @@
 +++
 title = "Flat White"
 description = "Espresso med mikroskumat mjölk – en silkeslen australisk klassiker med stark kaffekärna."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 9
 
 [extra]
-ikon = "🤍"
 image = "photo-1571934811356-5cc061b6821f"
 svarighet = "Mellannivå"
 bryggtid = "1–2 minuter"
@@ -14,6 +13,22 @@ temperatur = "60–65°C (mjölk)"
 malningsgrad = "Fint"
 vattenkvot = "1:2 (espresso) + lite mjölk"
 smaker = ["Choklad", "Rostat", "Nötig"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 94
+espresso = 38
+mjolk = 42
+skum = 20
+etikett = "1:2"
+
+[[extra.kopp.andel]]
+bredd = 20
+typ = "espresso"
+
+[[extra.kopp.andel]]
+bredd = 24
+typ = "mjolk"
 +++
 
 ## Vad är flat white?

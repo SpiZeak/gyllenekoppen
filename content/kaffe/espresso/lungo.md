@@ -1,11 +1,10 @@
 +++
 title = "Lungo"
 description = "En längre extraktion av espresso – mildare och större volym med djupare smaker."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 3
 
 [extra]
-ikon = "🔵"
 image = "photo-1485808191679-5f86510681a2"
 svarighet = "Mellannivå"
 bryggtid = "40–50 sekunder"
@@ -14,6 +13,16 @@ temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:4 (1 g kaffe → 4 g lungo)"
 smaker = ["Jordig", "Rostat", "Choklad"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 88
+espresso = 100
+etikett = "1"
+
+[[extra.kopp.andel]]
+bredd = 28
+typ = "espresso"
 +++
 
 ## Vad är lungo?

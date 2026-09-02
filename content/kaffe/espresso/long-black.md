@@ -1,11 +1,10 @@
 +++
 title = "Long Black"
 description = "Espresso hälld över hett vatten – en fylligare kopp än americano med bevarad crema och djupare karaktär."
-template = "coffee_page.html"
+template = "kaffe_page.html"
 weight = 6
 
 [extra]
-ikon = "🌊"
 image = "photo-1509042239860-f550ce710b93"
 svarighet = "Nybörjarvänlig"
 bryggtid = "30–45 sekunder"
@@ -14,6 +13,21 @@ temperatur = "90–96°C"
 malningsgrad = "Fint"
 vattenkvot = "1:4–1:6 (1 g kaffe → 4–6 g vatten)"
 smaker = ["Choklad", "Fruktig", "Rostat"]
+
+# Kopillustration: hojd/espresso i koppen, lager i %, andelar i px
+[extra.kopp]
+hojd = 104
+espresso = 28
+vatten = 72
+etikett = "3× vatten"
+
+[[extra.kopp.andel]]
+bredd = 20
+typ = "espresso"
+
+[[extra.kopp.andel]]
+bredd = 36
+typ = "vatten"
 +++
 
 ## Vad är long black?
